@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnv2ikg1u4ni2"]
+
+[ext_resource type="Texture2D" uid="uid://dxq1cvoksh231" path="res://Assets/Textures/Enemy/cyclops.png" id="1_mw074"]
+[ext_resource type="Script" uid="uid://otnhhg3gmd4e" path="res://Scenes/Enemy/Scripts/enemy.gd" id="1_nvvbs"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_nvvbs")
+enemy_speed = 100
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -2)
+texture = ExtResource("1_mw074")
+hframes = 2

@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://darw2e6k87ldw"]
+[gd_scene load_steps=3 format=3 uid="uid://dki47ebywt47l"]
 
-[ext_resource type="Script" uid="uid://d2be5eiwgvmyw" path="res://Scripts/Player/Player.cs" id="1_a3d8c"]
-[ext_resource type="Texture2D" uid="uid://ywij2rnwq47s" path="res://Assets/icon.svg" id="2_btcbx"]
+[ext_resource type="Script" uid="uid://dwq326ibrckj7" path="res://Scenes/Player/Scripts/player.gd" id="1_uvnfx"]
+[ext_resource type="Texture2D" uid="uid://c7cwngrku8a1r" path="res://Assets/Textures/Items/Upgrades/low_boots.png" id="2_a3d8c"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
-position = Vector2(378, 194)
-script = ExtResource("1_a3d8c")
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_uvnfx")
+player_velocity = 200
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_btcbx")
+texture = ExtResource("2_a3d8c")
+
+[node name="Camera2D" type="Camera2D" parent="."]

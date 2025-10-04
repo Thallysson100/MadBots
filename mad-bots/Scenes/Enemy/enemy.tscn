@@ -1,13 +1,117 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnv2ikg1u4ni2"]
+[gd_scene load_steps=10 format=3 uid="uid://dnv2ikg1u4ni2"]
 
-[ext_resource type="Texture2D" uid="uid://dxq1cvoksh231" path="res://Assets/Textures/Enemy/cyclops.png" id="1_mw074"]
 [ext_resource type="Script" uid="uid://otnhhg3gmd4e" path="res://Scenes/Enemy/Scripts/enemy.gd" id="1_nvvbs"]
+[ext_resource type="Texture2D" uid="uid://cq16ek2mmv30o" path="res://Assets/Textures/robots/Destroyer/Walk.png" id="2_nvvbs"]
+[ext_resource type="Texture2D" uid="uid://ch8bhq5666a5k" path="res://Assets/Textures/robots/Destroyer/Attack_1.png" id="4_dmwl5"]
+[ext_resource type="Script" uid="uid://b3ndq5rre6466" path="res://Scenes/Enemy/Scripts/animation_player.gd" id="5_d40jh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nvvbs"]
+radius = 34.0147
+
+[sub_resource type="Animation" id="Animation_dmwl5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteWalk:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteAttack:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_d40jh"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteAttack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.11751971, 0.23333333, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_2t2r4"]
+resource_name = "walk"
+length = 1.05
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteWalk:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.4, 0.53333336, 0.6666667, 0.8, 0.93333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d40jh"]
+_data = {
+&"RESET": SubResource("Animation_dmwl5"),
+&"attack": SubResource("Animation_d40jh"),
+&"walk": SubResource("Animation_2t2r4")
+}
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+motion_mode = 1
 script = ExtResource("1_nvvbs")
-enemy_speed = 100
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1, -2)
-texture = ExtResource("1_mw074")
-hframes = 2
+[node name="SpriteWalk" type="Sprite2D" parent="."]
+position = Vector2(-1, 10)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_nvvbs")
+offset = Vector2(0, -46)
+hframes = 8
+
+[node name="SpriteAttack" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_dmwl5")
+offset = Vector2(0, -40)
+hframes = 4
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -17)
+shape = SubResource("CircleShape2D_nvvbs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_d40jh")
+}
+script = ExtResource("5_d40jh")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="AttackDelay" type="Timer" parent="."]
+wait_time = 0.23
+one_shot = true

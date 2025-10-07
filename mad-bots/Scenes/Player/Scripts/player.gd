@@ -2,9 +2,9 @@ extends CharacterBody2D
 class_name Player
 
 @export var player_velocity: int
-@export var target_path: NodePath
 
-@onready var animation = $AnimationPlayer
+@export var animationPlayer_path : NodePath
+@onready var animation = get_node(animationPlayer_path)
 
 
 func _physics_process(_delta: float) -> void:

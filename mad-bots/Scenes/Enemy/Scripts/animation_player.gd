@@ -1,8 +1,14 @@
 extends AnimationPlayer
+class_name Enemy_AnimationPlayer
 
-@onready var enemy = get_node("..")
-@onready var spriteWalk = $"../SpriteWalk"
-@onready var spriteAttack = $"../SpriteAttack"
+@export var enemy_path : NodePath
+@onready var enemy = get_node(enemy_path)
+
+@export var spriteWalk_path : NodePath
+@onready var spriteWalk = get_node(spriteWalk_path)
+
+@export var spriteAttack_path : NodePath
+@onready var spriteAttack = get_node(spriteAttack_path)
 
 var can_play_new_animation := true  # Controle simples de bloqueio
 

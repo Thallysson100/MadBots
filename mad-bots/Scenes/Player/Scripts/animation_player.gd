@@ -1,8 +1,14 @@
 extends AnimationPlayer
+class_name Player_AnimationPlayer
 
-@onready var player = get_node("..")
-@onready var spriteWalk = $"../SpriteWalk"
-@onready var spriteIdle = $"../SpriteIdle"
+@export var player_path : NodePath
+@onready var player = get_node(player_path)
+
+@export var spriteWalk_path : NodePath
+@onready var spriteWalk = get_node(spriteWalk_path)
+
+@export var spriteIdle_path : NodePath
+@onready var spriteIdle = get_node(spriteIdle_path)
 
 
 func _ready() -> void:

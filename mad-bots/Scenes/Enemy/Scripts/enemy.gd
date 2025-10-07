@@ -3,13 +3,21 @@ class_name Enemy
 
 
 
-@export var speed: float = 100.0
-
 @onready var player = get_tree().get_first_node_in_group("player")
-@onready var animation = $AnimationPlayer
-@onready var attack_cooldown = $AttackCooldown
-@onready var attack_delay = $AttackDelay
-@onready var player_detector = $Area2D
+
+@export var animationPlayer_path : NodePath
+@onready var animation = get_node(animationPlayer_path)
+
+@export var attack_cooldown_path : NodePath
+@onready var attack_cooldown = get_node(attack_cooldown_path)
+
+@export var attack_delay_path : NodePath
+@onready var attack_delay = get_node(attack_delay_path)
+
+@export var player_detector_path : NodePath 
+@onready var player_detector = get_node(player_detector_path)
+
+@export var speed: float = 100.0
 
 var can_attack: bool = true
 var player_detected : bool = false

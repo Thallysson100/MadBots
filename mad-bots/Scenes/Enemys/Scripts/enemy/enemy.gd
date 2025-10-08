@@ -12,18 +12,19 @@ class_name Enemy
 @onready var attack = get_node(attack_path)
 
 @export var speed: float = 100.0
+var direction_to_player : Vector2 = Vector2.ZERO
 
 
-func _physics_process(delta):
-	move_or_attack(delta)
+func _physics_process(_delta):
+	direction_to_player = (player.global_position - global_position).normalized()
+	move_or_attack()
 	
 
-func move_or_attack(_delta):
+func move_or_attack():
 	if (attack.player_detected and attack.can_attack):
 		attack.generic_attack() 
 	elif (animation.can_play_new_animation):
-		var direction = (player.global_position - global_position).normalized()
-		velocity = direction * speed	
+		velocity = direction_to_player * speed	
 		animation.process_sprite()
 		animation.play("walk")
 		move_and_slide()

@@ -10,6 +10,9 @@ class_name Player_AnimationPlayer
 @export var spriteIdle_path : NodePath
 @onready var spriteIdle = get_node(spriteIdle_path)
 
+@export var spriteTakingDamage_path : NodePath
+@onready var spriteTakingDamage = get_node(spriteTakingDamage_path)
+
 
 func _ready() -> void:
 	animation_started.connect(_on_animation_started)
@@ -22,18 +25,22 @@ var z_pos : int = 0
 var INTERVALE_Z : int = abs(RenderingServer.CANVAS_ITEM_Z_MIN)+abs(RenderingServer.CANVAS_ITEM_Z_MAX)
 
 func process_sprite() -> void:
-	var dir = set_direction()
+	var dir : bool = set_direction()
 	spriteWalk.flip_h = dir
 	spriteIdle.flip_h = dir
+	spriteTakingDamage.flip_h = dir
+	
+	z_pos = RenderingServer.CANVAS_ITEM_Z_MIN + (int)(player.global_position.y / 20) % INTERVALE_Z
+	
+	spriteWalk.z_index = z_pos
+	spriteIdle.z_index = z_pos
+	spriteTakingDamage.z_index = z_pos
+
 	if (flipped):
 		spriteWalk.offset.x *= -1
 		spriteIdle.offset.x *= -1
-	z_pos = RenderingServer.CANVAS_ITEM_Z_MIN + (int)(player.global_position.y / 20) % INTERVALE_Z
+		spriteTakingDamage.offset.x *= -1
 	
-	spriteWalk.flip_h = dir
-	spriteIdle.flip_h = dir
-	spriteWalk.z_index = z_pos
-	spriteIdle.z_index = z_pos
 
 func set_direction() -> bool:
 	if (player.velocity.x > 0):
@@ -53,9 +60,12 @@ func set_direction() -> bool:
 func _on_animation_started(anim_name: String) -> void:
 	spriteWalk.visible = false
 	spriteIdle.visible = false
+	spriteTakingDamage.visible = false
 
 	match anim_name:
 		"walk":
 			spriteWalk.visible = true
 		"idle":
 			spriteIdle.visible = true
+		"taking_damage":
+			spriteTakingDamage.visible = true

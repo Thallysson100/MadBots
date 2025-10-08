@@ -11,6 +11,8 @@ class_name Enemy_AnimationPlayer
 @onready var spriteAttack = get_node(spriteAttack_path)
 
 var can_play_new_animation := true  # Controle simples de bloqueio
+var flipped: bool
+var last_result: bool = false
 var z_pos : int = 0
 var INTERVALE_Z : int = abs(RenderingServer.CANVAS_ITEM_Z_MIN)+abs(RenderingServer.CANVAS_ITEM_Z_MAX)
 
@@ -25,21 +27,32 @@ var last_direction: bool
 
 func process_sprite() -> void:
 	var dir = set_direction()
-	z_pos = RenderingServer.CANVAS_ITEM_Z_MIN + (int)(enemy.global_position.y / 20) % INTERVALE_Z
 	
 	spriteWalk.flip_h = dir
 	spriteAttack.flip_h = dir
+
+	z_pos = RenderingServer.CANVAS_ITEM_Z_MIN + (int)(enemy.global_position.y / 20) % INTERVALE_Z
+
 	spriteWalk.z_index = z_pos
 	spriteAttack.z_index = z_pos
 
+	if (flipped):
+		spriteWalk.offset.x *= -1
+		spriteAttack.offset.x *= -1
+
 func set_direction() -> bool:
 	if (enemy.velocity.x > 0):
-		last_direction = false
+		if (last_result): flipped = true
+		else: flipped = false	
+		last_result = false
 		return false
 	if (enemy.velocity.x < 0):
-		last_direction = true
+		if (not last_result): flipped = true
+		else: flipped = false	
+		last_result = true
 		return true;
-	return last_direction
+	flipped = false
+	return last_result
 
 
 func _on_animation_started(anim_name: String) -> void:

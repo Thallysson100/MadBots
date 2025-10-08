@@ -4,14 +4,12 @@ class_name Player
 @export var player_velocity: int
 
 
-@onready var enemys = get_tree().get_nodes_in_group("enemy")
 
 @export var animationPlayer_path : NodePath
 @onready var animation = get_node(animationPlayer_path)
 
-func _ready():
-	for enemy in enemys:
-		enemy.get_node("Attack").attacked_player.connect(_on_attacked_player)
+var knockback: Vector2 = Vector2.ZERO
+@export var knockback_recovery: float = 3.5
 
 
 
@@ -24,18 +22,23 @@ func movement():
 	var y_mov = Input.get_action_strength("down") - Input.get_action_strength("up")
 	var mov = Vector2(x_mov, y_mov).normalized()
 
-	velocity = mov * player_velocity
+	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
+	
 	animation.process_sprite()
-
-	if (velocity != Vector2.ZERO):
-		animation.play("walk")
+	velocity = mov * player_velocity
+	if (knockback != Vector2.ZERO):
+		animation.play("taking_damage")
+		velocity = knockback
+	elif (mov != Vector2.ZERO):
+		animation.play("walk")	
 	else:
 		animation.play("idle")
 		
 	move_and_slide()
 
-func _on_attacked_player(damage):
-	print("atacou o player com ", damage, " de dano")
+func process_attack(damage, knockback_vector):
+	knockback = knockback_vector
+	print("o player foi atacado com ", damage, " de dano com direcao", knockback_vector)
 
 func debbug():
 	pass

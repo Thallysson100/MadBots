@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnv2ikg1u4ni2"]
+[gd_scene load_steps=12 format=3 uid="uid://dnv2ikg1u4ni2"]
 
 [ext_resource type="Script" uid="uid://otnhhg3gmd4e" path="res://Scenes/Enemys/Scripts/enemy/enemy.gd" id="1_nvvbs"]
 [ext_resource type="Texture2D" uid="uid://cq16ek2mmv30o" path="res://Assets/Textures/robots/Destroyer/Walk.png" id="2_nvvbs"]
@@ -88,6 +88,9 @@ _data = {
 &"walk": SubResource("Animation_2t2r4")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjbuf"]
+size = Vector2(20, 67)
+
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 position = Vector2(0, 3)
 collision_layer = 2
@@ -130,9 +133,11 @@ spriteAttack_path = NodePath("../SpriteAttack")
 script = ExtResource("5_gx76c")
 damage = 999
 animationPlayer_path = NodePath("../Enemy_AnimationPlayer")
+enemy_path = NodePath("..")
 attack_cooldown_path = NodePath("AttackCooldown")
 attack_delay_path = NodePath("AttackDelay")
 player_detector_path = NodePath("../Player_Detector")
+knockback_force = 500
 
 [node name="AttackCooldown" type="Timer" parent="Attack"]
 wait_time = 0.5
@@ -142,3 +147,9 @@ autostart = true
 [node name="AttackDelay" type="Timer" parent="Attack"]
 wait_time = 0.23
 one_shot = true
+
+[node name="Hurt_box" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurt_box"]
+position = Vector2(0, -23.5)
+shape = SubResource("RectangleShape2D_rjbuf")

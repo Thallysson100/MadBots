@@ -82,7 +82,7 @@ collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_uvnfx")
 player_velocity = 400
-animationPlayer_path = NodePath("Player_AnimationPlayers")
+animationPlayer_path = NodePath("Player_AnimationPlayer")
 
 [node name="SpriteIdle" type="Sprite2D" parent="."]
 z_index = 1
@@ -105,7 +105,7 @@ z_index = 1
 position = Vector2(0, 4.75)
 shape = SubResource("RectangleShape2D_a3d8c")
 
-[node name="Player_AnimationPlayers" type="AnimationPlayer" parent="."]
+[node name="Player_AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_0u5uq")
 }

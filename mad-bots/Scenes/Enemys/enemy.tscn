@@ -1,13 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnv2ikg1u4ni2"]
+[gd_scene load_steps=11 format=3 uid="uid://dnv2ikg1u4ni2"]
 
 [ext_resource type="Script" uid="uid://otnhhg3gmd4e" path="res://Scenes/Enemys/Scripts/enemy/enemy.gd" id="1_nvvbs"]
 [ext_resource type="Texture2D" uid="uid://cq16ek2mmv30o" path="res://Assets/Textures/robots/Destroyer/Walk.png" id="2_nvvbs"]
 [ext_resource type="Texture2D" uid="uid://ch8bhq5666a5k" path="res://Assets/Textures/robots/Destroyer/Attack_1.png" id="4_dmwl5"]
 [ext_resource type="Script" uid="uid://b3ndq5rre6466" path="res://Scenes/Enemys/Scripts/enemy/animation_player.gd" id="5_d40jh"]
-[ext_resource type="Script" uid="uid://jklrvsfafx5y" path="res://Scenes/Enemys/Scripts/enemy/attack.gd" id="5_gx76c"]
+[ext_resource type="PackedScene" uid="uid://fj4ep7j7o1s8" path="res://Scenes/Utility/Attacks/Enemy_Melee/attack_melee.tscn" id="5_rjbuf"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_nvvbs"]
-radius = 34.0147
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjbuf"]
+size = Vector2(20, 74)
 
 [sub_resource type="Animation" id="Animation_dmwl5"]
 length = 0.001
@@ -88,17 +88,18 @@ _data = {
 &"walk": SubResource("Animation_2t2r4")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjbuf"]
-size = Vector2(20, 67)
-
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 position = Vector2(0, 3)
-collision_layer = 2
-collision_mask = 0
+collision_layer = 4
+collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_nvvbs")
 animationPlayer_path = NodePath("Enemy_AnimationPlayer")
-attack_path = NodePath("Attack")
+attack_path = NodePath("Attack_Melee")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -23)
+shape = SubResource("RectangleShape2D_rjbuf")
 
 [node name="SpriteWalk" type="Sprite2D" parent="."]
 position = Vector2(-1, 10)
@@ -108,17 +109,12 @@ offset = Vector2(0, -46)
 hframes = 8
 
 [node name="SpriteAttack" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, 1)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_dmwl5")
 offset = Vector2(0, -40)
 hframes = 4
-
-[node name="Player_Detector" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player_Detector"]
-position = Vector2(0, -17)
-shape = SubResource("CircleShape2D_nvvbs")
 
 [node name="Enemy_AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -129,27 +125,6 @@ enemy_path = NodePath("..")
 spriteWalk_path = NodePath("../SpriteWalk")
 spriteAttack_path = NodePath("../SpriteAttack")
 
-[node name="Attack" type="Node" parent="."]
-script = ExtResource("5_gx76c")
-damage = 999
-animationPlayer_path = NodePath("../Enemy_AnimationPlayer")
-enemy_path = NodePath("..")
-attack_cooldown_path = NodePath("AttackCooldown")
-attack_delay_path = NodePath("AttackDelay")
-player_detector_path = NodePath("../Player_Detector")
-knockback_force = 500
+[node name="Attack_Melee" parent="." instance=ExtResource("5_rjbuf")]
 
-[node name="AttackCooldown" type="Timer" parent="Attack"]
-wait_time = 0.5
-one_shot = true
-autostart = true
-
-[node name="AttackDelay" type="Timer" parent="Attack"]
-wait_time = 0.23
-one_shot = true
-
-[node name="Hurt_box" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurt_box"]
-position = Vector2(0, -23.5)
-shape = SubResource("RectangleShape2D_rjbuf")
+[editable path="Attack_Melee"]

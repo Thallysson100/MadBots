@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://3postoy3r8y2"]
+[gd_scene load_steps=4 format=3 uid="uid://3postoy3r8y2"]
 
 [ext_resource type="Texture2D" uid="uid://c6yg1epmfdc34" path="res://icon.svg" id="1_3rhlx"]
 [ext_resource type="PackedScene" uid="uid://dki47ebywt47l" path="res://Scenes/Player/player.tscn" id="1_t1gg8"]
 [ext_resource type="PackedScene" uid="uid://dnv2ikg1u4ni2" path="res://Scenes/Enemys/enemy.tscn" id="2_yp2ti"]
-[ext_resource type="PackedScene" uid="uid://cvr45cmlgrjaa" path="res://Scenes/Enemys/enemy2_test.tscn" id="4_vadfg"]
 
 [node name="World" type="Node2D"]
 
@@ -20,7 +19,11 @@ region_rect = Rect2(-23.018433, -23.055603, 1130.5781, 926.0434)
 position = Vector2(1601, 1153)
 
 [node name="Enemy" parent="." instance=ExtResource("2_yp2ti")]
-position = Vector2(1116, 908)
+position = Vector2(1187, 1001)
 
-[node name="Enemy2_test" parent="." instance=ExtResource("4_vadfg")]
-position = Vector2(2125, 901)
+[node name="Enemy2" parent="." instance=ExtResource("2_yp2ti")]
+position = Vector2(2095, 1013)
+speed = 500.0
+
+[editable path="Enemy2"]
+[editable path="Enemy2/Attack_Melee"]

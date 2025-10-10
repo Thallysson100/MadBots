@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://fj4ep7j7o1s8"]
+
+[ext_resource type="Script" uid="uid://jklrvsfafx5y" path="res://Scenes/Utility/Attacks/Enemy_Melee/attack_melle.gd" id="1_fup5m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nvvbs"]
+radius = 34.0147
+
+[node name="Attack_Melee" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_fup5m")
+animationPlayer_path = NodePath("../Enemy_AnimationPlayer")
+enemy_path = NodePath("..")
+knockback_force = 500
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -17)
+shape = SubResource("CircleShape2D_nvvbs")
+
+[node name="AttackDelay" type="Timer" parent="."]
+wait_time = 0.23
+one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true

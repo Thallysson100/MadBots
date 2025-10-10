@@ -30,8 +30,9 @@ func process_sprite() -> void:
 	
 	spriteWalk.flip_h = dir
 	spriteAttack.flip_h = dir
-
-	z_pos = RenderingServer.CANVAS_ITEM_Z_MIN + (int)(enemy.global_position.y / 20) % INTERVALE_Z
+	
+	#preciso consertar, cooredanas negativas inverte
+	z_pos = RenderingServer.CANVAS_ITEM_Z_MIN + (int) (abs(enemy.global_position.y) / 20) % INTERVALE_Z
 
 	spriteWalk.z_index = z_pos
 	spriteAttack.z_index = z_pos

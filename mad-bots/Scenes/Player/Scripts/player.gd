@@ -36,9 +36,9 @@ func movement():
 		
 	move_and_slide()
 
-func process_attack(damage, knockback_vector):
-	knockback = knockback_vector
-	print("o player foi atacado com ", damage, " de dano com direcao", knockback_vector)
+func process_attack(damage, angle, knockback_amount):
+	knockback = angle * knockback_amount
+	print("o player foi atacado com ", damage, " de dano com vetor", knockback)
 
 func debbug():
 	pass

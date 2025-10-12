@@ -1,13 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnv2ikg1u4ni2"]
+[gd_scene load_steps=10 format=3 uid="uid://dnv2ikg1u4ni2"]
 
-[ext_resource type="Script" uid="uid://otnhhg3gmd4e" path="res://Scenes/Enemys/Scripts/enemy/enemy.gd" id="1_nvvbs"]
+[ext_resource type="Script" uid="uid://otnhhg3gmd4e" path="res://Scenes/Enemys/Scripts/enemy.gd" id="1_nvvbs"]
 [ext_resource type="Texture2D" uid="uid://cq16ek2mmv30o" path="res://Assets/Textures/robots/Destroyer/Walk.png" id="2_nvvbs"]
 [ext_resource type="Texture2D" uid="uid://ch8bhq5666a5k" path="res://Assets/Textures/robots/Destroyer/Attack_1.png" id="4_dmwl5"]
-[ext_resource type="Script" uid="uid://b3ndq5rre6466" path="res://Scenes/Enemys/Scripts/enemy/animation_player.gd" id="5_d40jh"]
-[ext_resource type="PackedScene" uid="uid://fj4ep7j7o1s8" path="res://Scenes/Utility/Attacks/Enemy_Melee/attack_melee.tscn" id="5_rjbuf"]
+[ext_resource type="Script" uid="uid://b3ndq5rre6466" path="res://Scenes/Enemys/Scripts/animation_player.gd" id="5_d40jh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rjbuf"]
-size = Vector2(20, 74)
+size = Vector2(20, 49)
 
 [sub_resource type="Animation" id="Animation_dmwl5"]
 length = 0.001
@@ -89,16 +88,13 @@ _data = {
 }
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
-position = Vector2(0, 3)
 collision_layer = 4
-collision_mask = 4
+collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_nvvbs")
-animationPlayer_path = NodePath("Enemy_AnimationPlayer")
-attack_path = NodePath("Attack_Melee")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -23)
+position = Vector2(0, -10.5)
 shape = SubResource("RectangleShape2D_rjbuf")
 
 [node name="SpriteWalk" type="Sprite2D" parent="."]
@@ -124,7 +120,3 @@ script = ExtResource("5_d40jh")
 enemy_path = NodePath("..")
 spriteWalk_path = NodePath("../SpriteWalk")
 spriteAttack_path = NodePath("../SpriteAttack")
-
-[node name="Attack_Melee" parent="." instance=ExtResource("5_rjbuf")]
-
-[editable path="Attack_Melee"]

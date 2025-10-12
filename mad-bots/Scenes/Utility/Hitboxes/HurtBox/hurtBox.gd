@@ -6,6 +6,7 @@ extends Area2D
 @onready var disableTimer = $DisableTimer
 
 func _ready():
+	area_entered.connect(_on_area_entered)
 	disableTimer.timeout.connect(_on_disable_timer_timeout)
 
 signal hurt(damage, knockback_force)

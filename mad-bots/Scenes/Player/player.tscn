@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dki47ebywt47l"]
+[gd_scene load_steps=14 format=3 uid="uid://dki47ebywt47l"]
 
 [ext_resource type="Script" uid="uid://dwq326ibrckj7" path="res://Scenes/Player/Scripts/player.gd" id="1_uvnfx"]
 [ext_resource type="Texture2D" uid="uid://ct2kswpjdmq4s" path="res://Assets/Textures/cyberpunk_carachters/2 Punk/Punk_idle.png" id="2_a3d8c"]
 [ext_resource type="Texture2D" uid="uid://2l5aqymcb7xf" path="res://Assets/Textures/cyberpunk_carachters/2 Punk/Punk_run.png" id="3_mtuoh"]
 [ext_resource type="Texture2D" uid="uid://dokhj053yhu4v" path="res://Assets/Textures/cyberpunk_carachters/2 Punk/Punk_hurt.png" id="4_dd0ac"]
 [ext_resource type="Script" uid="uid://b1a4agwuanrr1" path="res://Scenes/Player/Scripts/animation_player.gd" id="4_htcer"]
+[ext_resource type="PackedScene" uid="uid://djv6hj8hqdilv" path="res://Scenes/Utility/Hitboxes/HurtBox/hurtBox.tscn" id="6_dd0ac"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3d8c"]
 size = Vector2(20, 34.5)
@@ -107,14 +108,17 @@ _data = {
 &"walk": SubResource("Animation_mtuoh")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0u5uq"]
+size = Vector2(20, 34)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 collision_layer = 2
-collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_uvnfx")
-player_velocity = 400
 animationPlayer_path = NodePath("Player_AnimationPlayer")
+hurtbox_path = NodePath("HurtBox")
+player_velocity = 400
 knockback_recovery = 25.0
 
 [node name="SpriteIdle" type="Sprite2D" parent="."]
@@ -153,3 +157,13 @@ player_path = NodePath("..")
 spriteWalk_path = NodePath("../SpriteWalk")
 spriteIdle_path = NodePath("../SpriteIdle")
 spriteTakingDamage_path = NodePath("../SpriteTakingDamage")
+
+[node name="HurtBox" parent="." instance=ExtResource("6_dd0ac")]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_0u5uq")
+
+[editable path="HurtBox"]

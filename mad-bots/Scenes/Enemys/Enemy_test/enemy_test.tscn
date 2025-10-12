@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://20imgnfiatm"]
+
+[ext_resource type="PackedScene" uid="uid://dnv2ikg1u4ni2" path="res://Scenes/Enemys/enemy.tscn" id="1_jakdy"]
+[ext_resource type="PackedScene" uid="uid://fj4ep7j7o1s8" path="res://Scenes/Utility/Attacks/Enemy_Melee/delayed_attack_melee.tscn" id="2_076uo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_076uo"]
+radius = 40.012497
+
+[node name="Enemy_test" instance=ExtResource("1_jakdy")]
+attack_path = NodePath("Delayed_Attack_Melee")
+
+[node name="Delayed_Attack_Melee" parent="." index="4" instance=ExtResource("2_076uo")]
+damage = 100
+knockback_force = 500
+attack_range = 40.01
+
+[node name="Delay_timer" parent="Delayed_Attack_Melee" index="0"]
+wait_time = 0.3
+
+[node name="Attack_area" parent="Delayed_Attack_Melee" index="2"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="Delayed_Attack_Melee/Attack_area" index="0"]
+shape = SubResource("CircleShape2D_076uo")
+
+[editable path="Delayed_Attack_Melee"]
+[editable path="Delayed_Attack_Melee/Attack_area"]

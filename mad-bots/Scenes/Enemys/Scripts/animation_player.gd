@@ -1,0 +1,81 @@
+# Custom AnimationPlayer class for enemy character animations
+extends AnimationPlayer
+class_name Enemy_AnimationPlayer
+
+# Export variables for node references - these will appear in the inspector
+@export var enemy_path : NodePath  # Path to the enemy node
+@onready var enemy = get_node(enemy_path)  # Reference to the enemy node
+
+@export var spriteWalk_path : NodePath  # Path to the walk sprite
+@onready var spriteWalk = get_node(spriteWalk_path)  # Reference to walk sprite
+
+@export var spriteAttack_path : NodePath  # Path to the attack sprite
+@onready var spriteAttack = get_node(spriteAttack_path)  # Reference to attack sprite
+
+# Animation control variables
+var can_play_new_animation := true  # Control flag to prevent animation interruptions
+var flipped: bool  # Track if sprite should be flipped
+var last_result: bool = false  # Store the last direction result
+var z_pos : int = 0  # Calculated Z position for depth sorting
+
+# Calculate the total range of possible Z values for depth sorting
+var INTERVALE_Z : int = abs(RenderingServer.CANVAS_ITEM_Z_MIN) + abs(RenderingServer.CANVAS_ITEM_Z_MAX)
+
+func _ready() -> void:
+	# Connect signals to handle animation events
+	animation_started.connect(_on_animation_started)
+	animation_finished.connect(_on_animation_finished)
+
+var last_direction: bool  # Store the last movement direction
+
+# Main function to process sprite animation and properties
+func process_sprite() -> void:
+	var dir = set_direction()  # Get current direction
+	
+	# Mirror sprites based on movement direction
+	spriteWalk.flip_h = dir
+	spriteAttack.flip_h = dir
+	
+	# Calculate Z position based on Y coordinate for depth sorting (isometric/perspective)
+	# Higher Y position = higher Z index (appears in front)
+	# negative coordinates inversion need fixing
+	z_pos = RenderingServer.CANVAS_ITEM_Z_MIN + (int)(abs(enemy.global_position.y) / 20) % INTERVALE_Z
+
+	# Apply Z index to both sprites
+	spriteWalk.z_index = z_pos
+	spriteAttack.z_index = z_pos
+
+	# Apply horizontal offset if flipped
+	if flipped:
+		spriteWalk.offset.x *= -1
+		spriteAttack.offset.x *= -1
+
+# Determine sprite direction based on enemy velocity
+func set_direction() -> bool:
+	# Store current direction based on velocity
+	var current_direction: bool = enemy.velocity.x < 0  # true for left, false for right/stopped
+	
+	# Check if direction has changed
+	flipped = (current_direction != last_result)
+	
+	# Update last result and return direction
+	last_result = current_direction
+	return current_direction
+
+# Called when an animation starts playing
+func _on_animation_started(anim_name: String) -> void:
+	can_play_new_animation = true  # Reset control flag
+	spriteWalk.visible = false  # Hide both sprites initially
+	spriteAttack.visible = false
+
+	# Show appropriate sprite based on animation type
+	match anim_name:
+		"walk":
+			spriteWalk.visible = true  # Show walk sprite
+		"attack":
+			can_play_new_animation = false  # Lock animations during attack
+			spriteAttack.visible = true  # Show attack sprite
+
+# Called when an animation finishes playing
+func _on_animation_finished(_anim_name: String) -> void:
+	can_play_new_animation = true  # Allow new animations to play

@@ -1,115 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://dki47ebywt47l"]
+[gd_scene load_steps=12 format=3 uid="uid://dki47ebywt47l"]
 
 [ext_resource type="Script" uid="uid://dwq326ibrckj7" path="res://Scenes/Player/Scripts/player.gd" id="1_uvnfx"]
 [ext_resource type="Texture2D" uid="uid://ct2kswpjdmq4s" path="res://Assets/Textures/cyberpunk_carachters/2 Punk/Punk_idle.png" id="2_a3d8c"]
 [ext_resource type="Texture2D" uid="uid://2l5aqymcb7xf" path="res://Assets/Textures/cyberpunk_carachters/2 Punk/Punk_run.png" id="3_mtuoh"]
 [ext_resource type="Texture2D" uid="uid://dokhj053yhu4v" path="res://Assets/Textures/cyberpunk_carachters/2 Punk/Punk_hurt.png" id="4_dd0ac"]
-[ext_resource type="Script" uid="uid://b1a4agwuanrr1" path="res://Scenes/Player/Scripts/animation_player.gd" id="4_htcer"]
+[ext_resource type="PackedScene" uid="uid://by7n1jkmulmg" path="res://Scenes/Player/player_animation_player.tscn" id="5_0u5uq"]
 [ext_resource type="PackedScene" uid="uid://djv6hj8hqdilv" path="res://Scenes/Utility/Hitboxes/HurtBox/hurtBox.tscn" id="6_dd0ac"]
+[ext_resource type="PackedScene" uid="uid://fj4ep7j7o1s8" path="res://Scenes/Utility/Attacks/Enemy_Melee/delayed_attack_melee.tscn" id="7_0u5uq"]
+[ext_resource type="Texture2D" uid="uid://cscseiykdcv67" path="res://Assets/Textures/robots/COUPON.png" id="8_jlvik"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3d8c"]
 size = Vector2(20, 34.5)
 
-[sub_resource type="Animation" id="Animation_htcer"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteWalk:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SpriteIdle:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SpriteTakingDamage:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_dd0ac"]
-resource_name = "idle"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteIdle:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.019934757, 0.23333333, 0.43333334, 0.6333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-
-[sub_resource type="Animation" id="Animation_0u5uq"]
-resource_name = "taking_damage"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteTakingDamage:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-
-[sub_resource type="Animation" id="Animation_mtuoh"]
-resource_name = "walk"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SpriteWalk:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0u5uq"]
-_data = {
-&"RESET": SubResource("Animation_htcer"),
-&"idle": SubResource("Animation_dd0ac"),
-&"taking_damage": SubResource("Animation_0u5uq"),
-&"walk": SubResource("Animation_mtuoh")
-}
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0u5uq"]
 size = Vector2(20, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk6dx"]
+size = Vector2(165, 169)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
@@ -120,6 +27,7 @@ animationPlayer_path = NodePath("Player_AnimationPlayer")
 hurtbox_path = NodePath("HurtBox")
 player_velocity = 400
 knockback_recovery = 25.0
+attack_path = NodePath("Delayed_Attack_Melee")
 
 [node name="SpriteIdle" type="Sprite2D" parent="."]
 z_index = 1
@@ -148,22 +56,42 @@ hframes = 2
 position = Vector2(0, 4.75)
 shape = SubResource("RectangleShape2D_a3d8c")
 
-[node name="Player_AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_0u5uq")
-}
-script = ExtResource("4_htcer")
-player_path = NodePath("..")
-spriteWalk_path = NodePath("../SpriteWalk")
-spriteIdle_path = NodePath("../SpriteIdle")
-spriteTakingDamage_path = NodePath("../SpriteTakingDamage")
+[node name="Player_AnimationPlayer" parent="." instance=ExtResource("5_0u5uq")]
 
 [node name="HurtBox" parent="." instance=ExtResource("6_dd0ac")]
 collision_layer = 0
 collision_mask = 16
+monitorable = false
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_0u5uq")
 
+[node name="Delayed_Attack_Melee" parent="." instance=ExtResource("7_0u5uq")]
+damage = 100
+knockback_force = 500
+attack_range = 100.0
+
+[node name="Delay_timer" parent="Delayed_Attack_Melee" index="0"]
+wait_time = 0.1
+
+[node name="Cooldown_timer" parent="Delayed_Attack_Melee" index="1"]
+wait_time = 0.1
+
+[node name="Attack_area" parent="Delayed_Attack_Melee" index="2"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" parent="Delayed_Attack_Melee/Attack_area" index="0"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_gk6dx")
+
+[node name="Sprite2D" type="Sprite2D" parent="Delayed_Attack_Melee"]
+z_index = -4096
+position = Vector2(0.59999704, -0.7874979)
+scale = Vector2(0.0897826, 0.06935583)
+texture = ExtResource("8_jlvik")
+
 [editable path="HurtBox"]
+[editable path="Delayed_Attack_Melee"]
+[editable path="Delayed_Attack_Melee/Attack_area"]

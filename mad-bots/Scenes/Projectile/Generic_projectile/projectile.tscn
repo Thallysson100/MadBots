@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dn55nwjvi8ywu"]
+
+[node name="Projectile" type="Area2D" groups=["attack"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="sound_play" type="AudioStreamPlayer" parent="."]

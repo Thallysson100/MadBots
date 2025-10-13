@@ -23,9 +23,6 @@ var z_pos : int = 0  # Calculated Z position for depth sorting
 # Calculate the total range of possible Z values for depth sorting
 var INTERVALE_Z : int = abs(RenderingServer.CANVAS_ITEM_Z_MIN) + abs(RenderingServer.CANVAS_ITEM_Z_MAX)
 
-func _ready() -> void:
-	# Connect signal to handle animation start events
-	animation_started.connect(_on_animation_started)
 
 # Main function to process sprite animation and properties
 func process_sprite() -> void:
@@ -73,7 +70,7 @@ func set_direction() -> bool:
 
 
 # Called when an animation starts playing
-func _on_animation_started(anim_name: String) -> void:
+func custom_play(anim_name: String) -> void:
 	# Hide all sprites initially
 	spriteWalk.visible = false
 	spriteIdle.visible = false
@@ -87,3 +84,4 @@ func _on_animation_started(anim_name: String) -> void:
 			spriteIdle.visible = true
 		"taking_damage":
 			spriteTakingDamage.visible = true
+	play(anim_name)  # Play the specified animation

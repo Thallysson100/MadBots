@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://san70ewrn4ap"]
+
+[ext_resource type="Texture2D" uid="uid://camrh1opun25n" path="res://Assets/Textures/gunsandroses/2 Guns/4_1.png" id="1_33vv2"]
+[ext_resource type="Script" uid="uid://cf2apnm38a17n" path="res://Scenes/Player/Guns/Gun_base/gun_base.gd" id="1_0175l"]
+[ext_resource type="Script" uid="uid://b2llnum51i0cu" path="res://Scenes/Player/Guns/Gun_base/sprite_2d.gd" id="3_eh1gl"]
+
+[node name="Gun_base" type="Node2D"]
+script = ExtResource("1_0175l")
+damage = 10
+range_travel = 300.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_33vv2")
+script = ExtResource("3_eh1gl")
+
+[node name="ProjectileSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(13, -3)

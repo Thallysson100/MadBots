@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://ct2kswpjdmq4s" path="res://Assets/Textures/cyberpunk_carachters/2 Punk/Punk_idle.png" id="2_a3d8c"]
 [ext_resource type="Texture2D" uid="uid://2l5aqymcb7xf" path="res://Assets/Textures/cyberpunk_carachters/2 Punk/Punk_run.png" id="3_mtuoh"]
 [ext_resource type="Texture2D" uid="uid://dokhj053yhu4v" path="res://Assets/Textures/cyberpunk_carachters/2 Punk/Punk_hurt.png" id="4_dd0ac"]
-[ext_resource type="PackedScene" uid="uid://by7n1jkmulmg" path="res://Scenes/Player/player_animation_player.tscn" id="5_0u5uq"]
+[ext_resource type="Script" uid="uid://b1a4agwuanrr1" path="res://Scenes/Player/Scripts/animation_player.gd" id="5_dd0ac"]
 [ext_resource type="PackedScene" uid="uid://djv6hj8hqdilv" path="res://Scenes/Utility/Hitboxes/HurtBox/hurtBox.tscn" id="6_dd0ac"]
-[ext_resource type="PackedScene" uid="uid://fj4ep7j7o1s8" path="res://Scenes/Utility/Attacks/Enemy_Melee/delayed_attack_melee.tscn" id="7_0u5uq"]
-[ext_resource type="Texture2D" uid="uid://cscseiykdcv67" path="res://Assets/Textures/robots/COUPON.png" id="8_jlvik"]
+[ext_resource type="Script" uid="uid://bvdiqfcy8tpd6" path="res://Scenes/Player/Scripts/orbital_gun.gd" id="6_ocvar"]
+[ext_resource type="Script" uid="uid://d4k2rkusta5n" path="res://Scenes/Player/Player_base/enemy_detector.gd" id="8_5potw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3d8c"]
 size = Vector2(20, 34.5)
@@ -15,19 +15,20 @@ size = Vector2(20, 34.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0u5uq"]
 size = Vector2(20, 34)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk6dx"]
-size = Vector2(165, 169)
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhp24"]
+radius = 401.31036
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_uvnfx")
-animationPlayer_path = NodePath("Player_AnimationPlayer")
+animationPlayer_path = NodePath("AnimationPlayer")
 hurtbox_path = NodePath("HurtBox")
+attack_path = NodePath("GunsOrbiter")
+enemy_detection_path = NodePath("EnemyDetector")
 player_velocity = 400
 knockback_recovery = 25.0
-attack_path = NodePath("Delayed_Attack_Melee")
 
 [node name="SpriteIdle" type="Sprite2D" parent="."]
 z_index = 1
@@ -56,7 +57,15 @@ hframes = 2
 position = Vector2(0, 4.75)
 shape = SubResource("RectangleShape2D_a3d8c")
 
-[node name="Player_AnimationPlayer" parent="." instance=ExtResource("5_0u5uq")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+script = ExtResource("5_dd0ac")
+player_path = NodePath("..")
+spriteWalk_path = NodePath("../SpriteWalk")
+spriteIdle_path = NodePath("../SpriteIdle")
+spriteTakingDamage_path = NodePath("../SpriteTakingDamage")
+
+[node name="GunsOrbiter" type="Node2D" parent="."]
+script = ExtResource("6_ocvar")
 
 [node name="HurtBox" parent="." instance=ExtResource("6_dd0ac")]
 collision_layer = 0
@@ -67,31 +76,14 @@ monitorable = false
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_0u5uq")
 
-[node name="Delayed_Attack_Melee" parent="." instance=ExtResource("7_0u5uq")]
-damage = 100
-knockback_force = 500
-attack_range = 100.0
+[node name="EnemyDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("8_5potw")
+gunsOrbiter_path = NodePath("../GunsOrbiter")
 
-[node name="Delay_timer" parent="Delayed_Attack_Melee" index="0"]
-wait_time = 0.1
-
-[node name="Cooldown_timer" parent="Delayed_Attack_Melee" index="1"]
-wait_time = 0.1
-
-[node name="Attack_area" parent="Delayed_Attack_Melee" index="2"]
-collision_layer = 8
-collision_mask = 0
-
-[node name="CollisionShape2D" parent="Delayed_Attack_Melee/Attack_area" index="0"]
-position = Vector2(0.5, -0.5)
-shape = SubResource("RectangleShape2D_gk6dx")
-
-[node name="Sprite2D" type="Sprite2D" parent="Delayed_Attack_Melee"]
-z_index = -4096
-position = Vector2(0.59999704, -0.7874979)
-scale = Vector2(0.0897826, 0.06935583)
-texture = ExtResource("8_jlvik")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector"]
+shape = SubResource("CircleShape2D_bhp24")
 
 [editable path="HurtBox"]
-[editable path="Delayed_Attack_Melee"]
-[editable path="Delayed_Attack_Melee/Attack_area"]

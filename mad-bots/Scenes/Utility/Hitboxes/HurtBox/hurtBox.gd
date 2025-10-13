@@ -9,7 +9,7 @@ func _ready():
 	area_entered.connect(_on_area_entered)
 	disableTimer.timeout.connect(_on_disable_timer_timeout)
 
-signal hurt(damage, knockback_force)
+signal hurt(damage, direction, knockback_force)
 
 var hit_once_array = []
 
@@ -32,14 +32,14 @@ func _on_area_entered(area):
 					if area.has_method("tempdisable"):
 						area.tempdisable()
 			var damage = area.damage
-			var angle = Vector2.ZERO
+			var direction = Vector2.ZERO
 			var knockback = 1
-			if not area.get("angle") == null:
-				angle = area.angle
+			if not area.get("direction") == null:
+				direction = area.direction
 			if not area.get("knockback_amount") == null:
 				knockback = area.knockback_amount
 			
-			emit_signal("hurt",damage, angle, knockback)
+			emit_signal("hurt",damage, direction, knockback)
 			if area.has_method("enemy_hit"):
 				area.enemy_hit(1)
 

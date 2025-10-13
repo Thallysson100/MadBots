@@ -9,19 +9,45 @@ class_name Player
 @onready var hurtbox = get_node(hurtbox_path)  # Reference to the Hurtbox area
 var knockback: Vector2 = Vector2.ZERO  # Stores the current knockback force applied to the player
 
+@export var attack_path : NodePath  ## Path to the attack system node
+@onready var gunsOrbiter = get_node(attack_path)  # Reference to attack system
+
+@export var enemy_detection_path : NodePath  ## Path to the enemy detection area node
+@onready var enemy_detection = get_node(enemy_detection_path)  # Reference to the enemy detection area
+
+
 # Player Stats - Configurable properties that can be adjusted in the inspector
 @export var player_velocity: int = 200  ## Base movement speed of the player in pixels per second
 @export var knockback_recovery: float = 3.5  ## How quickly knockback force decays (higher = faster recovery)
 @export var max_health: int = 1000  ## Maximum health points the player can have
 var current_health: int = max_health  # Current health points (starts at max health)
 
-@export var attack_path : NodePath  ## Path to the attack system node
-@onready var attack = get_node(attack_path)  # Reference to attack system
+func set_range(radius : float):
+	# Adjust the radius of the enemy detection area
+	enemy_detection.shape.set_radius(radius)  # Example radius value
+
+func set_player_velocity(velocity_set : int):
+	# Adjust the player's movement speed
+	player_velocity = velocity_set  # Example velocity value
+
+func set_max_health(health_set : int):
+	# Adjust the player's maximum health and reset current health to max
+	max_health = health_set
+	if (current_health > max_health):
+		current_health = max_health
+
+func add_gun(gun_name: String):
+	# Add a new gun to the player's attack system
+	gunsOrbiter.add_gun(gun_name)
+
+
 func _ready() -> void:
 	# Connect the hurt signal from the hurtbox to our damage processing function
 	hurtbox.hurt.connect(hurt)
 	
 func _physics_process(_delta: float) -> void:
+	
+	gunsOrbiter.target_position = enemy_detection.closest_enemy_position()
 	movement()
 
 func movement():
@@ -51,19 +77,18 @@ func movement():
 	else:
 		# Play idle animation when stationary
 		animation.custom_play("idle")
-	if (attack.can_attack):
-		# Start attack if attack input is detected
-		attack.start_attack(Vector2.ZERO)  # Example angle to the right
 		
 	# Apply movement and handle collisions
 	move_and_slide()
 
-func hurt(damage, angle, knockback_amount):
+func hurt(damage, direction, knockback_amount):
 	# Apply damage to player's health
 	current_health -= damage
 	
 	# Calculate and apply knockback force in the specified direction
-	knockback = angle * knockback_amount
+	knockback = direction * knockback_amount
+
+
 
 
 func debbug():

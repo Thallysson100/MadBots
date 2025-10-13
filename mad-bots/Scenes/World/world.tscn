@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://3postoy3r8y2"]
 
 [ext_resource type="Texture2D" uid="uid://c6yg1epmfdc34" path="res://icon.svg" id="1_3rhlx"]
-[ext_resource type="PackedScene" uid="uid://dki47ebywt47l" path="res://Scenes/Player/player.tscn" id="1_t1gg8"]
 [ext_resource type="PackedScene" uid="uid://bk54nw0n6l0nk" path="res://Scenes/Utility/EnemySpawner/enemy_spawner.tscn" id="3_3rhlx"]
+[ext_resource type="PackedScene" uid="uid://bktn2d8pc84ta" path="res://Scenes/Player/player_test.tscn" id="3_vadfg"]
 
 [node name="World" type="Node2D"]
 
@@ -15,7 +15,7 @@ texture = ExtResource("1_3rhlx")
 region_enabled = true
 region_rect = Rect2(-23.018433, -23.055603, 1130.5781, 926.0434)
 
-[node name="Player" parent="." instance=ExtResource("1_t1gg8")]
-position = Vector2(1634, 1150)
-
 [node name="EnemySpawner" parent="." instance=ExtResource("3_3rhlx")]
+
+[node name="Player_test" parent="." instance=ExtResource("3_vadfg")]
+position = Vector2(1885, 956)

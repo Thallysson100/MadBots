@@ -6,7 +6,7 @@ extends Area2D
 
 var damage = 1
 var disable = true
-var angle = Vector2.ZERO
+var direction = Vector2.ZERO
 var knockback_amount = 1
 
 func _ready():
@@ -27,8 +27,8 @@ func tempToggle():
 func _on_disable_hit_box_timer_timeout():
 	collision.call_deferred("set","disabled",not disable)
 
-func set_knockback_property(damage_set: int, angle_set: Vector2, knockback_amount_set: int):
+func set_knockback_property(damage_set: int, direction_set: Vector2, knockback_amount_set: int):
 	damage = damage_set
-	angle = angle_set
+	direction = direction_set
 	knockback_amount = knockback_amount_set
 	

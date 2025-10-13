@@ -7,7 +7,8 @@ class_name Enemy
 @export var attack_path : NodePath  ## Path to the attack system node
 @onready var attack = get_node(attack_path)  # Reference to attack system
 
-@onready var animation = $Enemy_AnimationPlayer  # Animation controller
+@export var animation_path : NodePath
+@onready var animation = get_node(animation_path)   # Animation controller
 @onready var hurtbox = $HurtBox  # Hurtbox area
 
 # Enemy properties
@@ -27,16 +28,16 @@ func _ready() -> void:
 	# Connect the death animation finished signal to queue_free the enemy
 	animation.death_animation_finished.connect(queue_free)
 
-func _physics_process(_delta):
+func _physics_process(delta : float) -> void:
 	if not player:
 		return  # Exit if player is not found
 
 	# Calculate direction to player every frame
 	direction_to_player = (player.global_position - global_position)
-	move_or_attack()
+	move_or_attack(delta)
 
 
-func move_or_attack():
+func move_or_attack(_delta : float):
 	var distance_to_player = direction_to_player.length()
 	direction_to_player = direction_to_player.normalized()
 	
@@ -57,11 +58,10 @@ func move_or_attack():
 		# Move towards player	
 		velocity = speed * direction_to_player
 		animation.process_sprite()
-		animation.custom_play("walk")
-		
+		animation.custom_play("walk")	
 	move_and_slide()
 
-func hurt(damage, _angle, knockback_amount):
+func hurt(damage, _direction, knockback_amount):
 	# Apply damage to player's health
 	current_health -= damage
 	

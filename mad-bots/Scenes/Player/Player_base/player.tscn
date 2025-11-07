@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dki47ebywt47l"]
+[gd_scene load_steps=16 format=3 uid="uid://dki47ebywt47l"]
 
 [ext_resource type="Script" uid="uid://dwq326ibrckj7" path="res://Scenes/Player/Scripts/player.gd" id="1_uvnfx"]
 [ext_resource type="Texture2D" uid="uid://ct2kswpjdmq4s" path="res://Assets/Textures/Armas_E_Personagens/Personagens/2 Punk/Punk_idle.png" id="2_a3d8c"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bvdiqfcy8tpd6" path="res://Scenes/Player/Scripts/orbital_gun.gd" id="6_ocvar"]
 [ext_resource type="Texture2D" uid="uid://dlasogkv1aliy" path="res://Assets/Textures/GUI/exp_background.png" id="8_bhp24"]
 [ext_resource type="Texture2D" uid="uid://341qwvb8xft8" path="res://Assets/Textures/GUI/exp_progress.png" id="9_2iroa"]
+[ext_resource type="PackedScene" uid="uid://18p05avlo2ww" path="res://Scenes/Utility/HealthBar/healthbar.tscn" id="10_2iroa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3d8c"]
 size = Vector2(20, 34.5)
@@ -23,6 +24,7 @@ radius = 222.03603
 radius = 13.453624
 
 [sub_resource type="SystemFont" id="SystemFont_bhp24"]
+subpixel_positioning = 0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
@@ -124,6 +126,13 @@ offset_bottom = 21.0
 theme_override_fonts/font = SubResource("SystemFont_bhp24")
 text = "Level: 1"
 horizontal_alignment = 1
+
+[node name="Healthbar" parent="GUILayer/GUI" instance=ExtResource("10_2iroa")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 21.0
+offset_right = 639.0
+offset_bottom = 42.0
 
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]

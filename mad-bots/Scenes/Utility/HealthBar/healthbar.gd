@@ -21,10 +21,10 @@ func _set_health(new_health):
 
 func init_health(_health):
 	health = _health
-	max_value = health
-	value = health
-	damage_bar.max_value = health
-	damage_bar.value = health
+	max_value = _health
+	value = _health
+	damage_bar.max_value = _health
+	damage_bar.value = _health
 
 
 func _on_timer_timeout() -> void:

@@ -4,7 +4,7 @@ extends Node2D
 @export var guns_available: Dictionary = {
 	"gun_test" : preload("res://Scenes/Player/Guns/gun_test.tscn"),
 }
-@export var orbit_radius: float = 150.0
+@export var orbit_radius: float = 200
 @export var orbit_speed: float = 0.25  # Rotações por segundo
 
 @onready var player = get_parent()
@@ -35,10 +35,6 @@ func add_gun(gun_name: String):
 func _ready():
 	add_gun("gun_test")
 	add_gun("gun_test")
-	add_gun("gun_test")
-	add_gun("gun_test")
-	add_gun("gun_test")
-	add_gun("gun_test")
 
 func start_fire():
 	for gun in self.get_children():
@@ -54,7 +50,4 @@ func _process(delta):
 		var angle = gun.get_meta("angle") + orbit_speed * delta
 		gun.set_meta("angle", angle)
 		gun.global_position = player.global_position + Vector2(cos(angle), sin(angle)) * orbit_radius
-		var target_direction = (target_position - gun.get_child(1).global_position).normalized()
-		gun.target_direction = target_direction
-		gun.rotation = target_direction.angle()
 	

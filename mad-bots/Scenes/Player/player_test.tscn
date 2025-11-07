@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bktn2d8pc84ta"]
+[gd_scene load_steps=10 format=3 uid="uid://bktn2d8pc84ta"]
 
 [ext_resource type="PackedScene" uid="uid://dki47ebywt47l" path="res://Scenes/Player/Player_base/player.tscn" id="1_dg6dr"]
+[ext_resource type="Texture2D" uid="uid://3spxbtf2aitg" path="res://Assets/Textures/Armas_E_Personagens/Personagens/2 Punk/Idle1.png" id="2_623wg"]
+[ext_resource type="Texture2D" uid="uid://cy2cxoadh2w0e" path="res://Assets/Textures/Armas_E_Personagens/Personagens/2 Punk/Walk1.png" id="3_ggvqp"]
 
 [sub_resource type="Animation" id="Animation_vcvbm"]
 length = 0.001
@@ -98,11 +100,18 @@ _data = {
 &"walk": SubResource("Animation_o5pip")
 }
 
-[node name="Player_test" instance=ExtResource("1_dg6dr")]
-animationPlayer_path = NodePath("AnimationPlayer")
+[sub_resource type="CircleShape2D" id="CircleShape2D_pkpl1"]
+radius = 222.03603
 
-[node name="SpriteTakingDamage" parent="." index="2"]
-visible = true
+[node name="Player_test" instance=ExtResource("1_dg6dr")]
+grab_area = NodePath("GrabArea")
+pickup_range = 200.0
+
+[node name="SpriteIdle" parent="." index="0"]
+texture = ExtResource("2_623wg")
+
+[node name="SpriteWalk" parent="." index="1"]
+texture = ExtResource("3_ggvqp")
 
 [node name="AnimationPlayer" parent="." index="5"]
 libraries = {
@@ -112,5 +121,11 @@ libraries = {
 [node name="GunsOrbiter" parent="." index="6"]
 orbit_radius = 50.0
 orbit_speed = 1.0
+
+[node name="GrabArea" parent="GrabArea" index="0"]
+shape = SubResource("CircleShape2D_pkpl1")
+
+[node name="ExperienceBar" parent="GUILayer/GUI" index="0"]
+value = 0.0
 
 [editable path="HurtBox"]

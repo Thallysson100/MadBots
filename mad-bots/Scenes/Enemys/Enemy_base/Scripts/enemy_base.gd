@@ -15,7 +15,9 @@ class_name Enemy
 @export var speed: float   ## Movement speed
 @export var knockback_recovery: float  ## How quickly knockback force decays (higher = faster recovery)
 @export var max_health: int  ## Maximum health points the enemy can have
+@export var experience_reward: int  ## Experience given to player upon defeat
 
+@onready var experience_gem_scene : PackedScene = preload("res://Scenes/Objects/experience_gem.tscn")
 
 var direction_to_player : Vector2 = Vector2.ZERO  # Direction towards player
 var knockback: Vector2 = Vector2.ZERO  # Stores the current knockback force applied to the enemy
@@ -26,7 +28,7 @@ func _ready() -> void:
 	# Connect the hurt signal from the hurtbox to our damage processing function
 	hurtbox.hurt.connect(hurt)
 	# Connect the death animation finished signal to queue_free the enemy
-	animation.death_animation_finished.connect(queue_free)
+	animation.death_animation_finished.connect(_on_dead)
 
 func _physics_process(delta : float) -> void:
 	if not player:
@@ -69,4 +71,12 @@ func hurt(damage, _direction, knockback_amount):
 	knockback = -direction_to_player * knockback_amount
 	if current_health <= 0:
 		animation.custom_play("death")
+
+func _on_dead():
+	var gem_experience = experience_gem_scene.instantiate()
+	gem_experience.global_position = global_position
+	gem_experience.experience = experience_reward
+	get_tree().root.add_child(gem_experience)
+	queue_free()
+
 		

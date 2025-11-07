@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://dki47ebywt47l"]
+[gd_scene load_steps=15 format=3 uid="uid://dki47ebywt47l"]
 
 [ext_resource type="Script" uid="uid://dwq326ibrckj7" path="res://Scenes/Player/Scripts/player.gd" id="1_uvnfx"]
-[ext_resource type="Texture2D" uid="uid://ct2kswpjdmq4s" path="res://Assets/Textures/cyberpunk_carachters/2 Punk/Punk_idle.png" id="2_a3d8c"]
-[ext_resource type="Texture2D" uid="uid://2l5aqymcb7xf" path="res://Assets/Textures/cyberpunk_carachters/2 Punk/Punk_run.png" id="3_mtuoh"]
-[ext_resource type="Texture2D" uid="uid://dokhj053yhu4v" path="res://Assets/Textures/cyberpunk_carachters/2 Punk/Punk_hurt.png" id="4_dd0ac"]
+[ext_resource type="Texture2D" uid="uid://ct2kswpjdmq4s" path="res://Assets/Textures/Armas_E_Personagens/Personagens/2 Punk/Punk_idle.png" id="2_a3d8c"]
+[ext_resource type="Texture2D" uid="uid://2l5aqymcb7xf" path="res://Assets/Textures/Armas_E_Personagens/Personagens/2 Punk/Punk_run.png" id="3_mtuoh"]
+[ext_resource type="Texture2D" uid="uid://dokhj053yhu4v" path="res://Assets/Textures/Armas_E_Personagens/Personagens/2 Punk/Punk_hurt.png" id="4_dd0ac"]
 [ext_resource type="Script" uid="uid://b1a4agwuanrr1" path="res://Scenes/Player/Scripts/animation_player.gd" id="5_dd0ac"]
 [ext_resource type="PackedScene" uid="uid://djv6hj8hqdilv" path="res://Scenes/Utility/Hitboxes/HurtBox/hurtBox.tscn" id="6_dd0ac"]
 [ext_resource type="Script" uid="uid://bvdiqfcy8tpd6" path="res://Scenes/Player/Scripts/orbital_gun.gd" id="6_ocvar"]
-[ext_resource type="Script" uid="uid://d4k2rkusta5n" path="res://Scenes/Player/Player_base/enemy_detector.gd" id="8_5potw"]
+[ext_resource type="Texture2D" uid="uid://dlasogkv1aliy" path="res://Assets/Textures/GUI/exp_background.png" id="8_bhp24"]
+[ext_resource type="Texture2D" uid="uid://341qwvb8xft8" path="res://Assets/Textures/GUI/exp_progress.png" id="9_2iroa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3d8c"]
 size = Vector2(20, 34.5)
@@ -15,8 +16,13 @@ size = Vector2(20, 34.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0u5uq"]
 size = Vector2(20, 34)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bhp24"]
-radius = 401.31036
+[sub_resource type="CircleShape2D" id="CircleShape2D_ocvar"]
+radius = 222.03603
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5potw"]
+radius = 13.453624
+
+[sub_resource type="SystemFont" id="SystemFont_bhp24"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
@@ -26,7 +32,6 @@ script = ExtResource("1_uvnfx")
 animationPlayer_path = NodePath("AnimationPlayer")
 hurtbox_path = NodePath("HurtBox")
 attack_path = NodePath("GunsOrbiter")
-enemy_detection_path = NodePath("EnemyDetector")
 player_velocity = 400
 knockback_recovery = 25.0
 
@@ -76,14 +81,51 @@ monitorable = false
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_0u5uq")
 
-[node name="EnemyDetector" type="Area2D" parent="."]
+[node name="GrabArea" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 32
 monitorable = false
-script = ExtResource("8_5potw")
-gunsOrbiter_path = NodePath("../GunsOrbiter")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector"]
-shape = SubResource("CircleShape2D_bhp24")
+[node name="GrabArea" type="CollisionShape2D" parent="GrabArea"]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_ocvar")
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollectArea" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_5potw")
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="GUILayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+value = 50.0
+texture_under = ExtResource("8_bhp24")
+texture_progress = ExtResource("9_2iroa")
+
+[node name="lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 546.0
+offset_top = -2.0
+offset_right = 646.0
+offset_bottom = 21.0
+theme_override_fonts/font = SubResource("SystemFont_bhp24")
+text = "Level: 1"
+horizontal_alignment = 1
+
+[connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
+[connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 
 [editable path="HurtBox"]

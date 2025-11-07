@@ -45,7 +45,8 @@ func process_sprite() -> void:
 	# Calculate Z position based on Y coordinate for depth sorting (isometric/perspective)
 	# Higher Y position = higher Z index (appears in front)
 	# negative coordinates inversion need fixing
-	z_pos = RenderingServer.CANVAS_ITEM_Z_MIN + (int)(abs(enemy.global_position.y) / 20) % INTERVALE_Z
+	var pos : int = int(enemy.global_position.y)
+	z_pos = (pos)%RenderingServer.CANVAS_ITEM_Z_MAX if (pos>=0) else (pos)%RenderingServer.CANVAS_ITEM_Z_MIN
 
 	# Apply Z index to both sprites
 	spriteWalk.z_index = z_pos

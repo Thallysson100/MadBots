@@ -7,8 +7,6 @@ radius = 401.31036
 
 [node name="Gun_test" instance=ExtResource("1_ld2xs")]
 damage = 100
-fire_rate = 0.1
-pierce = 3
 projectile_speed = 3000.0
 fire_range = 500.0
 knockback_amount = 1.0

@@ -18,9 +18,10 @@ var knockback: Vector2 = Vector2.ZERO  # Stores the current knockback force appl
 #GUI
 @onready var expBar = get_node("%ExperienceBar")  # Reference to the experience bar GUI element
 @onready var lbl_level = get_node("%lbl_level")  # Reference to the level label GUI element
-
-
-
+@onready var lvlUpSound = get_node("%snd_levelup")  # Reference to the level-up sound effect
+@onready var levelPanel = get_node("%LevelUp")  # Reference to the level-up panel GUI element
+@onready var upgradeOptions = get_node("%UpgradeOptions")  # Reference to the upgrade options container
+@onready var itemOptions = preload("res://Scenes/Utility/Item_Option/item_option.tscn")  # Preload the item option scene
 
 
 # Player Stats - Configurable properties that can be adjusted in the inspector
@@ -122,6 +123,7 @@ func calculate_experience(gem_exp):
 		print("Level:",experience_level)
 		experience = 0
 		exp_required = calculate_experiencecap()
+		show_levelup_panel()
 		calculate_experience(0)
 	else:
 		experience += collected_experience
@@ -145,4 +147,37 @@ func set_expbar(set_value = 1, set_max_value = 100):
 	expBar.max_value = set_max_value
 	lbl_level.text = str("Level: ", experience_level)
 
-		
+var levelPanel_position = Vector2.ZERO
+func show_levelup_panel():
+	lvlUpSound.play()
+	lbl_level.text = str("Level: ",experience_level)
+	levelPanel_position = levelPanel.position
+	var screen_center = get_viewport_rect().size / 2  # Get the center of the screen
+	var panel_center = levelPanel.get_size() / 2  # Get the center of the panel
+	# Calculate the target position for centering the panel
+	var target_position = screen_center - panel_center * levelPanel.get_scale()  
+	var tween = levelPanel.create_tween()
+	tween.tween_property(levelPanel, "position", target_position, 0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+
+	var options = 0
+	while options < 3:
+		var item_option_instance = itemOptions.instantiate()
+		# If upgradeOptions is a container (e.g., VBoxContainer), let it handle sizing
+		item_option_instance.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		item_option_instance.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		upgradeOptions.add_child(item_option_instance)
+		options += 1
+
+	get_tree().paused = true
+
+
+func upgrade_character(upgrade):
+	print("Upgraded with: ", upgrade)
+	# Implement upgrade logic here
+	# After upgrading, hide the level-up panel and resume the game
+	var options_children = upgradeOptions.get_children()
+	for child in options_children:
+		child.queue_free()
+	levelPanel.position = levelPanel_position
+	get_tree().paused = false
+	

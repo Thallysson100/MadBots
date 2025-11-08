@@ -149,7 +149,7 @@ animation_path = NodePath("AnimationPlayer")
 speed = 100.0
 knockback_recovery = 25.0
 max_health = 100
-experience_reward = 10
+experience_reward = 1
 
 [node name="CollisionShape2D" parent="Enemy_base" index="0"]
 visible = false

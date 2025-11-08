@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bvdiqfcy8tpd6" path="res://Scenes/Player/Scripts/orbital_gun.gd" id="6_ocvar"]
 [ext_resource type="Texture2D" uid="uid://dlasogkv1aliy" path="res://Assets/Textures/GUI/exp_background.png" id="8_bhp24"]
 [ext_resource type="Texture2D" uid="uid://341qwvb8xft8" path="res://Assets/Textures/GUI/exp_progress.png" id="9_2iroa"]
+[ext_resource type="PackedScene" uid="uid://18p05avlo2ww" path="res://Scenes/Utility/HealthBar/healthbar.tscn" id="10_2iroa"]
 [ext_resource type="FontFile" uid="uid://jtemo7px1tum" path="res://Assets/Font/CyberpunkCraftpixPixel.otf" id="10_2iroa"]
 [ext_resource type="Texture2D" uid="uid://c1vxlp7qsaxju" path="res://Assets/Textures/image_placeholder.png" id="11_d5l35"]
 [ext_resource type="AudioStream" uid="uid://mhglwy5ui8ty" path="res://Assets/Audio/SoundEffect/levelup.ogg" id="12_j7xa5"]
@@ -24,6 +25,9 @@ radius = 222.03603
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5potw"]
 radius = 13.453624
+
+[sub_resource type="SystemFont" id="SystemFont_bhp24"]
+subpixel_positioning = 0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
@@ -126,6 +130,12 @@ theme_override_fonts/font = ExtResource("10_2iroa")
 text = "Level: 1"
 horizontal_alignment = 1
 
+[node name="Healthbar" parent="GUILayer/GUI" instance=ExtResource("10_2iroa")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 21.0
+offset_right = 639.0
+offset_bottom = 42.0
 [node name="LevelUp" type="TextureRect" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 process_mode = 2

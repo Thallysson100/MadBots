@@ -18,6 +18,9 @@ var knockback: Vector2 = Vector2.ZERO  # Stores the current knockback force appl
 #GUI
 @onready var expBar = get_node("%ExperienceBar")  # Reference to the experience bar GUI element
 @onready var lbl_level = get_node("%lbl_level")  # Reference to the level label GUI element
+@onready var healthbar = get_node("%Healthbar") # Reference to the health bar GUI element
+
+
 @onready var lvlUpSound = get_node("%snd_levelup")  # Reference to the level-up sound effect
 @onready var levelPanel = get_node("%LevelUp")  # Reference to the level-up panel GUI element
 @onready var upgradeOptions = get_node("%UpgradeOptions")  # Reference to the upgrade options container
@@ -54,6 +57,7 @@ func _ready() -> void:
 	# Connect the hurt signal from the hurtbox to our damage processing function
 	hurtbox.hurt.connect(hurt)
 	grabArea.get_child(0).shape.radius = pickup_range
+	healthbar.init_health(max_health)
 	
 func _physics_process(_delta: float) -> void:
 	movement()
@@ -92,6 +96,7 @@ func movement():
 func hurt(damage, direction, knockback_amount):
 	# Apply damage to player's health
 	current_health -= damage
+	healthbar.health = current_health
 	
 	# Calculate and apply knockback force in the specified direction
 	knockback = direction * knockback_amount

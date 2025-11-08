@@ -15,6 +15,10 @@ run/main_scene="uid://3postoy3r8y2"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+UpgradesDb="*res://Scenes/Utility/UgradesDB/upgrades_db.tscn"
+
 [display]
 
 window/size/viewport_width=1280

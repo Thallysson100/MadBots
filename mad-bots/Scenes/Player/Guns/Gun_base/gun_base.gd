@@ -4,45 +4,47 @@ extends Node2D
 @onready var projectile_spawn_point: Marker2D = $ProjectileSpawnPoint
 @onready var enemyDetector = $EnemyDetector
 
-
-@export var damage: int = 100 ## Damage dealt by the gun
-@export var fire_rate: float = 0.5 ## Time in seconds between shots
+@export var projectiles: Array[ProjectileInfo] = []
+@export var init_damage: int = 100 ## Damage dealt by the gun
+@export var init_fire_rate: float = 0.5 ## Time in seconds between shots
+@export var init_projectile_speed: float = 4000 ## Speed of the projectile
+@export var init_fire_range : float = 400
+@export var init_knockback_amount: float = 500 ## Knockback force applied to enemies hit
 @export var pierce: int = 1 ## How many enemies the projectile can pierce through
-@export var projectile_speed: float = 4000 ## Speed of the projectile
-@export var fire_range : float = 400
-@export var knockback_amount: float = 500 ## Knockback force applied to enemies hit
+
+# Update gun stats functions
+var damage: int
+var fire_rate: float
+var projectile_speed: float
+var fire_range : float
+var knockback_amount: float
+
 var current_cooldown: float = 0.0
 var can_fire = false
 
-
-@export var projectiles_available: Dictionary = {
-	"projectile_test" : preload("res://Scenes/Projectile/projectile_test.tscn"),
+var projectiles_available: Dictionary = {
 }
-var projectile_scene: PackedScene  ## The projectile scene to instantiate
+@export var projectile_scene: PackedScene  ## The projectile scene to instantiate
 
 func _ready():
+	damage = init_damage
+	fire_rate = init_fire_rate
+	projectile_speed = init_projectile_speed
+	fire_range = init_fire_range
+	knockback_amount = init_knockback_amount
+	
+	for proj in projectiles:
+		projectiles_available[proj.projectile_name] = proj.projectile_scene
 	#temporario, depois criar função para mudar o projétil na interface
-	set_current_projectile("projectile_test")
 	enemyDetector.connect("start_fire", _on_start_fire)
 	enemyDetector.connect("stop_fire", _on_stop_fire)
 	enemyDetector.get_child(0).shape.radius = fire_range
-
-
-
-func set_current_projectile(projectile_name: String):
-	if projectiles_available.has(projectile_name):
-		projectile_scene = projectiles_available[projectile_name]
-	else:
-		print("Projectile not found in available projectiles.")
 
 func _process(delta: float):
 	current_cooldown += delta
 	if current_cooldown >= fire_rate and can_fire:
 		current_cooldown = 0
 		fire(enemyDetector.closest_enemy_position())
-
-	
-	
 
 func fire(target_pos: Vector2):	
 	var projectile_instance = projectile_scene.instantiate()
@@ -62,3 +64,30 @@ func _on_start_fire():
 	can_fire = true
 func _on_stop_fire():
 	can_fire = false
+
+
+
+
+func gun_update(upgrade_type: String, value: float):
+	match upgrade_type:
+		"damage":
+			damage = (int)(init_damage * value)
+		"fire_rate":
+			fire_rate = max(0.1, fire_rate - (init_fire_rate * value))  # Ensure fire rate doesn't go below 0.1 seconds
+		"projectile_speed":
+			projectile_speed = (init_projectile_speed * value)
+		"fire_range":
+			fire_range = (init_fire_range * value)
+			enemyDetector.get_child(0).shape.radius = fire_range
+		"knockback_amount":
+			knockback_amount = (init_knockback_amount * value)
+		"pierce":
+			pierce += (int)(value)
+		_:
+			print("Unknown upgrade type: ", upgrade_type)
+
+func set_current_projectile(projectile_name: String):
+	if projectiles_available.has(projectile_name):
+		projectile_scene = projectiles_available[projectile_name]
+	else:
+		print("Projectile not found in available projectiles.")

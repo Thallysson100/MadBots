@@ -24,12 +24,13 @@ func closest_enemy_position() -> Vector2:
 		return Vector2.ZERO
 	
 	var closest_enemy = enemies_in_range[0]
-	var closest_dist = global_position.distance_to(closest_enemy.global_position)
+	var closest_dist_squared = global_position.distance_squared_to(closest_enemy.global_position)
 	
-	for enemy in enemies_in_range:
-		var dist = global_position.distance_to(enemy.global_position)
-		if dist < closest_dist:
-			closest_dist = dist
+	for i in range(1, enemies_in_range.size()):
+		var enemy = enemies_in_range[i]
+		var dist_squared = global_position.distance_squared_to(enemy.global_position)
+		if dist_squared < closest_dist_squared:
+			closest_dist_squared = dist_squared
 			closest_enemy = enemy
 	
 	return closest_enemy.global_position

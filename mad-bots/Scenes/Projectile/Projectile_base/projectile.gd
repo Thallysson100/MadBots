@@ -1,10 +1,6 @@
 extends Area2D
 
 
-@onready var sprite = $Sprite2D
-@onready var notify = $VisibleOnScreenNotifier2D
-
-
 var direction = Vector2.ZERO
 var speed = 400
 var damage = 1
@@ -19,7 +15,6 @@ signal shake_camera(intensity, duration)
 
 
 func _ready():
-	notify.screen_exited.connect(_on_screen_exited)
 	body_entered.connect(_on_body_entered)
 
 
@@ -37,10 +32,6 @@ func _on_body_entered(body):
 		pierce -= 1
 		if pierce <= 0:
 			kill()
-
-func _on_screen_exited():
-	if not already_killed:
-		kill()
 
 func kill():
 	already_killed = true

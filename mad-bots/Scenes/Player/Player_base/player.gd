@@ -17,14 +17,8 @@ var knockback: Vector2 = Vector2.ZERO  # Stores the current knockback force appl
 
 #GUI
 @onready var expBar = get_node("%ExperienceBar")  # Reference to the experience bar GUI element
-@onready var lbl_level = get_node("%lbl_level")  # Reference to the level label GUI element
 @onready var healthbar = get_node("%Healthbar") # Reference to the health bar GUI element
-
-
-@onready var lvlUpSound = get_node("%snd_levelup")  # Reference to the level-up sound effect
 @onready var levelPanel = get_node("%LevelUp")  # Reference to the level-up panel GUI element
-@onready var upgradeOptions = get_node("%UpgradeOptions")  # Reference to the upgrade options container
-@onready var itemOptions = preload("res://Scenes/Utility/Item_Option/item_option.tscn")  # Preload the item option scene
 
 
 # Player Stats - Configurable properties that can be adjusted in the inspector
@@ -34,24 +28,7 @@ var knockback: Vector2 = Vector2.ZERO  # Stores the current knockback force appl
 @export var pickup_range: float = 100  ## Range within which the player can pick up items
 
 var current_health: int = max_health  # Current health points (starts at max health)
-var experience = 0
-var experience_level = 1
-var collected_experience = 0
-
-func set_player_velocity(velocity_set : int):
-	# Adjust the player's movement speed
-	player_velocity = velocity_set  # Example velocity value
-
-func set_max_health(health_set : int):
-	# Adjust the player's maximum health and reset current health to max
-	max_health = health_set
-	if (current_health > max_health):
-		current_health = max_health
-
-func add_gun(gun_name: String):
-	# Add a new gun to the player's attack system
-	gunsOrbiter.add_gun(gun_name)
-
+var knockback_percentage : float = 1 ## Percentage knockback recovery for upgrades
 
 func _ready() -> void:
 	# Connect the hurt signal from the hurtbox to our damage processing function
@@ -67,13 +44,11 @@ func movement():
 	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")
 	var y_mov = Input.get_action_strength("down") - Input.get_action_strength("up")
 	var mov = Vector2(x_mov, y_mov).normalized()  # Normalize to prevent diagonal movement being faster
-
-	
 	
 	# Update sprite direction and animations
 	animation.process_sprite()
 	
-	# Set velocity based on player input
+	# Set velocity based on player input and ensure it reflects the updated player_velocity
 	velocity = mov * player_velocity
 	
 	# Handle different animation states based on player condition
@@ -102,13 +77,6 @@ func hurt(damage, direction, knockback_amount):
 	knockback = direction * knockback_amount
 
 
-
-
-func debbug():
-	# Placeholder function for debugging purposes
-	pass
-
-
 func _on_grab_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("loot"):
 		area.target = self
@@ -117,72 +85,38 @@ func _on_grab_area_area_entered(area: Area2D) -> void:
 func _on_collect_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("loot"):
 		var gem_exp = area.collect()
-		calculate_experience(gem_exp)
+		expBar.calculate_experience(gem_exp)
 		
-func calculate_experience(gem_exp):
-	var exp_required = calculate_experiencecap()
-	collected_experience += gem_exp
-	if experience + collected_experience >= exp_required:
-		collected_experience -= exp_required-experience
-		experience_level += 1
-		print("Level:",experience_level)
-		experience = 0
-		exp_required = calculate_experiencecap()
-		show_levelup_panel()
-		calculate_experience(0)
-	else:
-		experience += collected_experience
-		collected_experience = 0
 
-	set_expbar(experience, exp_required)
+## UPGRADE FUNCTIONS ##
 
-func calculate_experiencecap():
-	var exp_cap = experience_level
-	if experience_level < 20:
-		exp_cap = experience_level*5
-	elif experience_level < 40:
-		exp_cap = 95 * (experience_level - 19)*8
-	else:
-		exp_cap = 255 * (experience_level - 39)*12
-		
-	return exp_cap
-
-func set_expbar(set_value = 1, set_max_value = 100):
-	expBar.value = set_value
-	expBar.max_value = set_max_value
-	lbl_level.text = str("Level: ", experience_level)
-
-var levelPanel_position = Vector2.ZERO
-func show_levelup_panel():
-	lvlUpSound.play()
-	lbl_level.text = str("Level: ",experience_level)
-	levelPanel_position = levelPanel.position
-	var screen_center = get_viewport_rect().size / 2  # Get the center of the screen
-	var panel_center = levelPanel.get_size() / 2  # Get the center of the panel
-	# Calculate the target position for centering the panel
-	var target_position = screen_center - panel_center * levelPanel.get_scale()  
-	var tween = levelPanel.create_tween()
-	tween.tween_property(levelPanel, "position", target_position, 0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
-
-	var options = 0
-	while options < 3:
-		var item_option_instance = itemOptions.instantiate()
-		# If upgradeOptions is a container (e.g., VBoxContainer), let it handle sizing
-		item_option_instance.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		item_option_instance.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		upgradeOptions.add_child(item_option_instance)
-		options += 1
-
-	get_tree().paused = true
-
-
-func upgrade_character(upgrade):
-	print("Upgraded with: ", upgrade)
-	# Implement upgrade logic here
-	# After upgrading, hide the level-up panel and resume the game
-	var options_children = upgradeOptions.get_children()
-	for child in options_children:
-		child.queue_free()
-	levelPanel.position = levelPanel_position
-	get_tree().paused = false
+# a item_option emits the signal selected_upgrade with the upgrade name as argument
+func upgrade_character(upgrade : String):
+	for i in range(UpgradesDb.UPGRADES[upgrade]["functions"].size()):
+		callv(UpgradesDb.UPGRADES[upgrade]["functions"][i], UpgradesDb.UPGRADES[upgrade]["arguments"][i])
 	
+	# After upgrading, hide the level-up panel
+	levelPanel.hide_levelup_panel()
+
+func update_player_velocity(percentage : float):
+	player_velocity += (int)(player_velocity * percentage)
+
+func update_max_health(health_amount : int):
+	# Adjust the player's maximum health and reset current health to max
+	max_health += health_amount
+	if (current_health > max_health):
+		current_health = max_health
+
+func add_gun(gun_name: String):
+	gunsOrbiter.add_gun(gun_name)
+
+var atributtes_percentage : Dictionary = {
+	"fire_rate" : 1.0,
+	"fire_range" : 1.0,
+	"knockback_amount" : 1.0,
+	"damage" : 1.0
+}
+
+func update_guns(atributte: String, percentage : float):
+	atributtes_percentage[atributte] += atributtes_percentage[atributte] * percentage
+	gunsOrbiter.update_guns(atributte, atributtes_percentage[atributte])

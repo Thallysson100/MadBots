@@ -1,16 +1,18 @@
-[gd_scene load_steps=18 format=3 uid="uid://dki47ebywt47l"]
+[gd_scene load_steps=20 format=3 uid="uid://dki47ebywt47l"]
 
-[ext_resource type="Script" uid="uid://dwq326ibrckj7" path="res://Scenes/Player/Scripts/player.gd" id="1_uvnfx"]
+[ext_resource type="Script" uid="uid://dwq326ibrckj7" path="res://Scenes/Player/Player_base/player.gd" id="1_uvnfx"]
 [ext_resource type="Texture2D" uid="uid://ct2kswpjdmq4s" path="res://Assets/Textures/Armas_E_Personagens/Personagens/2 Punk/Punk_idle.png" id="2_a3d8c"]
 [ext_resource type="Texture2D" uid="uid://2l5aqymcb7xf" path="res://Assets/Textures/Armas_E_Personagens/Personagens/2 Punk/Punk_run.png" id="3_mtuoh"]
 [ext_resource type="Texture2D" uid="uid://dokhj053yhu4v" path="res://Assets/Textures/Armas_E_Personagens/Personagens/2 Punk/Punk_hurt.png" id="4_dd0ac"]
-[ext_resource type="Script" uid="uid://b1a4agwuanrr1" path="res://Scenes/Player/Scripts/animation_player.gd" id="5_dd0ac"]
+[ext_resource type="Script" uid="uid://b1a4agwuanrr1" path="res://Scenes/Player/Player_base/animation_player.gd" id="5_dd0ac"]
 [ext_resource type="PackedScene" uid="uid://djv6hj8hqdilv" path="res://Scenes/Utility/Hitboxes/HurtBox/hurtBox.tscn" id="6_dd0ac"]
-[ext_resource type="Script" uid="uid://bvdiqfcy8tpd6" path="res://Scenes/Player/Scripts/orbital_gun.gd" id="6_ocvar"]
+[ext_resource type="Script" uid="uid://bvdiqfcy8tpd6" path="res://Scenes/Player/Player_base/orbital_gun.gd" id="6_ocvar"]
 [ext_resource type="Texture2D" uid="uid://dlasogkv1aliy" path="res://Assets/Textures/GUI/exp_background.png" id="8_bhp24"]
 [ext_resource type="Texture2D" uid="uid://341qwvb8xft8" path="res://Assets/Textures/GUI/exp_progress.png" id="9_2iroa"]
 [ext_resource type="FontFile" uid="uid://jtemo7px1tum" path="res://Assets/Font/CyberpunkCraftpixPixel.otf" id="10_2iroa"]
+[ext_resource type="Script" uid="uid://dkc4p5f608cur" path="res://Scenes/Player/Player_base/experience_bar.gd" id="10_uohgb"]
 [ext_resource type="Texture2D" uid="uid://c1vxlp7qsaxju" path="res://Assets/Textures/image_placeholder.png" id="11_d5l35"]
+[ext_resource type="Script" uid="uid://bgk743jro3fj6" path="res://Scenes/Player/Player_base/level_up.gd" id="12_5i2fg"]
 [ext_resource type="AudioStream" uid="uid://mhglwy5ui8ty" path="res://Assets/Audio/SoundEffect/levelup.ogg" id="12_j7xa5"]
 [ext_resource type="PackedScene" uid="uid://18p05avlo2ww" path="res://Scenes/Utility/HealthBar/healthbar.tscn" id="13_j7xa5"]
 
@@ -115,6 +117,7 @@ offset_bottom = 40.0
 value = 50.0
 texture_under = ExtResource("8_bhp24")
 texture_progress = ExtResource("9_2iroa")
+script = ExtResource("10_uohgb")
 
 [node name="lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar"]
 unique_name_in_owner = true
@@ -144,6 +147,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("11_d5l35")
+script = ExtResource("12_5i2fg")
 
 [node name="lbl_levelup" type="Label" parent="GUILayer/GUI/LevelUp"]
 unique_name_in_owner = true

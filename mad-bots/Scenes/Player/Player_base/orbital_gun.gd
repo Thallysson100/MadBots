@@ -9,22 +9,21 @@ extends Node2D
 
 @onready var player = get_parent()
 
-var array_guns: Array[Node2D] = []
+var array_guns_count: int = 0
 var target_position: Vector2 = Vector2.ZERO
 
 func add_gun(gun_name: String):
 	if guns_available.has(gun_name):
 		var gun_instance = guns_available[gun_name].instantiate()
-		array_guns.append(gun_instance)
+		array_guns_count += 1
 		add_child(gun_instance)
 	else:
 		print("Gun not found in available guns.")
 		return
 
-	var orbit_count = array_guns.size()
 	var i : int = 0
 	for gun in self.get_children():
-		var angle = i * TAU / orbit_count
+		var angle = i * TAU / array_guns_count
 		gun.set_meta("angle", angle)
 		gun.rotation = angle
 		gun.global_position = player.global_position + Vector2(cos(angle), sin(angle)) * orbit_radius
@@ -33,7 +32,6 @@ func add_gun(gun_name: String):
 	
 
 func _ready():
-	add_gun("gun_test")
 	add_gun("gun_test")
 
 func start_fire():
@@ -51,3 +49,6 @@ func _process(delta):
 		gun.set_meta("angle", angle)
 		gun.global_position = player.global_position + Vector2(cos(angle), sin(angle)) * orbit_radius
 	
+func update_guns(atributte: String, value: float):
+	for gun in self.get_children():
+		gun.gun_update(atributte, value)

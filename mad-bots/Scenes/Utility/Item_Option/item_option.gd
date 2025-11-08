@@ -2,8 +2,8 @@ extends TextureRect
 
 @onready var lblName = $lbl_name
 @onready var lblDescription = $lbl_description
-@onready var lblLevel = $lbl_level
-#@onready var itemIcon = $ColorRect/ItemIcon
+@onready var lblrarity = $lbl_rarity
+@onready var itemIcon = $TextureRect/itemIcon
 
 var mouse_over = false
 var item = null
@@ -14,12 +14,12 @@ signal selected_upgrade(upgrade)
 func _ready():
 	connect("selected_upgrade",Callable(player,"upgrade_character"))
 	if item == null:
-		item = "food"
-	# lblName.text = UpgradeDb.UPGRADES[item]["displayname"]
-	# lblDescription.text = UpgradeDb.UPGRADES[item]["details"]
-	# lblLevel.text = UpgradeDb.UPGRADES[item]["level"]
-	# itemIcon.texture = load(UpgradeDb.UPGRADES[item]["icon"])
-	
+		item = "Bomba"  # Default item for testing
+	lblName.text = UpgradesDb.UPGRADES[item]["displayname"]
+	lblDescription.text = UpgradesDb.UPGRADES[item]["details"]
+	lblrarity.text = UpgradesDb.UPGRADES[item]["rarity"]
+	itemIcon.texture = load(UpgradesDb.UPGRADES[item]["icon"])
+
 func _input(event):
 	if event.is_action_pressed("click"):
 		if mouse_over:

@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4l1p3sbfsv0o"]
+
+[ext_resource type="Texture2D" uid="uid://c1vxlp7qsaxju" path="res://Assets/Textures/image_placeholder.png" id="1_oj34s"]
+[ext_resource type="Script" uid="uid://b47ahdctcd11v" path="res://Scenes/Utility/Item_Option/item_option.gd" id="2_7s8j4"]
+[ext_resource type="FontFile" uid="uid://jtemo7px1tum" path="res://Assets/Font/CyberpunkCraftpixPixel.otf" id="2_u6ysw"]
+
+[node name="ItemOption" type="TextureRect"]
+offset_right = 214.0
+offset_bottom = 57.0
+texture = ExtResource("1_oj34s")
+expand_mode = 1
+script = ExtResource("2_7s8j4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.043
+anchor_top = 0.08800001
+anchor_right = 0.16900001
+anchor_bottom = 0.56100005
+offset_left = 0.056999207
+offset_top = -0.01600027
+offset_right = 0.09299469
+offset_bottom = 0.022996902
+grow_vertical = 2
+texture = ExtResource("1_oj34s")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="lbl_name" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.215
+anchor_top = 0.080000006
+anchor_right = 0.771
+anchor_bottom = 0.47400004
+offset_left = -0.010002136
+offset_right = 0.005996704
+offset_bottom = -0.018001556
+theme_override_fonts/font = ExtResource("2_u6ysw")
+theme_override_font_sizes/font_size = 12
+text = "Name"
+vertical_alignment = 1
+
+[node name="lbl_description" type="Label" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 31.0
+offset_right = 44.0
+offset_bottom = 54.0
+theme_override_fonts/font = ExtResource("2_u6ysw")
+
+[node name="lbl_level" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.047000002
+anchor_top = 0.64000005
+anchor_right = 0.95300007
+anchor_bottom = 0.96000004
+offset_left = -0.14700031
+offset_right = 0.14697266
+theme_override_fonts/font = ExtResource("2_u6ysw")
+theme_override_font_sizes/font_size = 10
+text = "Item Description"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

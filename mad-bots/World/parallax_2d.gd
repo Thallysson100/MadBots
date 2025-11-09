@@ -15,7 +15,6 @@ func _ready():
 	# Escolhe uma das texturas aleatoriamente
 	var random_index = randi() % map_textures.size()
 	var texture_path = map_textures[random_index]
-	texture_path = "res://Assets/Maps/bloquete.png"
 
 	# Carrega e aplica ao Sprite2D
 	var texture = load(texture_path)
@@ -23,4 +22,4 @@ func _ready():
 		sprite.texture = texture
 		print("Mapa selecionado:", texture_path)
 	else:
-		push_error("❌ Não foi possível carregar a textura: " + texture_path)
+		push_error("Não foi possível carregar a textura: " + texture_path)

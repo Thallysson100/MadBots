@@ -104,7 +104,7 @@ _data = {
 radius = 222.03603
 
 [node name="Player_test" instance=ExtResource("1_dg6dr")]
-grab_area = NodePath("GrabArea")
+max_health = 50
 pickup_range = 200.0
 
 [node name="SpriteIdle" parent="." index="0"]

@@ -2,12 +2,14 @@ extends ProgressBar
 
 @onready var timer = get_node("%Timer")
 @onready var damage_bar = get_node("%DamageBar")
+@onready var label = get_node("%Label")
 
 var health = 0 : set = _set_health
 
 func _set_health(new_health):
 	var prev_health = health
 	health = min(max_value,new_health)
+	label.text = str(new_health)
 	value = health
 	
 	if health <= 0:
@@ -24,6 +26,7 @@ func init_health(_health):
 	max_value = _health
 	value = _health
 	damage_bar.max_value = _health
+	label.text = str(_health)
 	damage_bar.value = _health
 
 

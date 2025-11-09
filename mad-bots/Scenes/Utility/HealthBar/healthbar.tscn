@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://18p05avlo2ww"]
+[gd_scene load_steps=7 format=3 uid="uid://18p05avlo2ww"]
 
 [ext_resource type="Script" uid="uid://xv0gwuibu321" path="res://Scenes/Utility/HealthBar/healthbar.gd" id="1_2wri2"]
+[ext_resource type="FontFile" uid="uid://jtemo7px1tum" path="res://Assets/Font/CyberpunkCraftpixPixel.otf" id="2_j3ua1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j3ua1"]
 
@@ -47,3 +48,11 @@ show_percentage = false
 unique_name_in_owner = true
 wait_time = 0.4
 autostart = true
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 45.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_j3ua1")
+theme_override_font_sizes/font_size = 16

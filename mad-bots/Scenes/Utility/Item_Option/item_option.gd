@@ -17,7 +17,7 @@ func _ready():
 		item = "Bomba"  # Default item for testing
 	lblName.text = UpgradesDb.UPGRADES[item]["displayname"]
 	lblDescription.text = UpgradesDb.UPGRADES[item]["details"]
-	lblrarity.text = UpgradesDb.UPGRADES[item]["rarity"]
+	update_lblrarity(UpgradesDb.UPGRADES[item]["rarity"])
 	itemIcon.texture = load(UpgradesDb.UPGRADES[item]["icon"])
 
 func _input(event):
@@ -32,3 +32,17 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	position.x -= 10
 	mouse_over = false
+
+func update_lblrarity(rarity: String):
+	lblrarity.text = rarity.capitalize()
+
+	match rarity.to_lower():
+		"common":
+			lblrarity.add_theme_color_override("font_color", Color("00bfff")) # azul
+		"rare":
+			lblrarity.add_theme_color_override("font_color", Color("00ff00")) # verde
+		"epic":
+			lblrarity.add_theme_color_override("font_color", Color("9400d3")) # roxo
+		_:
+			lblrarity.add_theme_color_override("font_color", Color("ffffff")) # branco padrão
+

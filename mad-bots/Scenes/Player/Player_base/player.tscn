@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bvdiqfcy8tpd6" path="res://Scenes/Player/Player_base/orbital_gun.gd" id="6_ocvar"]
 [ext_resource type="Script" uid="uid://bgga43xkcu7tp" path="res://Scenes/Utility/preloaded_resoures.gd" id="7_7bjry"]
 [ext_resource type="Texture2D" uid="uid://dlasogkv1aliy" path="res://Assets/Textures/GUI/exp_background.png" id="8_bhp24"]
-[ext_resource type="PackedScene" uid="uid://d330uqv85b571" path="res://Scenes/Player/Guns/gun_test.tscn" id="8_nfiwc"]
+[ext_resource type="PackedScene" uid="uid://d330uqv85b571" path="res://Scenes/Player/Guns/futurist_chicago.tscn" id="8_nfiwc"]
 [ext_resource type="Texture2D" uid="uid://341qwvb8xft8" path="res://Assets/Textures/GUI/exp_progress.png" id="9_2iroa"]
 [ext_resource type="FontFile" uid="uid://jtemo7px1tum" path="res://Assets/Font/CyberpunkCraftpixPixel.otf" id="10_2iroa"]
 [ext_resource type="Script" uid="uid://dkc4p5f608cur" path="res://Scenes/Player/Player_base/experience_bar.gd" id="10_uohgb"]
@@ -23,7 +23,7 @@ size = Vector2(20, 34.5)
 
 [sub_resource type="Resource" id="Resource_nfiwc"]
 script = ExtResource("7_7bjry")
-scene_name = "gun_test"
+scene_name = "Futuristic Chicago"
 preloaded_resource = ExtResource("8_nfiwc")
 metadata/_custom_type_script = "uid://bgga43xkcu7tp"
 
@@ -44,6 +44,7 @@ script = ExtResource("1_uvnfx")
 animationPlayer_path = NodePath("AnimationPlayer")
 hurtbox_path = NodePath("HurtBox")
 attack_path = NodePath("GunsOrbiter")
+grab_area = NodePath("GrabArea")
 player_velocity = 400
 knockback_recovery = 25.0
 
@@ -131,9 +132,9 @@ script = ExtResource("10_uohgb")
 [node name="lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 544.0
+offset_left = -1.0
 offset_top = 1.0
-offset_right = 644.0
+offset_right = 99.0
 offset_bottom = 24.0
 theme_override_fonts/font = ExtResource("10_2iroa")
 text = "Level: 1"

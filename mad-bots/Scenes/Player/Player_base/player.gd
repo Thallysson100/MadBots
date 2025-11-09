@@ -26,9 +26,17 @@ var knockback: Vector2 = Vector2.ZERO  # Stores the current knockback force appl
 @export var knockback_recovery: float = 3.5  ## How quickly knockback force decays (higher = faster recovery)
 @export var max_health: int = 1000  ## Maximum health points the player can have
 @export var pickup_range: float = 100  ## Range within which the player can pick up items
+@export var initial_gun: String = "Futuristic Chicago"  ## Name of the initial gun to equip
 
 var current_health: int = max_health  # Current health points (starts at max health)
-var knockback_percentage : float = 1 ## Percentage knockback recovery for upgrades
+
+var atributtes_percentage : Dictionary = { # Dictionary to track percentage-based upgrades
+	"fire_rate" : 1.0,
+	"fire_range" : 1.0,
+	"knockback_amount" : 1.0,
+	"damage" : 1.0,
+	"projectile_speed" : 1.0
+}
 
 func _ready() -> void:
 	# Connect the hurt signal from the hurtbox to our damage processing function
@@ -106,16 +114,10 @@ func update_max_health(health_amount : int):
 	max_health += health_amount
 	if (current_health > max_health):
 		current_health = max_health
+	healthbar.init_health(max_health)
 
 func add_gun(gun_name: String):
-	gunsOrbiter.add_gun(gun_name)
-
-var atributtes_percentage : Dictionary = {
-	"fire_rate" : 1.0,
-	"fire_range" : 1.0,
-	"knockback_amount" : 1.0,
-	"damage" : 1.0
-}
+	gunsOrbiter.add_gun(gun_name, atributtes_percentage)
 
 func update_guns(atributte: String, percentage : float):
 	atributtes_percentage[atributte] += atributtes_percentage[atributte] * percentage

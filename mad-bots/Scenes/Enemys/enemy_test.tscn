@@ -149,7 +149,7 @@ animation_path = NodePath("AnimationPlayer")
 speed = 100.0
 knockback_recovery = 25.0
 max_health = 100
-experience_reward = 10
+experience_reward = 5
 
 [node name="CollisionShape2D" parent="Enemy_base" index="0"]
 visible = false
@@ -187,7 +187,7 @@ libraries = {
 
 [node name="Delayed_Attack_Melee" parent="Enemy_base" instance=ExtResource("2_076uo")]
 visible = false
-damage = 100
+damage = 10
 knockback_force = 500
 attack_range = 44.0
 

@@ -12,11 +12,18 @@ var guns_available: Dictionary = {
 var array_guns_count: int = 0
 var target_position: Vector2 = Vector2.ZERO
 
-func add_gun(gun_name: String):
+func add_gun(gun_name: String, atributtes_percentage: Dictionary):
 	if guns_available.has(gun_name):
 		var gun_instance = guns_available[gun_name].instantiate()
-		array_guns_count += 1
 		add_child(gun_instance)
+		gun_instance.gun_update("damage", atributtes_percentage["damage"])
+		gun_instance.gun_update("fire_rate", atributtes_percentage["fire_rate"])
+		gun_instance.gun_update("projectile_speed", atributtes_percentage["projectile_speed"])
+		gun_instance.gun_update("fire_range", atributtes_percentage["fire_range"])
+		gun_instance.gun_update("knockback_amount", atributtes_percentage["knockback_amount"])
+		
+		array_guns_count += 1
+		
 	else:
 		print("Gun not found in available guns.")
 		return
@@ -34,9 +41,7 @@ func add_gun(gun_name: String):
 func _ready():
 	for gun in guns_to_use:
 		guns_available[gun.scene_name] = gun.preloaded_resource
-
-	add_gun("gun_test")
-	
+	add_gun(player.initial_gun, player.atributtes_percentage)
 
 func start_fire():
 	for gun in self.get_children():

@@ -70,6 +70,7 @@ func hurt(damage, _direction, knockback_amount):
 	# Calculate and apply knockback force in the specified direction
 	knockback = -direction_to_player * knockback_amount
 	if current_health <= 0:
+		attack.can_attack = false
 		animation.custom_play("death")
 
 func _on_dead():

@@ -1,6 +1,6 @@
 extends Node
 
-# Upgrade Database - A dictionary storing upgrade information
+# Rarity weight curves to influence upgrade selection based on player level
 const RARITY_CURVES = {
 	"common": {
 		"base_weight": 100.0,
@@ -45,13 +45,21 @@ const UPGRADES = {
 		"functions": ["update_guns", "update_guns"],
 		"arguments": [["damage", 0.10], ["fire_rate", -0.10]],
 	},
+	"Heal_health": {
+		"displayname": "Health Pack",
+		"details": "Heals the player by 10 health points.",
+		"rarity": "common",
+		"icon": "res://Assets/Textures/GUI/icons/1 Icons/6/Skillicon6_16.png",
+		"functions": ["heal_player"],
+		"arguments": [[10]],
+	},
 
 	# 🟢 Rare
 	"Overclocked_Guns": {
 		"displayname": "Overclocked Guns",
 		"details": "Increases fire rate by +20%, but reduces projectile speed by 15%.",
 		"rarity": "rare",
-		"icon": "res://Assets/Textures/image_placeholder.png",
+		"icon": "res://Assets/Textures/GUI/icons/1 Icons/1/Skillicon1_17.png",
 		"functions": ["update_guns", "update_guns"],
 		"arguments": [["fire_rate", 0.20], ["projectile_speed", -0.15]],
 	},
@@ -75,11 +83,11 @@ const UPGRADES = {
 	},
 
 	# 🟣 Epic
-	"Piercing_Core": {
-		"displayname": "Piercing Core",
+	"Pierce": {
+		"displayname": "Pierce",
 		"details": "Increases pierce by +2, but reduces projectile speed by 20%.",
 		"rarity": "epic",
-		"icon": "res://Assets/Textures/Items/itens/1 Icons/Icon10_29.png",
+		"icon": "res://Assets/Textures/Items/itens/1 Icons/cow_nose_ring.png",
 		"functions": ["update_guns", "update_guns"],
 		"arguments": [["pierce", 2], ["projectile_speed", -0.20]],
 	},
@@ -93,11 +101,11 @@ const UPGRADES = {
 		"arguments": [["damage", 0.40], [-30]],
 	},
 
-	"Juggernaut": {
-		"displayname": "Juggernaut",
+	"Steroid": {
+		"displayname": "Steroid",
 		"details": "Increases max health by +50 and knockback by +30%, but reduces movement speed by 20%.",
 		"rarity": "epic",
-		"icon": "res://Assets/Textures/image_placeholder.png",
+		"icon": "res://Assets/Textures/Items/itens/1 Icons/Icon10_39.png",
 		"functions": ["update_max_health", "update_guns", "update_player_velocity"],
 		"arguments": [[50], ["knockback_amount", 0.30], [-0.20]],
 	},

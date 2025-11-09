@@ -28,14 +28,14 @@ var knockback: Vector2 = Vector2.ZERO  # Stores the current knockback force appl
 @export var pickup_range: float = 100  ## Range within which the player can pick up items
 @export var initial_gun: String = "Futuristic Chicago"  ## Name of the initial gun to equip
 
-var current_health: int = max_health  # Current health points (starts at max health)
-
+var current_health
 var atributtes_percentage : Dictionary = { # Dictionary to track percentage-based upgrades
 	"fire_rate" : 1.0,
 	"fire_range" : 1.0,
 	"knockback_amount" : 1.0,
 	"damage" : 1.0,
-	"projectile_speed" : 1.0
+	"projectile_speed" : 1.0,
+	"pierce": 1.0
 }
 
 func _ready() -> void:
@@ -43,6 +43,7 @@ func _ready() -> void:
 	hurtbox.hurt.connect(hurt)
 	grabArea.get_child(0).shape.radius = pickup_range
 	healthbar.init_health(max_health)
+	current_health = max_health
 	
 func _physics_process(_delta: float) -> void:
 	movement()
@@ -80,7 +81,11 @@ func hurt(damage, direction, knockback_amount):
 	# Apply damage to player's health
 	current_health -= damage
 	healthbar.health = current_health
-	
+
+	if current_health <= 0:
+		get_tree().call_deferred("change_scene_to_file", "res://Scenes/Utility/GameOver/game_over.tscn")
+		call_deferred("queue_free")
+		return
 	# Calculate and apply knockback force in the specified direction
 	knockback = direction * knockback_amount
 
@@ -106,15 +111,19 @@ func upgrade_character(upgrade : String):
 	# After upgrading, hide the level-up panel
 	levelPanel.hide_levelup_panel()
 
+func heal_player(heal_amount : int):
+	current_health += heal_amount
+	current_health = min(current_health, max_health)
+	healthbar.health = current_health
+
 func update_player_velocity(percentage : float):
 	player_velocity += (int)(player_velocity * percentage)
 
 func update_max_health(health_amount : int):
 	# Adjust the player's maximum health and reset current health to max
-	max_health += health_amount
-	if (current_health > max_health):
-		current_health = max_health
-	healthbar.init_health(max_health)
+	max_health = (max_health + health_amount) if (max_health + health_amount > 0) else 1
+	current_health = (current_health) if (max_health > current_health) else max_health
+	healthbar.update_max_health(health_amount)
 
 func add_gun(gun_name: String):
 	gunsOrbiter.add_gun(gun_name, atributtes_percentage)
@@ -122,3 +131,7 @@ func add_gun(gun_name: String):
 func update_guns(atributte: String, percentage : float):
 	atributtes_percentage[atributte] += atributtes_percentage[atributte] * percentage
 	gunsOrbiter.update_guns(atributte, atributtes_percentage[atributte])
+
+func update_pickup_range(range_amount: float):
+	pickup_range += pickup_range * range_amount
+	grabArea.get_child(0).shape.radius = pickup_range

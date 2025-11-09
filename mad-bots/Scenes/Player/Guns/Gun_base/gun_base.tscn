@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://camrh1opun25n" path="res://Assets/Textures/Armas_E_Personagens/Armas/4_1.png" id="1_33vv2"]
 [ext_resource type="Script" uid="uid://cf2apnm38a17n" path="res://Scenes/Player/Guns/Gun_base/gun_base.gd" id="1_0175l"]
-[ext_resource type="Script" uid="uid://bgga43xkcu7tp" path="res://Scenes/Player/Guns/Gun_base/projectiles_info.gd" id="2_38ig0"]
+[ext_resource type="Script" uid="uid://bgga43xkcu7tp" path="res://Scenes/Utility/preloaded_resoures.gd" id="2_38ig0"]
 [ext_resource type="Script" uid="uid://d4k2rkusta5n" path="res://Scenes/Player/Guns/Gun_base/enemy_detector.gd" id="3_eh1gl"]
 [ext_resource type="PackedScene" uid="uid://c6f5u7q2t4m2t" path="res://Scenes/Projectile/projectile_test.tscn" id="3_tw0sy"]
 

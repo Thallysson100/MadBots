@@ -4,7 +4,7 @@ extends Node2D
 @onready var projectile_spawn_point: Marker2D = $ProjectileSpawnPoint
 @onready var enemyDetector = $EnemyDetector
 
-@export var projectiles: Array[ProjectileInfo] = []
+@export var projectiles: Array[PreloadedResourses] = []
 @export var init_damage: int = 100 ## Damage dealt by the gun
 @export var init_fire_rate: float = 0.5 ## Time in seconds between shots
 @export var init_projectile_speed: float = 4000 ## Speed of the projectile
@@ -34,7 +34,7 @@ func _ready():
 	knockback_amount = init_knockback_amount
 	
 	for proj in projectiles:
-		projectiles_available[proj.projectile_name] = proj.projectile_scene
+		projectiles_available[proj.scene_name] = proj.preloaded_resource
 	#temporario, depois criar função para mudar o projétil na interface
 	enemyDetector.connect("start_fire", _on_start_fire)
 	enemyDetector.connect("stop_fire", _on_stop_fire)

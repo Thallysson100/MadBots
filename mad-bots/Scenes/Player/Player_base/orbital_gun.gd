@@ -1,8 +1,8 @@
 extends Node2D
 
+@export var guns_to_use: Array[PreloadedResourses] = []
 
-@export var guns_available: Dictionary = {
-	"gun_test" : preload("res://Scenes/Player/Guns/gun_test.tscn"),
+var guns_available: Dictionary = {
 }
 @export var orbit_radius: float = 200
 @export var orbit_speed: float = 0.25  # Rotações por segundo
@@ -32,7 +32,11 @@ func add_gun(gun_name: String):
 	
 
 func _ready():
+	for gun in guns_to_use:
+		guns_available[gun.scene_name] = gun.preloaded_resource
+
 	add_gun("gun_test")
+	
 
 func start_fire():
 	for gun in self.get_children():

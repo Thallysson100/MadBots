@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="MadBots"
-run/main_scene="uid://3postoy3r8y2"
+run/main_scene="uid://8rwtwg6m8lse"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 UpgradesDb="*res://Scenes/Utility/UgradesDB/upgrades_db.tscn"
+TransitionScreen="*res://Scenes/Utility/FadingAnimation/transition_screen.tscn"
 
 [display]
 

@@ -119,23 +119,44 @@ anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 
+[node name="Healthbar" parent="GUILayer/GUI" instance=ExtResource("13_j7xa5")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021000002
+anchor_top = 0.054
+anchor_right = 0.296
+anchor_bottom = 0.079
+offset_left = -0.88000107
+offset_top = 25.119999
+offset_right = 7.119995
+offset_bottom = 30.119999
+
 [node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 25.999878
+offset_top = 21.0
+offset_right = 386.99988
+offset_bottom = 43.0
 value = 50.0
+nine_patch_stretch = true
 texture_under = ExtResource("8_bhp24")
 texture_progress = ExtResource("9_2iroa")
 script = ExtResource("10_uohgb")
 
 [node name="lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar"]
 unique_name_in_owner = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = -1.0
 offset_top = 1.0
-offset_right = 99.0
-offset_bottom = 24.0
+offset_right = -262.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("10_2iroa")
 text = "Level: 1"
 horizontal_alignment = 1
@@ -143,6 +164,7 @@ horizontal_alignment = 1
 [node name="LevelUp" type="TextureRect" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 process_mode = 2
+z_index = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -192,14 +214,6 @@ grow_vertical = 2
 unique_name_in_owner = true
 stream = ExtResource("12_j7xa5")
 volume_db = -20.0
-
-[node name="Healthbar" parent="GUILayer/GUI" instance=ExtResource("13_j7xa5")]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 1.0
-offset_top = 27.0
-offset_right = 360.0
-offset_bottom = 48.0
 
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]

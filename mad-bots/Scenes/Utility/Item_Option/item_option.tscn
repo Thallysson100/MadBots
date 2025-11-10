@@ -50,7 +50,7 @@ offset_right = 0.005996704
 offset_bottom = 15.474998
 theme_override_fonts/font = ExtResource("2_u6ysw")
 theme_override_font_sizes/font_size = 16
-text = "Exqueleto
+text = "Name
 "
 vertical_alignment = 1
 
@@ -65,6 +65,7 @@ offset_left = 0.14797974
 offset_right = -0.16403198
 theme_override_fonts/font = ExtResource("2_u6ysw")
 theme_override_font_sizes/font_size = 10
+text = "rarity"
 horizontal_alignment = 2
 
 [node name="lbl_description" type="Label" parent="."]
@@ -78,7 +79,7 @@ offset_left = 0.16399765
 offset_right = 0.09197998
 offset_bottom = -3.0000076
 theme_override_fonts/font = ExtResource("2_u6ysw")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "Item Description"
 autowrap_mode = 2
 

@@ -21,7 +21,6 @@ class_name Enemy
 
 var direction_to_player : Vector2 = Vector2.ZERO  # Direction towards player
 var knockback: Vector2 = Vector2.ZERO  # Stores the current knockback force applied to the enemy
-
 var current_health: int  # Current health points (starts at max health)
 func _ready() -> void:
 	current_health = max_health
@@ -61,7 +60,11 @@ func move_or_attack(_delta : float):
 		velocity = speed * direction_to_player
 		animation.process_sprite()
 		animation.custom_play("walk")	
+	move(distance_to_player)
+
+func move(_distance_to_player: float) -> void:
 	move_and_slide()
+		
 
 func hurt(damage, _direction, knockback_amount):
 	# Apply damage to player's health

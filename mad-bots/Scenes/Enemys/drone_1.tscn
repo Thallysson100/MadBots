@@ -1,0 +1,204 @@
+[gd_scene load_steps=16 format=3 uid="uid://cw7fphffgyt4c"]
+
+[ext_resource type="PackedScene" uid="uid://bpuhk31jpn0dm" path="res://Scenes/Enemys/Enemy_base/enemy_keep_distance.tscn" id="1_1kgbx"]
+[ext_resource type="Texture2D" uid="uid://c3d6on1b4t514" path="res://Assets/Textures/drone/1 Drones/3/Forward.png" id="2_j4vnt"]
+[ext_resource type="Texture2D" uid="uid://85bmjykqb6n" path="res://Assets/Textures/drone/1 Drones/3/Fire3.png" id="3_gnuxm"]
+[ext_resource type="Texture2D" uid="uid://cjicqp6drn5ju" path="res://Assets/Textures/drone/1 Drones/3/taking_damage-1.png" id="4_f3cok"]
+[ext_resource type="Texture2D" uid="uid://da1m145qeswk6" path="res://Assets/Textures/drone/1 Drones/3/Death.png" id="5_l8yqf"]
+[ext_resource type="PackedScene" uid="uid://bmf55wueli5ef" path="res://Scenes/Enemys/Attacks/Long_Range/long_range.tscn" id="6_l8yqf"]
+[ext_resource type="PackedScene" uid="uid://c6f5u7q2t4m2t" path="res://Scenes/Projectile/projectile_test.tscn" id="7_pt5yh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pt5yh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8yqf"]
+
+[sub_resource type="Animation" id="Animation_f3cok"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteWalk:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.43333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_l8yqf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteWalk:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteAttack:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpriteHurt:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SpriteDeath:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pt5yh"]
+resource_name = "attack"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteAttack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6333333, 0.76666665, 0.9, 1.0333333, 1.2, 1.3, 1.4, 1.5666667, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_u2auy"]
+resource_name = "taking_damage"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteHurt:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_2gsxw"]
+resource_name = "death"
+length = 0.65
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteDeath:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3020588, 0.4001798, 0.50407267, 0.6041176),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u2auy"]
+_data = {
+&"RESET": SubResource("Animation_l8yqf"),
+&"attack": SubResource("Animation_pt5yh"),
+&"death": SubResource("Animation_2gsxw"),
+&"taking_damage": SubResource("Animation_u2auy"),
+&"walk": SubResource("Animation_f3cok")
+}
+
+[node name="Drone1" instance=ExtResource("1_1kgbx")]
+scale = Vector2(1.5, 1.5)
+collision_mask = 4
+repel_radius = 50.0
+attack_path = NodePath("Long_Range")
+speed = 100.0
+knockback_recovery = 10.0
+max_health = 1000
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_pt5yh")
+
+[node name="SpriteWalk" parent="." index="1"]
+position = Vector2(0, 37)
+scale = Vector2(1, 1)
+texture = ExtResource("2_j4vnt")
+hframes = 4
+
+[node name="SpriteAttack" parent="." index="2"]
+visible = true
+position = Vector2(0, 37)
+scale = Vector2(1, 1)
+texture = ExtResource("3_gnuxm")
+hframes = 16
+
+[node name="SpriteHurt" parent="." index="3"]
+visible = true
+position = Vector2(0, 37)
+scale = Vector2(1, 1)
+texture = ExtResource("4_f3cok")
+hframes = 4
+
+[node name="SpriteDeath" parent="." index="4"]
+visible = true
+position = Vector2(0, 37)
+scale = Vector2(1, 1)
+texture = ExtResource("5_l8yqf")
+hframes = 8
+
+[node name="HurtBox" parent="." index="5"]
+position = Vector2(-1, -36)
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(1, 36)
+shape = SubResource("RectangleShape2D_l8yqf")
+
+[node name="DisableTimer" parent="HurtBox" index="1"]
+wait_time = 0.25
+
+[node name="AnimationPlayer" parent="." index="6"]
+libraries = {
+&"": SubResource("AnimationLibrary_u2auy")
+}
+
+[node name="Long_Range" parent="." index="7" instance=ExtResource("6_l8yqf")]
+projectile_scene = ExtResource("7_pt5yh")
+fire_rate = 3.0
+attack_range = 200.0
+
+[node name="Marker2D" parent="Long_Range" index="1"]
+position = Vector2(0, 4.666668)
+
+[editable path="HurtBox"]
+[editable path="Long_Range"]

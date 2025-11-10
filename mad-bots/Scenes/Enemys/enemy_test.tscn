@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://20imgnfiatm"]
 
 [ext_resource type="PackedScene" uid="uid://dnv2ikg1u4ni2" path="res://Scenes/Enemys/Enemy_base/enemy_base.tscn" id="1_jakdy"]
-[ext_resource type="PackedScene" uid="uid://fj4ep7j7o1s8" path="res://Scenes/Enemys/Attacks/Enemy_Melee/delayed_attack_melee.tscn" id="2_076uo"]
+[ext_resource type="PackedScene" uid="uid://fj4ep7j7o1s8" path="res://Scenes/Enemys/Attacks/Melee/delayed_attack_melee.tscn" id="2_076uo"]
 [ext_resource type="Texture2D" uid="uid://cq16ek2mmv30o" path="res://Assets/Textures/robots/Destroyer/Walk.png" id="2_jnn0v"]
 [ext_resource type="Texture2D" uid="uid://ch8bhq5666a5k" path="res://Assets/Textures/robots/Destroyer/Attack_1.png" id="3_tb5cq"]
 [ext_resource type="Texture2D" uid="uid://c5jiqpltuse1v" path="res://Assets/Textures/robots/Destroyer/Hurt.png" id="4_arebw"]
@@ -147,7 +147,7 @@ collision_mask = 5
 attack_path = NodePath("Delayed_Attack_Melee")
 animation_path = NodePath("AnimationPlayer")
 speed = 100.0
-knockback_recovery = 25.0
+knockback_recovery = 15.0
 max_health = 100
 experience_reward = 1
 
@@ -186,7 +186,6 @@ libraries = {
 }
 
 [node name="Delayed_Attack_Melee" parent="Enemy_base" instance=ExtResource("2_076uo")]
-visible = false
 damage = 10
 knockback_force = 500
 attack_range = 44.0

@@ -15,8 +15,8 @@ radius = 401.31036
 projectiles = Array[ExtResource("2_ws8aj")]([SubResource("Resource_bjaco")])
 init_damage = 100
 init_fire_rate = 1.0
-init_fire_range = 200.0
-init_knockback_amount = 1.0
+init_fire_range = 300.0
+init_knockback_amount = 50.0
 
 [node name="Sprite2D" parent="." index="0"]
 rotation = 0.7853982

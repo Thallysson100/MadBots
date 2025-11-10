@@ -8,7 +8,7 @@ const RARITY_CURVES = {
 	},
 	"rare": {
 		"base_weight": 	0.0,
-		"level_modifier": 1  # Increases slightly with level
+		"level_modifier": 1.0  # Increases slightly with level
 	},
 	"epic": {
 		"base_weight": 0.0,
@@ -21,7 +21,7 @@ const UPGRADES = {
 	# 🔵 Common
 	"Agile_Body": {
 		"displayname": "Agile Body",
-		"details": "Increases movement speed by +15%, but reduces max health by 10 points.",
+		"details": "Increases movement speed by +15 percent, but reduces max health by 10 points.",
 		"rarity": "common",
 		"icon": "res://Assets/Textures/GUI/icons/1 Icons/10/Skillicon10_29.png",
 		"functions": ["update_player_velocity", "update_max_health"],
@@ -30,7 +30,7 @@ const UPGRADES = {
 
 	"Heavy_Armor": {
 		"displayname": "Heavy Armor",
-		"details": "Increases max health by +25, but reduces movement speed by 10%.",
+		"details": "Increases max health by +25, but reduces movement speed by 10 percent.",
 		"rarity": "common",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/Icon10_14.png",
 		"functions": ["update_max_health", "update_player_velocity"],
@@ -39,7 +39,7 @@ const UPGRADES = {
 
 	"Sharpened_Ammo": {
 		"displayname": "Sharpened Ammo",
-		"details": "Increases bullet damage by +10%, but reduces fire rate by 10%.",
+		"details": "Increases bullet damage by +10 percent, but reduces fire rate by 10 percent.",
 		"rarity": "common",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/Icon10_28.png",
 		"functions": ["update_guns", "update_guns"],
@@ -57,7 +57,7 @@ const UPGRADES = {
 	# 🟢 Rare
 	"Overclocked_Guns": {
 		"displayname": "Overclocked Guns",
-		"details": "Increases fire rate by +20%, but reduces projectile speed by 15%.",
+		"details": "Increases fire rate by +20 percent, but reduces projectile speed by 15 percent.",
 		"rarity": "rare",
 		"icon": "res://Assets/Textures/GUI/icons/1 Icons/1/Skillicon1_17.png",
 		"functions": ["update_guns", "update_guns"],
@@ -66,7 +66,7 @@ const UPGRADES = {
 
 	"Reinforced_Bullets": {
 		"displayname": "Reinforced Bullets",
-		"details": "Increases damage by +25%, but reduces knockback by 20%.",
+		"details": "Increases damage by +25 percent, but reduces knockback by 20 percent.",
 		"rarity": "rare",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/Icon10_18.png",
 		"functions": ["update_guns", "update_guns"],
@@ -75,7 +75,7 @@ const UPGRADES = {
 
 	"Cool_Classes": {
 		"displayname": "Cool Classes",
-		"details": "Increases projectile range by +30%, but reduces fire rate by 15%.",
+		"details": "Increases projectile range by +30 percent, but reduces fire rate by 15 percent.",
 		"rarity": "rare",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/Icon10_08.png",
 		"functions": ["update_guns", "update_guns"],
@@ -85,7 +85,7 @@ const UPGRADES = {
 	# 🟣 Epic
 	"Pierce": {
 		"displayname": "Pierce",
-		"details": "Increases pierce by +2, but reduces projectile speed by 20%.",
+		"details": "Increases pierce by +2, but reduces projectile speed by 20 percent.",
 		"rarity": "epic",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/cow_nose_ring.png",
 		"functions": ["update_guns", "update_guns"],
@@ -94,7 +94,7 @@ const UPGRADES = {
 
 	"Glass_Cannon": {
 		"displayname": "Glass Cannon",
-		"details": "Increases damage by +40%, but reduces max health by 30 points.",
+		"details": "Increases damage by +40 percent, but reduces max health by 30 points.",
 		"rarity": "epic",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/glass_cannon-removebg-preview.png",
 		"functions": ["update_guns", "update_max_health"],
@@ -103,7 +103,7 @@ const UPGRADES = {
 
 	"Steroid": {
 		"displayname": "Steroid",
-		"details": "Increases max health by +50 and knockback by +30%, but reduces movement speed by 20%.",
+		"details": "Increase max health in +50 and knockback by +30 percent, but reduces movement speed by 20 percent.",
 		"rarity": "epic",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/Icon10_39.png",
 		"functions": ["update_max_health", "update_guns", "update_player_velocity"],

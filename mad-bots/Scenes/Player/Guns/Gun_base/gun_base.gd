@@ -4,13 +4,13 @@ extends Node2D
 @onready var projectile_spawn_point: Marker2D = $ProjectileSpawnPoint
 @onready var enemyDetector = $EnemyDetector
 
-@export var projectiles: Array[PreloadedResourses] = []
 @export var init_damage: int = 100 ## Damage dealt by the gun
 @export var init_fire_rate: float = 0.5 ## Time in seconds between shots
 @export var init_projectile_speed: float = 4000 ## Speed of the projectile
 @export var init_fire_range : float = 400
 @export var init_knockback_amount: float = 500 ## Knockback force applied to enemies hit
 @export var pierce: int = 1 ## How many enemies the projectile can pierce through
+@export var init_explosion_size: float = 100.0 ## Size of the explosion effect
 
 # Update gun stats functions
 var damage: int
@@ -18,12 +18,12 @@ var fire_rate: float
 var projectile_speed: float
 var fire_range : float
 var knockback_amount: float
+var explosion_size: float
 
 var current_cooldown: float = 0.0
 var can_fire = false
 
-var projectiles_available: Dictionary = {
-}
+
 @export var projectile_scene: PackedScene  ## The projectile scene to instantiate
 
 func _ready():
@@ -33,8 +33,6 @@ func _ready():
 	fire_range = init_fire_range
 	knockback_amount = init_knockback_amount
 	
-	for proj in projectiles:
-		projectiles_available[proj.scene_name] = proj.preloaded_resource
 	#temporario, depois criar função para mudar o projétil na interface
 	enemyDetector.connect("start_fire", _on_start_fire)
 	enemyDetector.connect("stop_fire", _on_stop_fire)
@@ -58,6 +56,8 @@ func fire(target_pos: Vector2):
 	projectile_instance.speed = projectile_speed
 	projectile_instance.knockback_amount = knockback_amount
 	projectile_instance.rotation  = target_direction.angle()
+	if projectile_instance.has_method("set_explosion_size"):
+		projectile_instance.set_explosion_size(explosion_size)
 	get_tree().root.add_child(projectile_instance)
 	
 func _on_start_fire():
@@ -83,11 +83,13 @@ func gun_update(upgrade_type: String, value: float):
 			knockback_amount = init_knockback_amount * value # Ensure knockback amount is at least 1
 		"pierce":
 			pierce += (int)(value)
+		"explosion_size":
+			explosion_size = init_explosion_size * value
 		_:
 			print("Unknown upgrade type: ", upgrade_type)
 
 func set_current_projectile(projectile_name: String):
-	if projectiles_available.has(projectile_name):
-		projectile_scene = projectiles_available[projectile_name]
+	if ResourcesDb.PACKEDSCENES["Projectiles"].has(projectile_name):
+		projectile_scene = ResourcesDb.PACKEDSCENES["Projectiles"][projectile_name]
 	else:
 		print("Projectile not found in available projectiles.")

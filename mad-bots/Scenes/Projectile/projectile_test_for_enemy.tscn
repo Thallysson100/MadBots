@@ -1,22 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://jsw064up3nkf"]
 
 [ext_resource type="PackedScene" uid="uid://dn55nwjvi8ywu" path="res://Scenes/Projectile/Projectile_base/projectile.tscn" id="1_tkuaq"]
-[ext_resource type="Texture2D" uid="uid://bxo8yigvka0s5" path="res://Assets/Textures/Armas_E_Personagens/Tiros/3.png" id="2_kc0pp"]
+[ext_resource type="Texture2D" uid="uid://b8o0f17el2xay" path="res://Assets/Textures/antagonistas/2/Projectile.png" id="2_tkuaq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bo2gv"]
-size = Vector2(7, 2)
+size = Vector2(4.8000007, 4.0000005)
 
 [node name="Projectile_test_for_enemy" instance=ExtResource("1_tkuaq")]
 scale = Vector2(2.5, 2.5)
 collision_layer = 16
 collision_mask = 2
-projectile_type = 1
 
 [node name="CollisionShape2D" parent="." index="0"]
-position = Vector2(0.5, 0)
+position = Vector2(9.536742e-08, -2.3841851e-08)
+scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_bo2gv")
 
 [node name="Sprite2D" parent="." index="1"]
-position = Vector2(0.25, 0)
-scale = Vector2(1.0714285, 1)
-texture = ExtResource("2_kc0pp")
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_tkuaq")

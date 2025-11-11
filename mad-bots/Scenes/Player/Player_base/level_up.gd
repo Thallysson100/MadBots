@@ -89,7 +89,7 @@ func select_random_rarity(experience_level: int) -> String:
 	var roll = randf() * 100.0
 	var cumulative = 0.0
 	
-	for rarity in UpgradesDb.RARITY_CURVES.keys():
+	for rarity in ResourcesDb.RARITY_CURVES.keys():
 		cumulative += weights[rarity]
 		if roll <= cumulative:
 			return rarity
@@ -98,8 +98,8 @@ func select_random_rarity(experience_level: int) -> String:
 
 func get_upgrades_by_rarity(rarity: String) -> Array:
 	var filtered = []
-	for upgrade_key in UpgradesDb.UPGRADES.keys():
-		if UpgradesDb.UPGRADES[upgrade_key]["rarity"] == rarity:
+	for upgrade_key in ResourcesDb.UPGRADES.keys():
+		if ResourcesDb.UPGRADES[upgrade_key]["rarity"] == rarity:
 			filtered.append(upgrade_key)
 	return filtered
 
@@ -108,8 +108,8 @@ func calculate_rarity_weights(experience_level: int) -> Dictionary:
 	var weights = {}
 	var total_weight = 0.0
 	
-	for rarity in UpgradesDb.RARITY_CURVES.keys():
-		var curve = UpgradesDb.RARITY_CURVES[rarity]
+	for rarity in ResourcesDb.RARITY_CURVES.keys():
+		var curve = ResourcesDb.RARITY_CURVES[rarity]
 		# Weight = base + (level * modifier), clamped to minimum 1
 		var weight = max(1.0, curve["base_weight"] + (experience_level * curve["level_modifier"]))
 		weights[rarity] = weight

@@ -1,5 +1,15 @@
 extends Node
-
+const PACKEDSCENES = {
+	"Guns": {
+		"Futuristic Chicago": preload("res://Scenes/Player/Guns/futuristic_chicago.tscn"), # Corrected file path
+		"Rocket Launcher": preload("res://Scenes/Player/Guns/rocket_launcher.tscn"), # Corrected file path
+	},
+	"Projectiles": {
+		"projectile_test": preload("res://Scenes/Projectile/projectile_test_for_enemy.tscn"), # Corrected file path
+		"projectile_test_for_enemy": preload("res://Scenes/Projectile/projectile_test_for_enemy.tscn"), # Corrected file path
+		"projectile_bomb": preload("res://Scenes/Projectile/Projectile_bomb/projectile_bomb.tscn"), # Corrected file path
+	}
+}
 # Rarity weight curves to influence upgrade selection based on player level
 const RARITY_CURVES = {
 	"common": {

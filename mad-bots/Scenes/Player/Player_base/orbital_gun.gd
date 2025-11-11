@@ -1,9 +1,6 @@
 extends Node2D
 
-@export var guns_to_use: Array[PreloadedResourses] = []
 
-var guns_available: Dictionary = {
-}
 @export var orbit_radius: float = 200
 @export var orbit_speed: float = 0.25  # Rotações por segundo
 
@@ -13,8 +10,8 @@ var array_guns_count: int = 0
 var target_position: Vector2 = Vector2.ZERO
 
 func add_gun(gun_name: String, atributtes_percentage: Dictionary):
-	if guns_available.has(gun_name):
-		var gun_instance = guns_available[gun_name].instantiate()
+	if ResourcesDb.PACKEDSCENES["Guns"].has(gun_name):
+		var gun_instance = ResourcesDb.PACKEDSCENES["Guns"][gun_name].instantiate()
 		add_child(gun_instance)
 		gun_instance.gun_update("damage", atributtes_percentage["damage"])
 		gun_instance.gun_update("fire_rate", atributtes_percentage["fire_rate"])
@@ -36,11 +33,6 @@ func add_gun(gun_name: String, atributtes_percentage: Dictionary):
 		gun.global_position = player.global_position + Vector2(cos(angle), sin(angle)) * orbit_radius
 		i += 1
 
-	
-
-func _ready():
-	for gun in guns_to_use:
-		guns_available[gun.scene_name] = gun.preloaded_resource
 
 func start_fire():
 	for gun in self.get_children():

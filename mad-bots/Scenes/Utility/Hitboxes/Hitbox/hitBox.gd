@@ -8,6 +8,7 @@ var damage = 1
 var disable = true
 var direction = Vector2.ZERO
 var knockback_amount = 1
+var attacker_position = Vector2.ZERO
 
 func _ready():
 	match DisableHitBoxType:
@@ -17,6 +18,7 @@ func _ready():
 			disable = false
 	collision.call_deferred("set","disabled", not disable)
 	disableTimer.timeout.connect(_on_disable_hit_box_timer_timeout)
+	attacker_position = global_position
 
 func tempToggle():
 	
@@ -27,8 +29,8 @@ func tempToggle():
 func _on_disable_hit_box_timer_timeout():
 	collision.call_deferred("set","disabled",not disable)
 
-func set_knockback_property(damage_set: int, direction_set: Vector2, knockback_amount_set: int):
+func set_knockback_property(damage_set: int, direction_set: Vector2, knockback_amount_set: int, attacker_position_set: Vector2 = Vector2.ZERO):
 	damage = damage_set
 	direction = direction_set
 	knockback_amount = knockback_amount_set
-	
+	attacker_position = attacker_position_set

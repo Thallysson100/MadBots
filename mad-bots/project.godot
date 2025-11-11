@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-UpgradesDb="*res://Scenes/Utility/UgradesDB/upgrades_db.tscn"
 TransitionScreen="*res://Scenes/Utility/FadingAnimation/transition_screen.tscn"
+ResourcesDb="*res://Scenes/Utility/ResourcesDb/resources_db.tscn"
 
 [display]
 

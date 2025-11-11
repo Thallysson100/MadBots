@@ -34,7 +34,8 @@ var atributtes_percentage : Dictionary = { # Dictionary to track percentage-base
 	"knockback_amount" : 1.0,
 	"damage" : 1.0,
 	"projectile_speed" : 1.0,
-	"pierce": 0
+	"pierce": 0,
+	"explosion_size": 1.0
 }
 
 var init_knockback: Vector2 = Vector2.ZERO
@@ -89,7 +90,9 @@ func movement(delta: float):
 	# Apply movement and handle collisions
 	move_and_slide()
 
-func hurt(damage, direction, knockback_amount):
+func hurt(damage, direction, knockback_amount, attackerPosition = Vector2.ZERO) -> void:
+	if (direction == Vector2.ZERO):
+		direction = (global_position - attackerPosition).normalized()
 	# Apply damage to player's health
 	current_health -= damage
 	healthbar.health = current_health
@@ -101,8 +104,9 @@ func hurt(damage, direction, knockback_amount):
 	# Calculate and apply knockback force in the specified direction
 	# Calculate and apply knockback force in the specified direction
 	init_knockback = direction * knockback_amount
-	# não me pergunte dá onde essa fórmula saiu, só fiquei testando no desmos até funcionar
+	# It just works better this way
 	init_knockback *= 2/invincibility_time 
+
 	current_knockback = init_knockback
 	knockback_cummulative_recovery = 0.0
 
@@ -122,8 +126,8 @@ func _on_collect_area_area_entered(area: Area2D) -> void:
 
 # a item_option emits the signal selected_upgrade with the upgrade name as argument
 func upgrade_character(upgrade : String):
-	for i in range(UpgradesDb.UPGRADES[upgrade]["functions"].size()):
-		callv(UpgradesDb.UPGRADES[upgrade]["functions"][i], UpgradesDb.UPGRADES[upgrade]["arguments"][i])
+	for i in range(ResourcesDb.UPGRADES[upgrade]["functions"].size()):
+		callv(ResourcesDb.UPGRADES[upgrade]["functions"][i], ResourcesDb.UPGRADES[upgrade]["arguments"][i])
 	
 	# After upgrading, hide the level-up panel
 	levelPanel.hide_levelup_panel()

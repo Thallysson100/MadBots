@@ -62,6 +62,9 @@ func move_or_attack(delta : float):
 		animation.custom_play("taking_damage")
 		velocity = current_knockback  # Override movement with knockback force
 
+		move_and_slide()
+		return  # Skip further movement/attack processing while being knocked back
+
 	elif attack.can_attack and distance_to_player <= attack.attack_range:
 		# Attack when in range
 		animation.custom_play("attack")
@@ -78,16 +81,21 @@ func move(_distance_to_player: float) -> void:
 	move_and_slide()
 		
 
-func hurt(damage, direction, knockback_amount):
+func hurt(damage, direction, knockback_amount, attackerPosition) -> void:
+	if (direction == Vector2.ZERO):
+		direction = (global_position - attackerPosition).normalized()
 	# Apply damage to player's health
 	current_health -= damage
 	
 	# Calculate and apply knockback force in the specified direction
 	init_knockback = direction * knockback_amount
-	# não me pergunte dá onde essa fórmula saiu, só fiquei testando no desmos até funcionar
+	
+	# It just works better this way
 	init_knockback *= 2/invincibility_time 
+
 	current_knockback = init_knockback
 	knockback_cummulative_recovery = 0.0
+
 
 	if current_health <= 0:
 		attack.can_attack = false

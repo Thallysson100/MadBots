@@ -13,12 +13,10 @@ signal selected_upgrade(upgrade)
 
 func _ready():
 	connect("selected_upgrade",Callable(player,"upgrade_character"))
-	if item == null:
-		item = "Bomba"  # Default item for testing
-	lblName.text = UpgradesDb.UPGRADES[item]["displayname"]
-	lblDescription.text = UpgradesDb.UPGRADES[item]["details"]
-	update_lblrarity(UpgradesDb.UPGRADES[item]["rarity"])
-	itemIcon.texture = load(UpgradesDb.UPGRADES[item]["icon"])
+	lblName.text = ResourcesDb.UPGRADES[item]["displayname"]
+	lblDescription.text = ResourcesDb.UPGRADES[item]["details"]
+	update_lblrarity(ResourcesDb.UPGRADES[item]["rarity"])
+	itemIcon.texture = load(ResourcesDb.UPGRADES[item]["icon"])
 
 func _input(event):
 	if event.is_action_pressed("click"):
@@ -45,4 +43,3 @@ func update_lblrarity(rarity: String):
 			lblrarity.add_theme_color_override("font_color", Color("9400d3")) # roxo
 		_:
 			lblrarity.add_theme_color_override("font_color", Color("ffffff")) # branco padrão
-

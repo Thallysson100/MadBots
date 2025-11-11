@@ -27,6 +27,7 @@ texture = ExtResource("3_o5l2g")
 hframes = 6
 
 [node name="Area2D" type="Area2D" parent="." index="2" groups=["attack"]]
+unique_name_in_owner = true
 collision_layer = 8
 collision_mask = 0
 monitoring = false

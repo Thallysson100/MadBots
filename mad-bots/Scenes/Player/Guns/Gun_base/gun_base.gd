@@ -32,6 +32,7 @@ func _ready():
 	projectile_speed = init_projectile_speed
 	fire_range = init_fire_range
 	knockback_amount = init_knockback_amount
+	explosion_size = init_explosion_size
 	
 	#temporario, depois criar função para mudar o projétil na interface
 	enemyDetector.connect("start_fire", _on_start_fire)
@@ -46,6 +47,7 @@ func _process(delta: float):
 
 func fire(target_pos: Vector2):	
 	var projectile_instance = projectile_scene.instantiate()
+	get_tree().root.add_child(projectile_instance)
 	var target_direction = (target_pos - projectile_spawn_point.global_position).normalized();
 	self.rotation = target_direction.angle()
 	projectile_instance.global_position = projectile_spawn_point.global_position
@@ -58,7 +60,7 @@ func fire(target_pos: Vector2):
 	projectile_instance.rotation  = target_direction.angle()
 	if projectile_instance.has_method("set_explosion_size"):
 		projectile_instance.set_explosion_size(explosion_size)
-	get_tree().root.add_child(projectile_instance)
+	
 	
 func _on_start_fire():
 	can_fire = true

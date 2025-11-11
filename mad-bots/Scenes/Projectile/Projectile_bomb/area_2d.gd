@@ -37,7 +37,6 @@ func set_knockback_property(_damage: int, _direction: Vector2, _knockback_amount
 	attacker_position = _attacker_position
 
 func set_size(size: float) -> void:
-	print("Setting bomb hitbox size to: ", size)
 	var shape = collision.shape
 	if shape is CircleShape2D:
 		shape.radius = size / 2

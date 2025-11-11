@@ -18,6 +18,7 @@ var can_attack: bool = true
 func start_attack(target_direction: Vector2) -> void:
 	if can_attack and player:
 		var projectile_instance = projectile_scene.instantiate()
+		get_tree().root.add_child(projectile_instance)
 		projectile_instance.global_position = marker.global_position
 		projectile_instance.damage = damage
 		projectile_instance.direction = target_direction
@@ -26,8 +27,7 @@ func start_attack(target_direction: Vector2) -> void:
 		projectile_instance.speed = projectile_speed
 		projectile_instance.knockback_amount = knockback_amount
 		projectile_instance.rotation  = target_direction.angle()
-		get_tree().root.add_child(projectile_instance)
-
+		
 
 		can_attack = false
 		cooldown.start(fire_rate)

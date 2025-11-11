@@ -13,10 +13,8 @@ radius = 401.31036
 
 [node name="Futurist_chicago" instance=ExtResource("1_aqdgd")]
 projectiles = Array[ExtResource("2_ws8aj")]([SubResource("Resource_bjaco")])
-init_damage = 100
-init_fire_rate = 1.0
 init_fire_range = 300.0
-init_knockback_amount = 50.0
+init_knockback_amount = 10.0
 
 [node name="Sprite2D" parent="." index="0"]
 rotation = 0.7853982
@@ -24,6 +22,9 @@ texture = ExtResource("3_lp0ko")
 
 [node name="ProjectileSpawnPoint" parent="." index="1"]
 position = Vector2(0, 0)
+
+[node name="EnemyDetector" parent="." index="2"]
+visible = false
 
 [node name="CollisionShape2D" parent="EnemyDetector" index="0"]
 shape = SubResource("CircleShape2D_ld2xs")

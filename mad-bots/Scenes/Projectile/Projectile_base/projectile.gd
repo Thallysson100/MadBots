@@ -9,6 +9,7 @@ var pierce = 1
 var already_killed = false
 var range_travel : float = 1
 signal shake_camera(intensity, duration)
+
 @export var shake_camera_on_hit = false
 @export var shake_intensity = 5
 @export var shake_duration = 0.1
@@ -16,7 +17,6 @@ signal shake_camera(intensity, duration)
 
 func _ready():
 	body_entered.connect(_on_body_entered)
-
 
 func _physics_process(delta: float) -> void:
 	var distance : Vector2 = direction.normalized() * speed * delta
@@ -26,9 +26,7 @@ func _physics_process(delta: float) -> void:
 		kill()
 
 func _on_body_entered(body):
-	if body.is_in_group("world"): 
-		kill()
-	if body.is_in_group("enemy"):
+	if body:
 		pierce -= 1
 		if pierce <= 0:
 			kill()

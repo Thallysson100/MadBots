@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpuhk31jpn0dm"]
-
-[ext_resource type="PackedScene" uid="uid://dnv2ikg1u4ni2" path="res://Scenes/Enemys/Enemy_base/enemy_base.tscn" id="1_4qci6"]
-[ext_resource type="Script" uid="uid://dgm6dc4qb1i2s" path="res://Scenes/Enemys/Enemy_base/enemy_Keep_distance.gd" id="2_86gm5"]
-
-[node name="Enemy_keep_dist" instance=ExtResource("1_4qci6")]
-script = ExtResource("2_86gm5")
-repel_radius = 100.0
-animation_path = NodePath("AnimationPlayer")

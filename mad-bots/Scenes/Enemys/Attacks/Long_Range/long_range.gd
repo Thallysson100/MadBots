@@ -27,6 +27,8 @@ func start_attack(target_direction: Vector2) -> void:
 		projectile_instance.knockback_amount = knockback_amount
 		projectile_instance.rotation  = target_direction.angle()
 		get_tree().root.add_child(projectile_instance)
+
+
 		can_attack = false
 		cooldown.start(fire_rate)
 	

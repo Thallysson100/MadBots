@@ -41,7 +41,6 @@ func add_gun(gun_name: String, atributtes_percentage: Dictionary):
 func _ready():
 	for gun in guns_to_use:
 		guns_available[gun.scene_name] = gun.preloaded_resource
-	add_gun(player.initial_gun, player.atributtes_percentage)
 
 func start_fire():
 	for gun in self.get_children():

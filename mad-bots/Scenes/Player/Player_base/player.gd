@@ -7,7 +7,6 @@ class_name Player
 
 @export var hurtbox_path : NodePath  ## Path to the Hurtbox area node that detects incoming attacks
 @onready var hurtbox = get_node(hurtbox_path)  # Reference to the Hurtbox area
-var knockback: Vector2 = Vector2.ZERO  # Stores the current knockback force applied to the player
 
 @export var attack_path : NodePath  ## Path to the attack system node
 @onready var gunsOrbiter = get_node(attack_path)  # Reference to attack system
@@ -23,20 +22,25 @@ var knockback: Vector2 = Vector2.ZERO  # Stores the current knockback force appl
 
 # Player Stats - Configurable properties that can be adjusted in the inspector
 @export var player_velocity: int = 200  ## Base movement speed of the player in pixels per second
-@export var knockback_recovery: float = 3.5  ## How quickly knockback force decays (higher = faster recovery)
 @export var max_health: int = 1000  ## Maximum health points the player can have
 @export var pickup_range: float = 100  ## Range within which the player can pick up items
 @export var initial_gun: String = "Futuristic Chicago"  ## Name of the initial gun to equip
+@export var invincibility_time: float = 0.5  ## Time the player is invincible after being hit
 
 var current_health
 var atributtes_percentage : Dictionary = { # Dictionary to track percentage-based upgrades
-	"fire_rate" : 1.0,
+	"fire_rate" : 0.0,
 	"fire_range" : 1.0,
 	"knockback_amount" : 1.0,
 	"damage" : 1.0,
 	"projectile_speed" : 1.0,
-	"pierce": 1.0
+	"pierce": 0
 }
+
+var init_knockback: Vector2 = Vector2.ZERO
+var current_knockback: Vector2 = Vector2.ZERO  # Stores the current knockback force applied to the enemy
+var knockback_recovery: float  ## How quickly knockback force decays (higher = faster recovery)
+var knockback_cummulative_recovery: float = 0.0
 
 func _ready() -> void:
 	# Connect the hurt signal from the hurtbox to our damage processing function
@@ -44,11 +48,15 @@ func _ready() -> void:
 	grabArea.get_child(0).shape.radius = pickup_range
 	healthbar.init_health(max_health)
 	current_health = max_health
-	
-func _physics_process(_delta: float) -> void:
-	movement()
+	knockback_recovery = 1.0 / invincibility_time
+	hurtbox.invincibility_time = invincibility_time
+	gunsOrbiter.add_gun(initial_gun, atributtes_percentage)
 
-func movement():
+	
+func _physics_process(delta: float) -> void:
+	movement(delta)
+
+func movement(delta: float):
 	# Get input from movement keys (WASD or arrow keys)
 	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")
 	var y_mov = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -61,12 +69,16 @@ func movement():
 	velocity = mov * player_velocity
 	
 	# Handle different animation states based on player condition
-	if knockback != Vector2.ZERO:
-		# Gradually reduce knockback force over time
-		knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
+	if current_knockback != Vector2.ZERO:
+		# Apply knockback in invincibility time
+		# Ex.: if knockback = 100, travel 100 pixels in invincibility_time seconds
+		knockback_cummulative_recovery += delta * knockback_recovery
+		current_knockback = init_knockback.lerp(Vector2.ZERO, knockback_cummulative_recovery)
+		
 		# Play hit animation when knockback is active
 		animation.custom_play("taking_damage")
-		velocity = knockback  # Override movement with knockback force
+		velocity = current_knockback  # Override movement with knockback force
+
 	elif mov != Vector2.ZERO:
 		# Play walk animation when moving
 		animation.custom_play("walk")	
@@ -87,7 +99,12 @@ func hurt(damage, direction, knockback_amount):
 		call_deferred("queue_free")
 		return
 	# Calculate and apply knockback force in the specified direction
-	knockback = direction * knockback_amount
+	# Calculate and apply knockback force in the specified direction
+	init_knockback = direction * knockback_amount
+	# não me pergunte dá onde essa fórmula saiu, só fiquei testando no desmos até funcionar
+	init_knockback *= 2/invincibility_time 
+	current_knockback = init_knockback
+	knockback_cummulative_recovery = 0.0
 
 
 func _on_grab_area_area_entered(area: Area2D) -> void:

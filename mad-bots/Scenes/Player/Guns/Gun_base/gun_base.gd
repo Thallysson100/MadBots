@@ -80,7 +80,7 @@ func gun_update(upgrade_type: String, value: float):
 			fire_range = (init_fire_range * value)
 			enemyDetector.get_child(0).shape.radius = fire_range
 		"knockback_amount":
-			knockback_amount = (init_knockback_amount * value)
+			knockback_amount = init_knockback_amount * value # Ensure knockback amount is at least 1
 		"pierce":
 			pierce += (int)(value)
 		_:

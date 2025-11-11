@@ -61,6 +61,7 @@ func process_sprite() -> void:
 		spriteHurt.offset.x *= -1
 		spriteDeath.offset.x *= -1
 
+
 # Determine sprite direction based on enemy velocity
 func set_direction() -> bool:
 	# Store current direction based on velocity
@@ -83,19 +84,30 @@ func custom_play(anim_name: String) -> void:
 	spriteDeath.visible = false
 
 	# Show appropriate sprite based on animation type
+	match_animation(anim_name)
+	
+	play(anim_name)  # Play the specified animation
+
+var last_animation = 0
+func match_animation(anim_name: String) -> void:
 	match anim_name:
-		"walk":
-			spriteWalk.visible = true  # Show walk sprite
-		"attack":
-			can_play_new_animation = false  # Lock animations during attack
-			spriteAttack.visible = true  # Show attack sprite
-		"taking_damage":
-			can_play_new_animation = false  # Lock animations during damage
-			spriteHurt.visible = true  # Show hurt sprite
 		"death":
 			can_play_new_animation = false  # Lock animations during death
 			spriteDeath.visible = true  # Show death sprite
-	play(anim_name)  # Play the specified animation
+		"taking_damage":
+			if not spriteDeath.visible:  # Only allow if death animation is not active
+				can_play_new_animation = false  # Lock animations during damage
+				spriteHurt.visible = true  # Show hurt sprite
+		"attack":
+			if not spriteDeath.visible and not spriteHurt.visible:  # Only allow if death or damage animation is not active
+				can_play_new_animation = false  # Lock animations during attack
+				spriteAttack.visible = true  # Show attack sprite
+		"walk":
+			if not spriteDeath.visible and not spriteHurt.visible and not spriteAttack.visible:  # Only allow if no higher-priority animations are active
+				spriteWalk.visible = true  # Show walk sprite
+		_:
+			# Default case (should not be reached)
+			assert(false, "Unknown animation: " + anim_name)
 
 # Called when an animation finishes playing
 func _on_animation_finished(anim_name: String) -> void:

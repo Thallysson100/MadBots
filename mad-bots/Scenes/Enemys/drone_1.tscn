@@ -1,20 +1,22 @@
 [gd_scene load_steps=16 format=3 uid="uid://cw7fphffgyt4c"]
 
-[ext_resource type="PackedScene" uid="uid://bpuhk31jpn0dm" path="res://Scenes/Enemys/Enemy_base/enemy_keep_distance.tscn" id="1_1kgbx"]
+[ext_resource type="PackedScene" uid="uid://bpuhk31jpn0dm" path="res://Scenes/Enemys/Enemy_Sniper/enemy_sniper.tscn" id="1_1kgbx"]
 [ext_resource type="Texture2D" uid="uid://c3d6on1b4t514" path="res://Assets/Textures/drone/1 Drones/3/Forward.png" id="2_j4vnt"]
 [ext_resource type="Texture2D" uid="uid://85bmjykqb6n" path="res://Assets/Textures/drone/1 Drones/3/Fire3.png" id="3_gnuxm"]
 [ext_resource type="Texture2D" uid="uid://cjicqp6drn5ju" path="res://Assets/Textures/drone/1 Drones/3/taking_damage-1.png" id="4_f3cok"]
 [ext_resource type="Texture2D" uid="uid://da1m145qeswk6" path="res://Assets/Textures/drone/1 Drones/3/Death.png" id="5_l8yqf"]
 [ext_resource type="PackedScene" uid="uid://bmf55wueli5ef" path="res://Scenes/Enemys/Attacks/Long_Range/long_range.tscn" id="6_l8yqf"]
-[ext_resource type="PackedScene" uid="uid://c6f5u7q2t4m2t" path="res://Scenes/Projectile/projectile_test.tscn" id="7_pt5yh"]
+[ext_resource type="PackedScene" uid="uid://jsw064up3nkf" path="res://Scenes/Projectile/projectile_test_for_enemy.tscn" id="7_l8yqf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pt5yh"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4vnt"]
+size = Vector2(53, 30)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8yqf"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3cok"]
+size = Vector2(59, 36)
 
 [sub_resource type="Animation" id="Animation_f3cok"]
 resource_name = "walk"
-length = 0.5
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -23,7 +25,7 @@ tracks/0/path = NodePath("SpriteWalk:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.43333334),
+"times": PackedFloat32Array(0, 0.2, 0.43333334, 0.6666667),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -82,7 +84,6 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_pt5yh"]
 resource_name = "attack"
-length = 1.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -90,15 +91,15 @@ tracks/0/path = NodePath("SpriteAttack:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6333333, 0.76666665, 0.9, 1.0333333, 1.2, 1.3, 1.4, 1.5666667, 1.7),
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.3, 0.36666667, 0.43333334, 0.5, 0.56666666, 0.6333333, 0.7, 0.76666665, 0.8333333, 0.9, 0.9586985),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15]
 }
 
 [sub_resource type="Animation" id="Animation_u2auy"]
 resource_name = "taking_damage"
-length = 0.25
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -106,15 +107,14 @@ tracks/0/path = NodePath("SpriteHurt:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_2gsxw"]
 resource_name = "death"
-length = 0.65
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -122,10 +122,10 @@ tracks/0/path = NodePath("SpriteDeath:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3020588, 0.4001798, 0.50407267, 0.6041176),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.11092213, 0.22184426, 0.33992267, 0.45263386, 0.57071227, 0.69773597, 0.8193925),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u2auy"]
@@ -138,54 +138,40 @@ _data = {
 }
 
 [node name="Drone1" instance=ExtResource("1_1kgbx")]
-scale = Vector2(1.5, 1.5)
-collision_mask = 4
-repel_radius = 50.0
+repel_radius = 300.0
 attack_path = NodePath("Long_Range")
 speed = 100.0
-knockback_recovery = 10.0
-max_health = 1000
+max_health = 100
+experience_reward = 1
+invincibility_time = 0.1
 
 [node name="CollisionShape2D" parent="." index="0"]
-shape = SubResource("RectangleShape2D_pt5yh")
+position = Vector2(0.5, -21)
+shape = SubResource("RectangleShape2D_j4vnt")
 
 [node name="SpriteWalk" parent="." index="1"]
 position = Vector2(0, 37)
-scale = Vector2(1, 1)
 texture = ExtResource("2_j4vnt")
 hframes = 4
 
 [node name="SpriteAttack" parent="." index="2"]
-visible = true
 position = Vector2(0, 37)
-scale = Vector2(1, 1)
 texture = ExtResource("3_gnuxm")
 hframes = 16
 
 [node name="SpriteHurt" parent="." index="3"]
-visible = true
 position = Vector2(0, 37)
-scale = Vector2(1, 1)
 texture = ExtResource("4_f3cok")
 hframes = 4
 
 [node name="SpriteDeath" parent="." index="4"]
-visible = true
 position = Vector2(0, 37)
-scale = Vector2(1, 1)
 texture = ExtResource("5_l8yqf")
 hframes = 8
 
-[node name="HurtBox" parent="." index="5"]
-position = Vector2(-1, -36)
-collision_layer = 4
-
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(1, 36)
-shape = SubResource("RectangleShape2D_l8yqf")
-
-[node name="DisableTimer" parent="HurtBox" index="1"]
-wait_time = 0.25
+position = Vector2(0.5, -21)
+shape = SubResource("RectangleShape2D_f3cok")
 
 [node name="AnimationPlayer" parent="." index="6"]
 libraries = {
@@ -193,12 +179,13 @@ libraries = {
 }
 
 [node name="Long_Range" parent="." index="7" instance=ExtResource("6_l8yqf")]
-projectile_scene = ExtResource("7_pt5yh")
-fire_rate = 3.0
-attack_range = 200.0
+projectile_scene = ExtResource("7_l8yqf")
+fire_rate = 0.5
+projectile_speed = 1000.0
+knockback_amount = 10.0
 
 [node name="Marker2D" parent="Long_Range" index="1"]
-position = Vector2(0, 4.666668)
+position = Vector2(0, -12)
 
 [editable path="HurtBox"]
 [editable path="Long_Range"]

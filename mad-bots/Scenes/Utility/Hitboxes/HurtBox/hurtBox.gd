@@ -5,6 +5,8 @@ extends Area2D
 @onready var collision = $CollisionShape2D
 @onready var disableTimer = $DisableTimer
 
+var invincibility_time : float = 0.5
+
 func _ready():
 	area_entered.connect(_on_area_entered)
 	disableTimer.timeout.connect(_on_disable_timer_timeout)
@@ -19,7 +21,7 @@ func _on_area_entered(area):
 			match HurtBoxType:
 				0: #Cooldown
 					collision.call_deferred("set","disabled",true)
-					disableTimer.start()
+					disableTimer.start(invincibility_time)
 				1: #HitOnce
 					if hit_once_array.has(area) == false:
 						hit_once_array.append(area)

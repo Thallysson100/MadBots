@@ -8,6 +8,7 @@
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_ucpyf")
+animation_path = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

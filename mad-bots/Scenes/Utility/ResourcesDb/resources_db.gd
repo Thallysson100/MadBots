@@ -13,15 +13,18 @@ const PACKEDSCENES = {
 # Rarity weight curves to influence upgrade selection based on player level
 const RARITY_CURVES = {
 	"common": {
-		"base_weight": 100.0,
+		"color": "00bfff", #blue
+		"base_weight": 30.0,
 		"level_modifier": -1.5  # Decreases as level increases
 	},
 	"rare": {
-		"base_weight": 	0.0,
+		"color": "00ff00", #green
+		"base_weight": 30.0,
 		"level_modifier": 1.0  # Increases slightly with level
 	},
 	"epic": {
-		"base_weight": 0.0,
+		"color": "9400d3", #purple
+		"base_weight": 30.0,
 		"level_modifier": 0.5  # Increases with level
 	}
 }

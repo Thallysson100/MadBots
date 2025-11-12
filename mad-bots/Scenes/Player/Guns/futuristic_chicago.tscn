@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://d330uqv85b571"]
 
 [ext_resource type="PackedScene" uid="uid://san70ewrn4ap" path="res://Scenes/Player/Guns/Gun_base/gun_base.tscn" id="1_aqdgd"]
-[ext_resource type="PackedScene" uid="uid://wnoy8u1jesq3" path="res://Scenes/Projectile/Projectile_bomb/projectile_bomb.tscn" id="2_dt3o8"]
+[ext_resource type="PackedScene" uid="uid://c6f5u7q2t4m2t" path="res://Scenes/Projectile/projectile_test.tscn" id="2_dt3o8"]
 [ext_resource type="Texture2D" uid="uid://e7unef3drhd4" path="res://Assets/Textures/icongun/Icones_Armas/Icon29_01.png" id="3_lp0ko"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ld2xs"]
 radius = 401.31036
 
 [node name="Futurist_chicago" instance=ExtResource("1_aqdgd")]
-init_projectile_speed = 400.0
+init_fire_rate = 0.2
 init_fire_range = 500.0
-init_knockback_amount = 100.0
+init_knockback_amount = 10.0
 projectile_scene = ExtResource("2_dt3o8")
 
 [node name="Sprite2D" parent="." index="0"]
@@ -19,9 +19,6 @@ texture = ExtResource("3_lp0ko")
 
 [node name="ProjectileSpawnPoint" parent="." index="1"]
 position = Vector2(0, 0)
-
-[node name="EnemyDetector" parent="." index="2"]
-visible = false
 
 [node name="CollisionShape2D" parent="EnemyDetector" index="0"]
 shape = SubResource("CircleShape2D_ld2xs")

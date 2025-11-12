@@ -1,8 +1,8 @@
 extends TextureRect
 
-@onready var lblName = $lbl_name
-@onready var lblDescription = $lbl_description
-@onready var lblrarity = $lbl_rarity
+@onready var lblName = $TextureName/lbl_name
+@onready var lblDescription = $TextureDescription/lbl_description
+@onready var lblrarity = $TextureRarity/lbl_rarity
 @onready var itemIcon = $TextureRect/itemIcon
 
 var mouse_over = false
@@ -15,7 +15,12 @@ func _ready():
 	connect("selected_upgrade",Callable(player,"upgrade_character"))
 	lblName.text = ResourcesDb.UPGRADES[item]["displayname"]
 	lblDescription.text = ResourcesDb.UPGRADES[item]["details"]
-	update_lblrarity(ResourcesDb.UPGRADES[item]["rarity"])
+	lblrarity.text = ResourcesDb.UPGRADES[item]["rarity"].capitalize()
+
+	var rarity_color = ResourcesDb.RARITY_CURVES[ResourcesDb.UPGRADES[item]["rarity"]]["color"]
+	lblrarity.add_theme_color_override("font_color",Color(rarity_color))
+	lblName.add_theme_color_override("font_color",Color(rarity_color))
+
 	itemIcon.texture = load(ResourcesDb.UPGRADES[item]["icon"])
 
 func _input(event):
@@ -30,16 +35,3 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	position.x -= 10
 	mouse_over = false
-
-func update_lblrarity(rarity: String):
-	lblrarity.text = rarity.capitalize()
-
-	match rarity.to_lower():
-		"common":
-			lblrarity.add_theme_color_override("font_color", Color("00bfff")) # azul
-		"rare":
-			lblrarity.add_theme_color_override("font_color", Color("00ff00")) # verde
-		"epic":
-			lblrarity.add_theme_color_override("font_color", Color("9400d3")) # roxo
-		_:
-			lblrarity.add_theme_color_override("font_color", Color("ffffff")) # branco padrão

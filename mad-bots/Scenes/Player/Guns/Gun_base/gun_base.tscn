@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://san70ewrn4ap"]
+[gd_scene load_steps=4 format=3 uid="uid://san70ewrn4ap"]
 
 [ext_resource type="Script" uid="uid://cf2apnm38a17n" path="res://Scenes/Player/Guns/Gun_base/gun_base.gd" id="1_0175l"]
 [ext_resource type="Script" uid="uid://d4k2rkusta5n" path="res://Scenes/Player/Guns/Gun_base/enemy_detector.gd" id="3_eh1gl"]
-[ext_resource type="PackedScene" uid="uid://c6f5u7q2t4m2t" path="res://Scenes/Projectile/projectile_test.tscn" id="3_tw0sy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eh1gl"]
 radius = 401.31036
@@ -10,7 +9,6 @@ radius = 401.31036
 [node name="Gun_base" type="Node2D"]
 script = ExtResource("1_0175l")
 init_damage = 10
-projectile_scene = ExtResource("3_tw0sy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 

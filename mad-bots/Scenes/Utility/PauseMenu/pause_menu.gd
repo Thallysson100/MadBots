@@ -32,5 +32,5 @@ func _on_quit_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Utility/MainMenu/MainMenu.tscn")
 
 
-func _process(delta):
+func _process(_delta):
 	testEsc()

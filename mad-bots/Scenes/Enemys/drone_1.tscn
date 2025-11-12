@@ -143,7 +143,7 @@ repel_radius = 400.0
 attack_path = NodePath("Long_Range")
 speed = 100.0
 max_health = 100
-experience_reward = 1
+experience_reward = 10
 invincibility_time = 0.1
 
 [node name="CollisionShape2D" parent="." index="0"]

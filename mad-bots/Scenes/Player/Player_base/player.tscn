@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dki47ebywt47l"]
+[gd_scene load_steps=26 format=3 uid="uid://dki47ebywt47l"]
 
 [ext_resource type="Script" uid="uid://dwq326ibrckj7" path="res://Scenes/Player/Player_base/player.gd" id="1_uvnfx"]
 [ext_resource type="Texture2D" uid="uid://ct2kswpjdmq4s" path="res://Assets/Textures/Armas_E_Personagens/Personagens/2 Punk/Punk_idle.png" id="2_a3d8c"]
@@ -11,11 +11,16 @@
 [ext_resource type="Texture2D" uid="uid://341qwvb8xft8" path="res://Assets/Textures/GUI/exp_progress.png" id="9_2iroa"]
 [ext_resource type="FontFile" uid="uid://jtemo7px1tum" path="res://Assets/Font/CyberpunkCraftpixPixel.otf" id="10_2iroa"]
 [ext_resource type="Script" uid="uid://dkc4p5f608cur" path="res://Scenes/Player/Player_base/experience_bar.gd" id="10_uohgb"]
-[ext_resource type="Texture2D" uid="uid://c1vxlp7qsaxju" path="res://Assets/Textures/image_placeholder.png" id="11_d5l35"]
 [ext_resource type="Script" uid="uid://bgk743jro3fj6" path="res://Scenes/Player/Player_base/level_up.gd" id="12_5i2fg"]
 [ext_resource type="AudioStream" uid="uid://mhglwy5ui8ty" path="res://Assets/Audio/SoundEffect/levelup.ogg" id="12_j7xa5"]
 [ext_resource type="PackedScene" uid="uid://18p05avlo2ww" path="res://Scenes/Utility/HealthBar/healthbar.tscn" id="13_j7xa5"]
+[ext_resource type="Texture2D" uid="uid://dsmnuk2pgbt6w" path="res://Assets/Textures/GUI/GUI_expecificas/menu_option_upgrade.png" id="14_7bjry"]
 [ext_resource type="PackedScene" uid="uid://bj6e4ouum8vkc" path="res://Scenes/Utility/PauseMenu/PauseMenu.tscn" id="16_7bjry"]
+[ext_resource type="Texture2D" uid="uid://dcdat1lqdyqew" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/4.png" id="17_0pqxf"]
+[ext_resource type="Texture2D" uid="uid://btp6khlf0obq" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/1.png" id="17_rvfrc"]
+[ext_resource type="Texture2D" uid="uid://cig7mvu53sii0" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/6.png" id="18_oxjp6"]
+[ext_resource type="Texture2D" uid="uid://c0tubx4pajhrx" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/8.png" id="19_oxjp6"]
+[ext_resource type="Texture2D" uid="uid://cax5i6hjg388c" path="res://Assets/Textures/GUI/GUI_expecificas/leve_up.png" id="19_rvfrc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3d8c"]
 size = Vector2(20, 34.5)
@@ -171,22 +176,81 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 760.0
 offset_top = -260.0
-offset_right = 1242.0
-offset_bottom = 201.46155
+offset_right = 1240.0
+offset_bottom = 188.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.3, 1.3)
-texture = ExtResource("11_d5l35")
+texture = ExtResource("14_7bjry")
 script = ExtResource("12_5i2fg")
 
-[node name="lbl_levelup" type="Label" parent="GUILayer/GUI/LevelUp"]
+[node name="decoration" type="TextureRect" parent="GUILayer/GUI/LevelUp"]
+layout_mode = 0
+offset_left = 327.69226
+offset_top = 47.692314
+offset_right = 381.53845
+offset_bottom = 106.923096
+texture = ExtResource("17_0pqxf")
+
+[node name="decoration2" type="TextureRect" parent="GUILayer/GUI/LevelUp"]
+layout_mode = 0
+offset_left = 71.53847
+offset_top = 42.3077
+offset_right = 109.53847
+offset_bottom = 106.153854
+texture = ExtResource("17_rvfrc")
+
+[node name="decoration3" type="TextureRect" parent="GUILayer/GUI/LevelUp"]
+layout_mode = 0
+offset_left = 5.3846126
+offset_top = 223.07695
+offset_right = 65.384674
+offset_bottom = 334.00003
+rotation = 3.1415927
+texture = ExtResource("18_oxjp6")
+
+[node name="decoration4" type="TextureRect" parent="GUILayer/GUI/LevelUp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 23.076965
+offset_top = -177.07693
+offset_right = 70.076965
+offset_bottom = -113.07693
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+texture = ExtResource("19_oxjp6")
+
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/LevelUp"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -183.0
+offset_right = 183.0
+offset_bottom = 46.923088
+grow_horizontal = 2
+texture = ExtResource("19_rvfrc")
+expand_mode = 1
+
+[node name="lbl_levelup" type="Label" parent="GUILayer/GUI/LevelUp/TextureRect"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.178
-offset_bottom = -0.099998474
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.5
+offset_top = -18.747694
+offset_right = 76.5
+offset_bottom = 18.747694
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("10_2iroa")
 theme_override_font_sizes/font_size = 25
 text = "Level Up !"

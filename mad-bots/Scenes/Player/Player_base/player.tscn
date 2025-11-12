@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dki47ebywt47l"]
+[gd_scene load_steps=21 format=3 uid="uid://dki47ebywt47l"]
 
 [ext_resource type="Script" uid="uid://dwq326ibrckj7" path="res://Scenes/Player/Player_base/player.gd" id="1_uvnfx"]
 [ext_resource type="Texture2D" uid="uid://ct2kswpjdmq4s" path="res://Assets/Textures/Armas_E_Personagens/Personagens/2 Punk/Punk_idle.png" id="2_a3d8c"]
@@ -7,9 +7,7 @@
 [ext_resource type="Script" uid="uid://b1a4agwuanrr1" path="res://Scenes/Player/Player_base/animation_player.gd" id="5_dd0ac"]
 [ext_resource type="PackedScene" uid="uid://djv6hj8hqdilv" path="res://Scenes/Utility/Hitboxes/HurtBox/hurtBox.tscn" id="6_dd0ac"]
 [ext_resource type="Script" uid="uid://bvdiqfcy8tpd6" path="res://Scenes/Player/Player_base/orbital_gun.gd" id="6_ocvar"]
-[ext_resource type="Script" uid="uid://bgga43xkcu7tp" path="res://Scenes/Utility/preloaded_resoures.gd" id="7_7bjry"]
 [ext_resource type="Texture2D" uid="uid://dlasogkv1aliy" path="res://Assets/Textures/GUI/exp_background.png" id="8_bhp24"]
-[ext_resource type="PackedScene" uid="uid://d330uqv85b571" path="res://Scenes/Player/Guns/futuristic_chicago.tscn" id="8_nfiwc"]
 [ext_resource type="Texture2D" uid="uid://341qwvb8xft8" path="res://Assets/Textures/GUI/exp_progress.png" id="9_2iroa"]
 [ext_resource type="FontFile" uid="uid://jtemo7px1tum" path="res://Assets/Font/CyberpunkCraftpixPixel.otf" id="10_2iroa"]
 [ext_resource type="Script" uid="uid://dkc4p5f608cur" path="res://Scenes/Player/Player_base/experience_bar.gd" id="10_uohgb"]
@@ -17,15 +15,10 @@
 [ext_resource type="Script" uid="uid://bgk743jro3fj6" path="res://Scenes/Player/Player_base/level_up.gd" id="12_5i2fg"]
 [ext_resource type="AudioStream" uid="uid://mhglwy5ui8ty" path="res://Assets/Audio/SoundEffect/levelup.ogg" id="12_j7xa5"]
 [ext_resource type="PackedScene" uid="uid://18p05avlo2ww" path="res://Scenes/Utility/HealthBar/healthbar.tscn" id="13_j7xa5"]
+[ext_resource type="PackedScene" uid="uid://bj6e4ouum8vkc" path="res://Scenes/Utility/PauseMenu/PauseMenu.tscn" id="16_7bjry"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3d8c"]
 size = Vector2(20, 34.5)
-
-[sub_resource type="Resource" id="Resource_nfiwc"]
-script = ExtResource("7_7bjry")
-scene_name = "Futuristic Chicago"
-preloaded_resource = ExtResource("8_nfiwc")
-metadata/_custom_type_script = "uid://bgga43xkcu7tp"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0u5uq"]
 size = Vector2(20, 34)
@@ -46,7 +39,6 @@ hurtbox_path = NodePath("HurtBox")
 attack_path = NodePath("GunsOrbiter")
 grab_area = NodePath("GrabArea")
 player_velocity = 400
-knockback_recovery = 25.0
 
 [node name="SpriteIdle" type="Sprite2D" parent="."]
 z_index = 1
@@ -84,7 +76,6 @@ spriteTakingDamage_path = NodePath("../SpriteTakingDamage")
 
 [node name="GunsOrbiter" type="Node2D" parent="."]
 script = ExtResource("6_ocvar")
-guns_to_use = Array[ExtResource("7_7bjry")]([SubResource("Resource_nfiwc")])
 
 [node name="HurtBox" parent="." instance=ExtResource("6_dd0ac")]
 collision_layer = 0
@@ -118,6 +109,13 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1280.0
 offset_bottom = 720.0
+
+[node name="PauseMenu" parent="GUILayer/GUI" instance=ExtResource("16_7bjry")]
+layout_mode = 1
+
+[node name="PanelContainer" parent="GUILayer/GUI/PauseMenu" index="1"]
+offset_top = -191.25
+offset_bottom = 111.25
 
 [node name="Healthbar" parent="GUILayer/GUI" instance=ExtResource("13_j7xa5")]
 unique_name_in_owner = true
@@ -219,3 +217,4 @@ volume_db = -20.0
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 
 [editable path="HurtBox"]
+[editable path="GUILayer/GUI/PauseMenu"]

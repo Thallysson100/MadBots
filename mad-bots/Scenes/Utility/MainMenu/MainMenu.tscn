@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://8rwtwg6m8lse"]
+[gd_scene load_steps=17 format=3 uid="uid://8rwtwg6m8lse"]
 
 [ext_resource type="Script" uid="uid://enhwdtel2tdk" path="res://Scenes/Utility/MainMenu/main_menu.gd" id="1_wrjco"]
 [ext_resource type="Texture2D" uid="uid://ca2vkujk6gpce" path="res://Assets/Textures/GUI/MenuBackground.png" id="2_7ryw1"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dnyhpipbe6lht" path="res://Assets/Audio/Music/MenuSong.ogg" id="4_0dd2c"]
 [ext_resource type="Script" uid="uid://btpkphfppmx4r" path="res://Scenes/Utility/MainMenu/audio_control.gd" id="5_53a2v"]
 [ext_resource type="Script" uid="uid://8d1ds7h2s77g" path="res://Scenes/Utility/MainMenu/full_screen_control.gd" id="6_4j8mn"]
+[ext_resource type="Texture2D" uid="uid://b672gir310lxd" path="res://Assets/Textures/GUI/Menu.png" id="7_elq4m"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b1agb"]
 texture = ExtResource("2_7ryw1")
@@ -43,6 +44,9 @@ shadow_offset = Vector2(0, 3.41)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1agb"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_elq4m"]
+texture = ExtResource("7_elq4m")
+
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_b1agb"]
 color = Color(1, 1, 1, 1)
 thickness = 6
@@ -50,6 +54,9 @@ thickness = 6
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_0dd2c"]
 color = Color(0.15294118, 0.5411765, 0.9411765, 1)
 thickness = 6
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v331b"]
+texture = ExtResource("7_elq4m")
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_wrjco")
@@ -155,12 +162,14 @@ offset_left = 404.0
 offset_top = 223.0
 offset_right = 874.0
 offset_bottom = 585.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_elq4m")
 
 [node name="Label" type="Label" parent="Options"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 34.0
+offset_top = 40.0
+offset_bottom = 74.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("3_b1agb")
 theme_override_font_sizes/font_size = 32
@@ -176,9 +185,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -153.0
-offset_top = 87.0
+offset_top = 63.0
 offset_right = 156.0
-offset_bottom = 161.0
+offset_bottom = 137.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
@@ -202,9 +211,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -181.5
-offset_top = -109.0
+offset_top = -85.0
 offset_right = 181.5
-offset_bottom = 61.0
+offset_bottom = 85.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
@@ -240,9 +249,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -187.0
-offset_top = -48.0
+offset_top = -8.0
 offset_right = 192.0
-offset_bottom = -16.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -257,18 +266,20 @@ script = ExtResource("6_4j8mn")
 
 [node name="LevelSelector" type="Panel" parent="."]
 offset_left = 404.0
-offset_top = 223.0
+offset_top = 231.0
 offset_right = 874.0
-offset_bottom = 585.0
+offset_bottom = 593.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_v331b")
 
 [node name="Label" type="Label" parent="LevelSelector"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 34.0
+offset_top = 40.0
+offset_bottom = 74.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("3_b1agb")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 30
 text = "SELECT LEVEL"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -280,10 +291,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -153.0
-offset_top = 87.0
-offset_right = 156.0
-offset_bottom = 161.0
+offset_left = -123.5
+offset_top = 84.0
+offset_right = 123.5
+offset_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
@@ -307,27 +318,30 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -181.5
-offset_top = -109.0
+offset_top = -93.0
 offset_right = 181.5
-offset_bottom = 61.0
+offset_bottom = 77.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 30
 
 [node name="Level 1" type="Button" parent="LevelSelector/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_b1agb")
 theme_override_font_sizes/font_size = 25
 text = "Level 1"
 
 [node name="Level 2" type="Button" parent="LevelSelector/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_b1agb")
 theme_override_font_sizes/font_size = 25
 text = "Level 2"
 
 [node name="Level 3" type="Button" parent="LevelSelector/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_b1agb")
 theme_override_font_sizes/font_size = 25
 text = "Level 3"

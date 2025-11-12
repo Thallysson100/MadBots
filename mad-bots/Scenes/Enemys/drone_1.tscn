@@ -183,7 +183,7 @@ libraries = {
 position = Vector2(0, -1)
 projectile_scene = ExtResource("7_l8yqf")
 fire_rate = 6.0
-damage = 0
+damage = 500
 projectile_speed = 400.0
 knockback_amount = 10.0
 

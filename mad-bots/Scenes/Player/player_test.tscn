@@ -130,7 +130,8 @@ visible = false
 [node name="GrabArea" parent="GrabArea" index="0"]
 shape = SubResource("CircleShape2D_pkpl1")
 
-[node name="ExperienceBar" parent="GUILayer/GUI" index="1"]
+[node name="ExperienceBar" parent="GUILayer/GUI" index="2"]
 value = 0.0
 
 [editable path="HurtBox"]
+[editable path="GUILayer/GUI/PauseMenu"]

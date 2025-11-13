@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://w84fgw1lgr3q"]
+
+[ext_resource type="Texture2D" uid="uid://n46nr2jx4xmw" path="res://Assets/Maps/bloquete.png" id="1_dry5x"]
+[ext_resource type="PackedScene" uid="uid://bktn2d8pc84ta" path="res://Scenes/Player/player_test.tscn" id="2_7x3dl"]
+[ext_resource type="PackedScene" uid="uid://bk54nw0n6l0nk" path="res://Scenes/Utility/EnemySpawner/enemy_spawner.tscn" id="3_sc3oo"]
+[ext_resource type="Script" uid="uid://bq30v575devcx" path="res://Scenes/Utility/EnemySpawner/spawn_info.gd" id="4_42ucu"]
+[ext_resource type="PackedScene" uid="uid://20imgnfiatm" path="res://Scenes/Enemys/enemy_test.tscn" id="5_f8crk"]
+
+[sub_resource type="Resource" id="Resource_pfq4i"]
+script = ExtResource("4_42ucu")
+time_end = 10
+enemy = ExtResource("5_f8crk")
+enemy_num = 10
+metadata/_custom_type_script = "uid://bq30v575devcx"
+
+[node name="World3" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+z_index = -4096
+scroll_offset = Vector2(251, -426)
+repeat_size = Vector2(32, 32)
+repeat_times = 81
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+texture = ExtResource("1_dry5x")
+
+[node name="Player_test" parent="." instance=ExtResource("2_7x3dl")]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_sc3oo")]
+spawns = Array[ExtResource("4_42ucu")]([SubResource("Resource_pfq4i")])

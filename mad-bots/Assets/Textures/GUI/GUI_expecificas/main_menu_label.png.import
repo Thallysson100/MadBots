@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcdat1lqdyqew"
-path="res://.godot/imported/4.png-e621a7eef3960edb2c1105184e768eba.ctex"
+uid="uid://bkh7ir0jprcdj"
+path="res://.godot/imported/main_menu_label.png-47ea20a0054cd099de76c3f4572d4991.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/4.png"
-dest_files=["res://.godot/imported/4.png-e621a7eef3960edb2c1105184e768eba.ctex"]
+source_file="res://Assets/Textures/GUI/GUI_expecificas/main_menu_label.png"
+dest_files=["res://.godot/imported/main_menu_label.png-47ea20a0054cd099de76c3f4572d4991.ctex"]
 
 [params]
 

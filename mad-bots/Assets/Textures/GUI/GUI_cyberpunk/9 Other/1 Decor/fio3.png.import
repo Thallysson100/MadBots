@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cax5i6hjg388c"
-path="res://.godot/imported/leve_up.png-af835d9f53d7265e7c8d397c2975b433.ctex"
+uid="uid://dkx2ich612wxu"
+path="res://.godot/imported/fio3.png-39fbc7ec58d66384da4e427e10614d60.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/GUI/GUI_expecificas/leve_up.png"
-dest_files=["res://.godot/imported/leve_up.png-af835d9f53d7265e7c8d397c2975b433.ctex"]
+source_file="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio3.png"
+dest_files=["res://.godot/imported/fio3.png-39fbc7ec58d66384da4e427e10614d60.ctex"]
 
 [params]
 

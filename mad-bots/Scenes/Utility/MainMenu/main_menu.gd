@@ -1,8 +1,8 @@
 extends Node2D
 
 @onready var main_buttons: VBoxContainer = $MainButtons
-@onready var options: Panel = $Options
-@onready var level_selector: Panel = $LevelSelector
+@onready var options: TextureRect = $Options
+@onready var level_selector: TextureRect = $LevelSelector
 
 
 func _ready():
@@ -36,14 +36,17 @@ func _on_back_level_selector_pressed() -> void:
 func _on_level_1_pressed() -> void:
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
-	get_tree().change_scene_to_file("res://World/world.tscn")
+	ResourcesDb.world_selected = "res://World/world1.tscn"
+	get_tree().change_scene_to_file("res://World/world1.tscn")
 
 func _on_level_2_pressed() -> void:
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
-	get_tree().change_scene_to_file("res://World/world.tscn")
+	ResourcesDb.world_selected = "res://World/world2.tscn"
+	get_tree().change_scene_to_file("res://World/world2.tscn")
 
 func _on_level_3_pressed() -> void:
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
-	get_tree().change_scene_to_file("res://World/world.tscn")
+	ResourcesDb.world_selected = "res://World/world3.tscn"
+	get_tree().change_scene_to_file("res://World/world3.tscn")

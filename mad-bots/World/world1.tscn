@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://3postoy3r8y2"]
+[gd_scene load_steps=7 format=3 uid="uid://3postoy3r8y2"]
 
 [ext_resource type="Script" uid="uid://bq30v575devcx" path="res://Scenes/Utility/EnemySpawner/spawn_info.gd" id="2_bkhv4"]
 [ext_resource type="PackedScene" uid="uid://bk54nw0n6l0nk" path="res://Scenes/Utility/EnemySpawner/enemy_spawner.tscn" id="3_3rhlx"]
 [ext_resource type="PackedScene" uid="uid://cw7fphffgyt4c" path="res://Scenes/Enemys/drone_1.tscn" id="3_bkhv4"]
-[ext_resource type="Script" uid="uid://be7r3fkd00phg" path="res://World/parallax_2d.gd" id="3_l1hd3"]
 [ext_resource type="PackedScene" uid="uid://bktn2d8pc84ta" path="res://Scenes/Player/player_test.tscn" id="3_vadfg"]
-[ext_resource type="Texture2D" uid="uid://c0ufs8voo8g7n" path="res://Assets/Textures/dirt_full_new.png" id="4_l1hd3"]
+[ext_resource type="Texture2D" uid="uid://b4af6qmo3cltx" path="res://Assets/Maps/grass.png" id="5_023t7"]
 
 [sub_resource type="Resource" id="Resource_bkhv4"]
 script = ExtResource("2_bkhv4")
@@ -29,7 +28,6 @@ z_index = -4096
 scroll_offset = Vector2(251, -426)
 repeat_size = Vector2(32, 32)
 repeat_times = 81
-script = ExtResource("3_l1hd3")
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
-texture = ExtResource("4_l1hd3")
+texture = ExtResource("5_023t7")

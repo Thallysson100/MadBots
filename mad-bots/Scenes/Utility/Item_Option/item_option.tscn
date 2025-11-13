@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://6s5dtstfuxg7" path="res://Assets/Textures/GUI/GUI_expecificas/item_frame_item_option.png" id="3_jaksr"]
 [ext_resource type="Texture2D" uid="uid://v1fhpkgohe1n" path="res://Assets/Textures/GUI/GUI_expecificas/item_option_rarity.png" id="6_d37p2"]
 [ext_resource type="Texture2D" uid="uid://damx66op5ty0k" path="res://Assets/Textures/GUI/GUI_expecificas/description_item_option.png" id="6_jaksr"]
-[ext_resource type="Texture2D" uid="uid://d16vnjht1u0ds" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/3.png" id="7_86wpl"]
-[ext_resource type="Texture2D" uid="uid://cmbrbvk5llosy" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/7.png" id="8_d37p2"]
-[ext_resource type="Texture2D" uid="uid://5uox0gbknjrg" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/2.png" id="9_25yoe"]
+[ext_resource type="Texture2D" uid="uid://dkx2ich612wxu" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio3.png" id="7_86wpl"]
+[ext_resource type="Texture2D" uid="uid://bq0w0baqqj8vj" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio7.png" id="8_d37p2"]
+[ext_resource type="Texture2D" uid="uid://blyg0magdimux" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio2.png" id="9_25yoe"]
 
 [node name="ItemOption" type="TextureRect"]
 offset_right = 366.0

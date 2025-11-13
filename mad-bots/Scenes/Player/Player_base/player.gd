@@ -98,6 +98,9 @@ func hurt(damage, direction, knockback_amount, attackerPosition = Vector2.ZERO) 
 	healthbar.health = current_health
 
 	if current_health <= 0:
+		for loot in get_tree().get_nodes_in_group("loot"):
+			loot.queue_free()
+			
 		get_tree().call_deferred("change_scene_to_file", "res://Scenes/Utility/GameOver/game_over.tscn")
 		call_deferred("queue_free")
 		return

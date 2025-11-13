@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://c4lhxp5ycv3qg"]
+
+[ext_resource type="Texture2D" uid="uid://dga2rrwus1s7f" path="res://Assets/Maps/earth.png" id="1_2swha"]
+[ext_resource type="PackedScene" uid="uid://bktn2d8pc84ta" path="res://Scenes/Player/player_test.tscn" id="2_2inwb"]
+[ext_resource type="PackedScene" uid="uid://bk54nw0n6l0nk" path="res://Scenes/Utility/EnemySpawner/enemy_spawner.tscn" id="3_yp7v2"]
+[ext_resource type="Script" uid="uid://bq30v575devcx" path="res://Scenes/Utility/EnemySpawner/spawn_info.gd" id="4_p53s1"]
+[ext_resource type="PackedScene" uid="uid://cw7fphffgyt4c" path="res://Scenes/Enemys/drone_1.tscn" id="5_vw4fy"]
+[ext_resource type="PackedScene" uid="uid://20imgnfiatm" path="res://Scenes/Enemys/enemy_test.tscn" id="6_che7i"]
+
+[sub_resource type="Resource" id="Resource_u30e8"]
+script = ExtResource("4_p53s1")
+time_end = 10
+enemy = ExtResource("5_vw4fy")
+enemy_num = 5
+metadata/_custom_type_script = "uid://bq30v575devcx"
+
+[sub_resource type="Resource" id="Resource_vyxds"]
+script = ExtResource("4_p53s1")
+time_end = 10
+enemy = ExtResource("6_che7i")
+enemy_num = 5
+metadata/_custom_type_script = "uid://bq30v575devcx"
+
+[node name="World2" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+z_index = -4096
+scroll_offset = Vector2(251, -426)
+repeat_size = Vector2(32, 32)
+repeat_times = 81
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+texture = ExtResource("1_2swha")
+
+[node name="Player_test" parent="." instance=ExtResource("2_2inwb")]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_yp7v2")]
+spawns = Array[ExtResource("4_p53s1")]([SubResource("Resource_u30e8"), SubResource("Resource_vyxds")])

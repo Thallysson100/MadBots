@@ -1,4 +1,8 @@
 extends Node
+
+var world_selected: String = ""
+
+
 const PACKEDSCENES = {
 	"Guns": {
 		"Futuristic Chicago": preload("res://Scenes/Player/Guns/futuristic_chicago.tscn"), # Corrected file path
@@ -14,17 +18,17 @@ const PACKEDSCENES = {
 const RARITY_CURVES = {
 	"common": {
 		"color": "00bfff", #blue
-		"base_weight": 30.0,
+		"base_weight": 100.0,
 		"level_modifier": -1.5  # Decreases as level increases
 	},
 	"rare": {
 		"color": "00ff00", #green
-		"base_weight": 30.0,
+		"base_weight": 0.0,
 		"level_modifier": 1.0  # Increases slightly with level
 	},
 	"epic": {
 		"color": "9400d3", #purple
-		"base_weight": 30.0,
+		"base_weight": 0.0,
 		"level_modifier": 0.5  # Increases with level
 	}
 }

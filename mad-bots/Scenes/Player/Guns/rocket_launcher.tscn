@@ -8,8 +8,8 @@
 init_damage = 100
 init_fire_rate = 2.0
 init_projectile_speed = 1000.0
-init_fire_range = 1000.0
-init_knockback_amount = 200.0
+init_fire_range = 500.0
+init_knockback_amount = 50.0
 init_explosion_size = 500.0
 projectile_scene = ExtResource("2_vkt8b")
 

@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://mhglwy5ui8ty" path="res://Assets/Audio/SoundEffect/levelup.ogg" id="12_j7xa5"]
 [ext_resource type="PackedScene" uid="uid://18p05avlo2ww" path="res://Scenes/Utility/HealthBar/healthbar.tscn" id="13_j7xa5"]
 [ext_resource type="Texture2D" uid="uid://dsmnuk2pgbt6w" path="res://Assets/Textures/GUI/GUI_expecificas/menu_option_upgrade.png" id="14_7bjry"]
-[ext_resource type="PackedScene" uid="uid://bj6e4ouum8vkc" path="res://Scenes/Utility/PauseMenu/PauseMenu.tscn" id="16_7bjry"]
+[ext_resource type="PackedScene" uid="uid://btaahi0mulu2w" path="res://Scenes/Utility/PauseMenu/PauseMenu.tscn" id="16_7bjry"]
 [ext_resource type="Texture2D" uid="uid://bldti2rtfbfcw" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio4.png" id="17_0pqxf"]
 [ext_resource type="Texture2D" uid="uid://5tjy0slhu7on" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio1.png" id="17_rvfrc"]
 [ext_resource type="Texture2D" uid="uid://bddcu460271pd" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio6.png" id="18_oxjp6"]
@@ -118,10 +118,6 @@ offset_bottom = 720.0
 
 [node name="PauseMenu" parent="GUILayer/GUI" instance=ExtResource("16_7bjry")]
 layout_mode = 1
-
-[node name="PanelContainer" parent="GUILayer/GUI/PauseMenu" index="1"]
-offset_top = -191.25
-offset_bottom = 111.25
 
 [node name="Healthbar" parent="GUILayer/GUI" instance=ExtResource("13_j7xa5")]
 unique_name_in_owner = true
@@ -290,4 +286,3 @@ volume_db = -20.0
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 
 [editable path="HurtBox"]
-[editable path="GUILayer/GUI/PauseMenu"]

@@ -2,7 +2,8 @@ extends Area2D
 
 
 var damage = 1
-var disable = true
+var disabled = true
+
 var direction = Vector2.ZERO
 var knockback_amount = 1
 var attacker_position = Vector2.ZERO
@@ -13,15 +14,16 @@ signal enabled
 
 @export var enable_time = 0.1
 @export var sprite_enable_time = 0.1
+@export var explosion_cooldown = 0.1
 
 var enabled_time: float = 0.0
 var sprite_enabled_time: float = 0.0
 
 func _process(delta):
-	if not disable:
+	if not disabled:
 		enabled_time -= delta
 		if enabled_time <= 0:
-			disable = true
+			disabled = true
 			collision.call_deferred("set","disabled",true)
 			emit_signal("enabled")
 	if sprite.visible:
@@ -44,7 +46,7 @@ func set_size(size: float) -> void:
 	sprite.scale = Vector2.ONE * (size / sprite.texture.get_size().x)
 
 func enable():
-	disable = false
+	disabled = false
 	enabled_time = enable_time
 	sprite_enabled_time = sprite_enable_time
 	collision.call_deferred("set","disabled",false)

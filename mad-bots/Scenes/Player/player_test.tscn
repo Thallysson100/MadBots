@@ -105,7 +105,7 @@ radius = 222.03603
 
 [node name="Player_test" instance=ExtResource("1_dg6dr")]
 player_velocity_init = 400
-pickup_range_init = 1000.0
+pickup_range_init = 400.0
 max_health = 50
 initial_gun = "Rocket Launcher"
 invincibility_time = 0.3

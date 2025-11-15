@@ -33,6 +33,7 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("4_ph8ns")
 enable_time = 0.02
+explosion_cooldown = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource("CircleShape2D_ph8ns")

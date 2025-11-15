@@ -39,7 +39,7 @@ var atributtes_percentage : Dictionary = { # Dictionary to track percentage-base
 	"knockback_amount" : 1.0,
 	"damage" : 1.0,
 	"projectile_speed" : 1.0,
-	"pierce": 1,
+	"pierce": 0.0,
 	"explosion_size": 1.0
 }
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://w84fgw1lgr3q"]
+[gd_scene load_steps=8 format=3 uid="uid://w84fgw1lgr3q"]
 
 [ext_resource type="Texture2D" uid="uid://n46nr2jx4xmw" path="res://Assets/Maps/bloquete.png" id="1_dry5x"]
 [ext_resource type="PackedScene" uid="uid://bktn2d8pc84ta" path="res://Scenes/Player/player_test.tscn" id="2_7x3dl"]
@@ -11,6 +11,14 @@ script = ExtResource("4_42ucu")
 time_end = 10
 enemy = ExtResource("5_f8crk")
 enemy_num = 10
+metadata/_custom_type_script = "uid://bq30v575devcx"
+
+[sub_resource type="Resource" id="Resource_51n30"]
+script = ExtResource("4_42ucu")
+time_start = 10
+time_end = 20
+enemy = ExtResource("5_f8crk")
+enemy_num = 50
 metadata/_custom_type_script = "uid://bq30v575devcx"
 
 [node name="World3" type="Node2D"]
@@ -27,4 +35,4 @@ texture = ExtResource("1_dry5x")
 [node name="Player_test" parent="." instance=ExtResource("2_7x3dl")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_sc3oo")]
-spawns = Array[ExtResource("4_42ucu")]([SubResource("Resource_pfq4i")])
+spawns = Array[ExtResource("4_42ucu")]([SubResource("Resource_pfq4i"), SubResource("Resource_51n30")])

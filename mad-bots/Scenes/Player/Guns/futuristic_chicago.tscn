@@ -8,9 +8,10 @@
 radius = 401.31036
 
 [node name="Futurist_chicago" instance=ExtResource("1_aqdgd")]
-init_fire_rate = 0.2
+init_fire_rate = 0.1
 init_fire_range = 500.0
 init_knockback_amount = 10.0
+pierce = 0
 projectile_scene = ExtResource("2_dt3o8")
 
 [node name="Sprite2D" parent="." index="0"]

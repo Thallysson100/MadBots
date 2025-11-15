@@ -18,6 +18,8 @@ func add_gun(gun_name: String, atributtes_percentage: Dictionary):
 		gun_instance.gun_update("projectile_speed", atributtes_percentage["projectile_speed"])
 		gun_instance.gun_update("fire_range", atributtes_percentage["fire_range"])
 		gun_instance.gun_update("knockback_amount", atributtes_percentage["knockback_amount"])
+		gun_instance.gun_update("pierce", atributtes_percentage["pierce"])
+		gun_instance.gun_update("explosion_size", atributtes_percentage["explosion_size"])
 		
 		array_guns_count += 1
 		

@@ -5,10 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://dtimgxeff0knx" path="res://Assets/Textures/icongun/Icones_Armas/Icon29_39.png" id="3_5fl5v"]
 
 [node name="Rocket_Launcher" instance=ExtResource("1_24y3x")]
-init_damage = 100
+init_damage = 50
 init_projectile_speed = 1000.0
 init_fire_range = 500.0
 init_knockback_amount = 50.0
+pierce = 0
 init_explosion_size = 500.0
 projectile_scene = ExtResource("2_vkt8b")
 

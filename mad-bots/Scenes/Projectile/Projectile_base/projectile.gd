@@ -33,7 +33,7 @@ func _on_body_entered(body):
 	if body:
 		pierce -= 1
 		specific_property_process()
-		if pierce <= 0:
+		if pierce < 0:
 			kill()
 		
 		

@@ -18,7 +18,7 @@ class_name Player
 @onready var expBar = get_node("%ExperienceBar")  # Reference to the experience bar GUI element
 @onready var healthbar = get_node("%Healthbar") # Reference to the health bar GUI element
 @onready var levelPanel = get_node("%LevelUp")  # Reference to the level-up panel GUI element
-
+@onready var damage_popup_layer = get_node("%DamagePopupLayer") as ColorRect  # Reference to the damage popup layer
 
 # Player Stats - Configurable properties that can be adjusted in the inspector
 @export var player_velocity: int = 200  ## Base movement speed of the player in pixels per second
@@ -100,10 +100,17 @@ func hurt(damage, direction, knockback_amount, attackerPosition = Vector2.ZERO) 
 	if current_health <= 0:
 		for loot in get_tree().get_nodes_in_group("loot"):
 			loot.queue_free()
+	
 			
 		get_tree().call_deferred("change_scene_to_file", "res://Scenes/Utility/GameOver/game_over.tscn")
 		call_deferred("queue_free")
 		return
+
+
+	var tween = damage_popup_layer.create_tween()
+	tween.tween_property(damage_popup_layer, "color", Color(1, 0, 0, 0.3), 0.1)
+	tween.tween_property(damage_popup_layer, "color", Color(1, 0, 0, 0), 0.2)
+
 	# Calculate and apply knockback force in the specified direction
 	# Calculate and apply knockback force in the specified direction
 	init_knockback = direction * knockback_amount

@@ -37,16 +37,16 @@ func _on_level_1_pressed() -> void:
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
 	ResourcesDb.world_selected = "res://World/world1.tscn"
-	get_tree().change_scene_to_file("res://World/world1.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://World/world1.tscn")
 
 func _on_level_2_pressed() -> void:
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
 	ResourcesDb.world_selected = "res://World/world2.tscn"
-	get_tree().change_scene_to_file("res://World/world2.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://World/world2.tscn")
 
 func _on_level_3_pressed() -> void:
 	TransitionScreen.transition()
 	await TransitionScreen.on_transition_finished
 	ResourcesDb.world_selected = "res://World/world3.tscn"
-	get_tree().change_scene_to_file("res://World/world3.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://World/world3.tscn")

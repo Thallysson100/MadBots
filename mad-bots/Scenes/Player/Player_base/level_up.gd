@@ -67,7 +67,10 @@ func get_random_upgrades(experience_level: int, count: int) -> Array:
 		if upgrade != "" and not selected.has(upgrade):
 			selected.append(upgrade)
 		attempts += 1
-	
+
+	if (selected.size() < count):
+		while (selected.size() < count):
+			selected.append(ResourcesDb.DEFAULT_UPGRADE)  # Fill with default upgrade if not enough unique upgrades found
 	return selected
 
 # Main function: Get a random upgrade based on experience level

@@ -12,7 +12,7 @@ var health = 0 : set = _set_health
 func _set_health(new_health):
 	var prev_health = health
 	health = clamp(new_health, 0, max_value)
-	label.text = str(health)
+	label.text = str("Hp: ", health)
 	value = health
 	if health <= 0:
 		queue_free()
@@ -28,7 +28,7 @@ func init_health(_health):
 	max_value = _health
 	value = _health
 	damage_bar.max_value = _health
-	label.text = str(_health)
+	label.text = str("Hp: ", _health)
 	damage_bar.value = _health
 
 func update_max_health(amount: int):
@@ -37,7 +37,7 @@ func update_max_health(amount: int):
 	health = min(health, max_value)
 	value = health
 	damage_bar.max_value = max_value
-	label.text = str(health)
+	label.text = str("Hp: ", health)
 
 	if amount < 0:
 		timer.start()

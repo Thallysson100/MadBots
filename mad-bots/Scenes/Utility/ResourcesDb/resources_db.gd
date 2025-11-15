@@ -32,6 +32,8 @@ const RARITY_CURVES = {
 		"level_modifier": 0.5  # Increases with level
 	}
 }
+
+const DEFAULT_UPGRADE = "Heal_health"
 # Each upgrade has a name, description, associated functions to call, 
 # arguments for the functions, rarity and the icon path
 const UPGRADES = {

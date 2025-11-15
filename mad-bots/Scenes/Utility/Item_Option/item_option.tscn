@@ -119,7 +119,7 @@ offset_right = 10.985992
 texture = ExtResource("6_jaksr")
 expand_mode = 1
 
-[node name="lbl_description" type="Label" parent="TextureDescription"]
+[node name="lbl_description" type="RichTextLabel" parent="TextureDescription"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.019000001
@@ -130,10 +130,11 @@ offset_left = 0.052999496
 offset_top = -0.00999999
 offset_right = 0.3499756
 offset_bottom = 1.9899979
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_u6ysw")
-theme_override_font_sizes/font_size = 10
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
 text = "Item Description"
+fit_content = true
 autowrap_mode = 2
 
 [node name="decoration1" type="TextureRect" parent="."]

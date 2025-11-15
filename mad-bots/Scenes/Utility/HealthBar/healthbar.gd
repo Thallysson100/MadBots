@@ -9,7 +9,7 @@ extends ProgressBar
 # allowing for additional logic or constraints to be applied whenever the health is modified.
 var health = 0 : set = _set_health
 
-func _set_health(new_health):
+func _set_health(new_health : int):
 	var prev_health = health
 	health = clamp(new_health, 0, max_value)
 	label.text = str("Hp: ", health)
@@ -23,7 +23,7 @@ func _set_health(new_health):
 		damage_bar.value = health
 
 
-func init_health(_health):
+func init_health(_health : int):
 	health = _health
 	max_value = _health
 	value = _health

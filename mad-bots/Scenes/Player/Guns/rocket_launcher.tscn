@@ -6,7 +6,6 @@
 
 [node name="Rocket_Launcher" instance=ExtResource("1_24y3x")]
 init_damage = 100
-init_fire_rate = 2.0
 init_projectile_speed = 1000.0
 init_fire_range = 500.0
 init_knockback_amount = 50.0

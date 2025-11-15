@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dki47ebywt47l"]
+[gd_scene load_steps=30 format=3 uid="uid://dki47ebywt47l"]
 
 [ext_resource type="Script" uid="uid://dwq326ibrckj7" path="res://Scenes/Player/Player_base/player.gd" id="1_uvnfx"]
 [ext_resource type="Texture2D" uid="uid://ct2kswpjdmq4s" path="res://Assets/Textures/Armas_E_Personagens/Personagens/2 Punk/Punk_idle.png" id="2_a3d8c"]
@@ -19,11 +19,12 @@
 [ext_resource type="PackedScene" uid="uid://btaahi0mulu2w" path="res://Scenes/Utility/PauseMenu/PauseMenu.tscn" id="16_7bjry"]
 [ext_resource type="Texture2D" uid="uid://bldti2rtfbfcw" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio4.png" id="17_0pqxf"]
 [ext_resource type="Texture2D" uid="uid://5tjy0slhu7on" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio1.png" id="17_rvfrc"]
-[ext_resource type="Texture2D" uid="uid://bddcu460271pd" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio6.png" id="18_oxjp6"]
 [ext_resource type="Texture2D" uid="uid://cbm3tpc6voqj3" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio8.png" id="19_oxjp6"]
 [ext_resource type="Texture2D" uid="uid://cax5i6hjg388c" path="res://Assets/Textures/GUI/GUI_expecificas/leve_up2.png" id="19_rvfrc"]
+[ext_resource type="Texture2D" uid="uid://bq0w0baqqj8vj" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio7.png" id="19_viay3"]
 [ext_resource type="Texture2D" uid="uid://j5amgqk0osbb" path="res://Assets/Textures/GUI/GUI_cyberpunk/9 Other/1 Decor/fio5.png" id="20_2yv7m"]
 [ext_resource type="Script" uid="uid://7hwjscugoodk" path="res://Scenes/Player/Player_base/timer_label.gd" id="24_fhn6u"]
+[ext_resource type="Texture2D" uid="uid://bopmc2dh1n2wc" path="res://Assets/Textures/GUI/GUI_expecificas/menu_option_upgrade_darkened.png" id="24_viay3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3d8c"]
 size = Vector2(20, 34.5)
@@ -46,7 +47,6 @@ animationPlayer_path = NodePath("AnimationPlayer")
 hurtbox_path = NodePath("HurtBox")
 attack_path = NodePath("GunsOrbiter")
 grab_area = NodePath("GrabArea")
-player_velocity = 400
 
 [node name="SpriteIdle" type="Sprite2D" parent="."]
 z_index = 1
@@ -211,10 +211,10 @@ script = ExtResource("12_5i2fg")
 
 [node name="decoration" type="TextureRect" parent="GUILayer/GUI/LevelUp"]
 layout_mode = 0
-offset_left = 327.69226
-offset_top = 47.692314
-offset_right = 381.53845
-offset_bottom = 91.53847
+offset_left = 332.30768
+offset_top = 43.846153
+offset_right = 375.3847
+offset_bottom = 90.76923
 texture = ExtResource("17_0pqxf")
 
 [node name="decoration2" type="TextureRect" parent="GUILayer/GUI/LevelUp"]
@@ -226,13 +226,14 @@ offset_bottom = 91.53847
 texture = ExtResource("17_rvfrc")
 
 [node name="decoration3" type="TextureRect" parent="GUILayer/GUI/LevelUp"]
+z_index = -1
 layout_mode = 0
-offset_left = 5.3846126
-offset_top = 223.07695
-offset_right = 65.384674
-offset_bottom = 334.00003
-rotation = 3.1415927
-texture = ExtResource("18_oxjp6")
+offset_left = 451.53845
+offset_top = 25.384605
+offset_right = 493.98303
+offset_bottom = 89.384605
+rotation = -1.2042772
+texture = ExtResource("19_viay3")
 
 [node name="decoration4" type="TextureRect" parent="GUILayer/GUI/LevelUp"]
 layout_mode = 1
@@ -311,6 +312,36 @@ unique_name_in_owner = true
 stream = ExtResource("12_j7xa5")
 volume_db = -20.0
 
+[node name="StatsShow" type="TextureRect" parent="GUILayer/GUI/LevelUp"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.019
+anchor_top = 0.098000005
+anchor_right = 1.5020001
+anchor_bottom = 0.59800005
+offset_left = 0.11077881
+offset_top = -5.442459
+offset_right = -0.1906128
+offset_bottom = -0.21170044
+texture = ExtResource("24_viay3")
+expand_mode = 1
+
+[node name="StatsDescription" type="RichTextLabel" parent="GUILayer/GUI/LevelUp/StatsShow"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.923096
+offset_top = -90.76923
+offset_right = 101.923096
+offset_bottom = 90.76923
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+
 [node name="DamagePopupLayer" type="ColorRect" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -339,7 +370,19 @@ text = "00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("24_fhn6u")
-time = 10.0
+time = 120.0
+
+[node name="FpsLabel" type="Label" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = 1222.0
+offset_top = 3.0
+offset_right = 1271.0
+offset_bottom = 26.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]

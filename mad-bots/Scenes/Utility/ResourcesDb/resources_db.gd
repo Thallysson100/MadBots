@@ -19,17 +19,17 @@ const RARITY_CURVES = {
 	"common": {
 		"color": "00bfff", #blue
 		"base_weight": 100.0,
-		"level_modifier": -1.5  # Decreases as level increases
+		"level_modifier": -10  # Decreases as level increases
 	},
 	"rare": {
 		"color": "00ff00", #green
 		"base_weight": 0.0,
-		"level_modifier": 1.0  # Increases slightly with level
+		"level_modifier": 5  # Increases slightly with level
 	},
 	"epic": {
 		"color": "9400d3", #purple
 		"base_weight": 0.0,
-		"level_modifier": 0.5  # Increases with level
+		"level_modifier": 5  # Increases with level
 	}
 }
 
@@ -40,7 +40,7 @@ const UPGRADES = {
 	# 🔵 Common
 	"Agile_Body": {
 		"displayname": "Agile Body",
-		"details": "Increases movement speed by +15 percent, but reduces max health by 10 points.",
+		"details": "Movement speed: [color=#00ff00]+15%[/color]. Max health: [color=#ff0000]-10[/color] points.",
 		"rarity": "common",
 		"icon": "res://Assets/Textures/GUI/icons/1 Icons/10/Skillicon10_29.png",
 		"functions": ["update_player_velocity", "update_max_health"],
@@ -49,7 +49,7 @@ const UPGRADES = {
 
 	"Heavy_Armor": {
 		"displayname": "Heavy Armor",
-		"details": "Increases max health by +25, but reduces movement speed by 10 percent.",
+		"details": "Max health: [color=#00ff00]+25[/color]. Movement speed: [color=#ff0000]-10%[/color].",
 		"rarity": "common",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/Icon10_14.png",
 		"functions": ["update_max_health", "update_player_velocity"],
@@ -58,7 +58,7 @@ const UPGRADES = {
 
 	"Sharpened_Ammo": {
 		"displayname": "Sharpened Ammo",
-		"details": "Increases bullet damage by +10 percent, but reduces fire rate by 10 percent.",
+		"details": "Bullet damage: [color=#00ff00]+10%[/color]. Fire rate: [color=#ff0000]-10%[/color].",
 		"rarity": "common",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/Icon10_28.png",
 		"functions": ["update_guns", "update_guns"],
@@ -66,7 +66,7 @@ const UPGRADES = {
 	},
 	"Heal_health": {
 		"displayname": "Health Pack",
-		"details": "Heals the player by 10 health points.",
+		"details": "Heals the player by [color=#00ff00]+10[/color] health points.",
 		"rarity": "common",
 		"icon": "res://Assets/Textures/GUI/icons/1 Icons/6/Skillicon6_16.png",
 		"functions": ["heal_player"],
@@ -76,7 +76,7 @@ const UPGRADES = {
 	# 🟢 Rare
 	"Overclocked_Guns": {
 		"displayname": "Overclocked Guns",
-		"details": "Increases fire rate by +20 percent, but reduces projectile speed by 15 percent.",
+		"details": "Fire rate: [color=#00ff00]+20%[/color]. Projectile speed: [color=#ff0000]-15%[/color].",
 		"rarity": "rare",
 		"icon": "res://Assets/Textures/GUI/icons/1 Icons/1/Skillicon1_17.png",
 		"functions": ["update_guns", "update_guns"],
@@ -85,7 +85,7 @@ const UPGRADES = {
 
 	"Reinforced_Bullets": {
 		"displayname": "Reinforced Bullets",
-		"details": "Increases damage by +25 percent, but reduces knockback by 20 percent.",
+		"details": "Damage: [color=#00ff00]+25%[/color]. Knockback: [color=#ff0000]-20%[/color].",
 		"rarity": "rare",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/Icon10_18.png",
 		"functions": ["update_guns", "update_guns"],
@@ -94,7 +94,7 @@ const UPGRADES = {
 
 	"Cool_Classes": {
 		"displayname": "Cool Classes",
-		"details": "Increases projectile range by +30 percent, but reduces fire rate by 15 percent.",
+		"details": "Projectile range: [color=#00ff00]+30%[/color]. Fire rate: [color=#ff0000]-15%[/color].",
 		"rarity": "rare",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/Icon10_08.png",
 		"functions": ["update_guns", "update_guns"],
@@ -104,7 +104,7 @@ const UPGRADES = {
 	# 🟣 Epic
 	"Pierce": {
 		"displayname": "Pierce",
-		"details": "Increases pierce by +2, but reduces projectile speed by 20 percent.",
+		"details": "Pierce: [color=#00ff00]+2[/color]. Projectile speed: [color=#ff0000]-20%[/color].",
 		"rarity": "epic",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/cow_nose_ring.png",
 		"functions": ["update_guns", "update_guns"],
@@ -113,7 +113,7 @@ const UPGRADES = {
 
 	"Glass_Cannon": {
 		"displayname": "Glass Cannon",
-		"details": "Increases damage by +40 percent, but reduces max health by 30 points.",
+		"details": "Damage: [color=#00ff00]+40%[/color]. Max health: [color=#ff0000]-30[/color] points.",
 		"rarity": "epic",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/glass_cannon-removebg-preview.png",
 		"functions": ["update_guns", "update_max_health"],
@@ -122,7 +122,7 @@ const UPGRADES = {
 
 	"Steroid": {
 		"displayname": "Steroid",
-		"details": "Increase max health in +50 and knockback by +30 percent, but reduces movement speed by 20 percent.",
+		"details": "Max health: [color=#00ff00]+50[/color]. Knockback: [color=#00ff00]+30%[/color]. Movement speed: [color=#ff0000]-20%[/color].",
 		"rarity": "epic",
 		"icon": "res://Assets/Textures/Items/itens/1 Icons/Icon10_39.png",
 		"functions": ["update_max_health", "update_guns", "update_player_velocity"],
@@ -135,5 +135,13 @@ const UPGRADES = {
 		"icon": "res://Assets/Textures/Armas_E_Personagens/1 Icons/Icon29_01.png",
 		"functions": ["add_gun"],
 		"arguments": [["Futuristic Chicago"]],
+	},
+	"Rocket Launcher": {
+		"displayname": "Rocket Launcher",
+		"details": "Adds Rocket Launcher gun in your arsenal.",
+		"rarity": "epic",
+		"icon": "res://Assets/Textures/Armas_E_Personagens/1 Icons/Icon29_39.png",
+		"functions": ["add_gun"],
+		"arguments": [["Rocket Launcher"]],
 	},
 }

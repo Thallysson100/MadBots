@@ -19,22 +19,27 @@ class_name Player
 @onready var healthbar = get_node("%Healthbar") # Reference to the health bar GUI element
 @onready var levelPanel = get_node("%LevelUp")  # Reference to the level-up panel GUI element
 @onready var damage_popup_layer = get_node("%DamagePopupLayer") as ColorRect  # Reference to the damage popup layer
+@onready var fps_label = get_node("%FpsLabel")  # Reference to the FPS label in the main scene
 
 # Player Stats - Configurable properties that can be adjusted in the inspector
-@export var player_velocity: int = 200  ## Base movement speed of the player in pixels per second
+@export var player_velocity_init: int = 200  ## Base movement speed of the player in pixels per second
+@export var pickup_range_init: float = 100  ## Range within which the player can pick up items
 @export var max_health: int = 1000  ## Maximum health points the player can have
-@export var pickup_range: float = 100  ## Range within which the player can pick up items
 @export var initial_gun: String = "Futuristic Chicago"  ## Name of the initial gun to equip
 @export var invincibility_time: float = 0.5  ## Time the player is invincible after being hit
+var player_velocity: int
+var pickup_range: float
 
 var current_health
 var atributtes_percentage : Dictionary = { # Dictionary to track percentage-based upgrades
-	"fire_rate" : 0.0,
+	"player_velocity" : 1.0,
+	"pickup_range" : 1.0,
+	"fire_rate" : 1.0,
 	"fire_range" : 1.0,
 	"knockback_amount" : 1.0,
 	"damage" : 1.0,
 	"projectile_speed" : 1.0,
-	"pierce": 0,
+	"pierce": 1,
 	"explosion_size": 1.0
 }
 
@@ -44,7 +49,8 @@ var knockback_recovery: float  ## How quickly knockback force decays (higher = f
 var knockback_cummulative_recovery: float = 0.0
 
 func _ready() -> void:
-	# Connect the hurt signal from the hurtbox to our damage processing function
+	player_velocity = player_velocity_init
+	pickup_range = pickup_range_init
 	hurtbox.hurt.connect(hurt)
 	grabArea.get_child(0).shape.radius = pickup_range
 	healthbar.init_health(max_health)
@@ -52,9 +58,11 @@ func _ready() -> void:
 	knockback_recovery = 1.0 / invincibility_time
 	hurtbox.invincibility_time = invincibility_time
 	gunsOrbiter.add_gun(initial_gun, atributtes_percentage)
+	
 
 	
 func _physics_process(delta: float) -> void:
+	fps_label.text = "FPS: %d" % Engine.get_frames_per_second()
 	movement(delta)
 
 func movement(delta: float):
@@ -114,7 +122,7 @@ func hurt(damage, direction, knockback_amount, attackerPosition = Vector2.ZERO) 
 	# Calculate and apply knockback force in the specified direction
 	# Calculate and apply knockback force in the specified direction
 	init_knockback = direction * knockback_amount
-	# It just works better this way
+	# Adjust knockback based on invincibility time, I find this formula testing values in desmos
 	init_knockback *= 2/invincibility_time 
 
 	current_knockback = init_knockback
@@ -148,21 +156,27 @@ func heal_player(heal_amount : int):
 	healthbar.health = current_health
 
 func update_player_velocity(percentage : float):
-	player_velocity += (int)(player_velocity * percentage)
+	atributtes_percentage["player_velocity"] += percentage
+	atributtes_percentage["player_velocity"] = max(atributtes_percentage["player_velocity"], 0.01)
+	player_velocity = player_velocity_init * atributtes_percentage["player_velocity"]
+	
 
 func update_max_health(health_amount : int):
 	# Adjust the player's maximum health and reset current health to max
-	max_health = (max_health + health_amount) if (max_health + health_amount > 0) else 1
-	current_health = (current_health) if (max_health > current_health) else max_health
+	max_health = max(max_health + health_amount, 1)
+	current_health = min(current_health, max_health)
 	healthbar.update_max_health(health_amount)
 
 func add_gun(gun_name: String):
 	gunsOrbiter.add_gun(gun_name, atributtes_percentage)
 
 func update_guns(atributte: String, percentage : float):
-	atributtes_percentage[atributte] += atributtes_percentage[atributte] * percentage
+	atributtes_percentage[atributte] += percentage
+	atributtes_percentage[atributte] = max(atributtes_percentage[atributte], 0.01)
 	gunsOrbiter.update_guns(atributte, atributtes_percentage[atributte])
 
-func update_pickup_range(range_amount: float):
-	pickup_range += pickup_range * range_amount
+func update_pickup_range(range_percentage: float):
+	atributtes_percentage["pickup_range"] += range_percentage
+	atributtes_percentage["pickup_range"] = max(atributtes_percentage["pickup_range"], 0.01)
+	pickup_range = pickup_range_init * atributtes_percentage["pickup_range"]
 	grabArea.get_child(0).shape.radius = pickup_range

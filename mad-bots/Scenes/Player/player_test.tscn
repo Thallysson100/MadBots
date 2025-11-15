@@ -104,8 +104,9 @@ _data = {
 radius = 222.03603
 
 [node name="Player_test" instance=ExtResource("1_dg6dr")]
+player_velocity_init = 400
+pickup_range_init = 1000.0
 max_health = 50
-pickup_range = 200.0
 initial_gun = "Rocket Launcher"
 invincibility_time = 0.3
 
@@ -130,8 +131,9 @@ visible = false
 [node name="GrabArea" parent="GrabArea" index="0"]
 shape = SubResource("CircleShape2D_pkpl1")
 
-[node name="ExperienceBar" parent="GUILayer/GUI/Bars" index="2"]
+[node name="ExperienceBar" parent="GUILayer/GUI/Bars" index="1"]
 value = 0.0
 
 [editable path="HurtBox"]
 [editable path="GUILayer/GUI/PauseMenu"]
+[editable path="GUILayer/GUI/Bars/Healthbar"]

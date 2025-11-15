@@ -75,14 +75,14 @@ func gun_update(upgrade_type: String, value: float):
 		"damage":
 			damage = (int)(init_damage * value)
 		"fire_rate":
-			fire_rate = max(0.1, fire_rate - (init_fire_rate * value))  # Ensure fire rate doesn't go below 0.1 seconds
+			fire_rate = max(0.01, init_fire_rate/value)
 		"projectile_speed":
 			projectile_speed = (init_projectile_speed * value)
 		"fire_range":
 			fire_range = (init_fire_range * value)
 			enemyDetector.get_child(0).shape.radius = fire_range
 		"knockback_amount":
-			knockback_amount = init_knockback_amount * value # Ensure knockback amount is at least 1
+			knockback_amount = init_knockback_amount * value
 		"pierce":
 			pierce += (int)(value)
 		"explosion_size":

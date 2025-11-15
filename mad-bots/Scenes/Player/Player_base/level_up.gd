@@ -4,7 +4,8 @@ extends TextureRect
 @onready var upgradeOptions = get_node("%UpgradeOptions")  # Reference to the upgrade options container
 @onready var itemOption = preload("res://Scenes/Utility/Item_Option/item_option.tscn")  # Preload the item option scene
 @onready var expBar = get_node("%ExperienceBar")  # Reference to the experience bar GUI element
-
+@onready var stats_description = get_node("%StatsDescription")  # Reference to the stats description label
+@onready var player = get_tree().get_first_node_in_group("player")  # Reference to the player node
 
 var levelPanel_position = Vector2.ZERO  # Store the original position of the level-up panel
 var levelup_queue = []  # Queue to manage level-up panel requests
@@ -43,6 +44,8 @@ func show_levelup_panel_instance():
 		item_option_instance.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		upgradeOptions.add_child(item_option_instance)
 		i += 1
+	
+	update_stats_description()
 
 	get_tree().paused = true
 
@@ -129,4 +132,49 @@ func print_rarity_chances(experience_level: int):
 	var weights = calculate_rarity_weights(experience_level)
 	print("Level %d rarity chances:" % experience_level)
 	for rarity in weights.keys():
-		print("  %s: %.1f%%" % [rarity, weights[rarity]])
+		print("  %s: %.0f%%" % [rarity, weights[rarity]])
+
+
+#@export var player_velocity: int = 200  ## Base movement speed of the player in pixels per second
+#@export var max_health: int = 1000  ## Maximum health points the player can have
+#@export var pickup_range: float = 100  ## Range within which the player can pick up items
+# var atributtes_percentage : Dictionary = { # Dictionary to track percentage-based upgrades
+# 	"fire_rate" : 0.0,
+# 	"fire_range" : 1.0,
+# 	"knockback_amount" : 1.0,
+# 	"damage" : 1.0,
+# 	"projectile_speed" : 1.0,
+# 	"pierce": 0,
+# 	"explosion_size": 1.0
+# }
+
+
+func update_stats_description():
+	var atributtes = player.atributtes_percentage
+	var text = " - Velocity: %s\n" % _color_percent(atributtes["player_velocity"])
+	text += " - Pickup Range: %s\n" % _color_percent(atributtes["pickup_range"])
+	text += " - Fire Rate: %s\n" % _color_percent(atributtes["fire_rate"])
+	text += " - Fire Range: %s\n" % _color_percent(atributtes["fire_range"])
+	text += " - Damage: %s\n" % _color_percent(atributtes["damage"])
+	text += " - Projectile Speed: %s\n" % _color_percent(atributtes["projectile_speed"])
+	# Pierce isn't a percentage; color positive as green, zero/negative as red/white
+	text += " - Pierce: %s\n" % _color_number(atributtes["pierce"])
+	text += " - Explosion Size: %s\n" % _color_percent(atributtes["explosion_size"])
+
+	stats_description.bbcode_text = text
+
+func _color_percent(val: float) -> String:
+	var perc = int(round(val * 100))
+	var col = "#ffffff"
+	if perc > 100:
+		col = "#00ff00"  # green
+	elif perc < 100:
+		col = "#ff4444"  # red
+	return "[color=%s]%d%%[/color]" % [col, perc]
+
+func _color_number(val: float) -> String:
+	var num = int(round(val))
+	var col = "#ffffff"
+	if num > 1:
+		col = "#00ff00"
+	return "[color=%s]%d[/color]" % [col, num]

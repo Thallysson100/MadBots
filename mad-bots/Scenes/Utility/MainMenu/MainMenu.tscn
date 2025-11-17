@@ -158,6 +158,7 @@ vertical_alignment = 1
 stream = ExtResource("4_0dd2c")
 autoplay = true
 bus = &"Music"
+parameters/looping = true
 
 [node name="Options" type="TextureRect" parent="."]
 visible = false

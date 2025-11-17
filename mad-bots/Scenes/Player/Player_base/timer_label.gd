@@ -7,7 +7,7 @@ func _process(delta):
 	text = format_time(time+1)
 
 	if (time <= 0):
-		get_tree().call_deferred("change_scene_to_file", "res://Scenes/Utility/MainMenu/MainMenu.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://Scenes/Utility/WinScreen/WinScreen.tscn")
 	
 
 func format_time(t):

@@ -370,7 +370,7 @@ text = "00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("24_fhn6u")
-time = 10.0
+time = 15.0
 
 [node name="FpsLabel" type="Label" parent="GUILayer/GUI"]
 unique_name_in_owner = true

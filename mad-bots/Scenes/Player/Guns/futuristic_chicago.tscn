@@ -8,6 +8,7 @@
 radius = 401.31036
 
 [node name="Futurist_chicago" instance=ExtResource("1_aqdgd")]
+scale = Vector2(1.5, 1.5)
 init_fire_rate = 0.1
 init_fire_range = 500.0
 init_knockback_amount = 1.0

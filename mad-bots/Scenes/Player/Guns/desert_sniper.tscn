@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bf8sqqx2j4h5f" path="res://Assets/Textures/Armas_E_Personagens/1 Icons/desert_sniper.png" id="3_dvsyq"]
 
 [node name="DesertSniper" instance=ExtResource("1_dvsyq")]
+scale = Vector2(1.5, 1.5)
 init_damage = 100
 init_fire_rate = 1.0
 init_projectile_speed = 6000.0

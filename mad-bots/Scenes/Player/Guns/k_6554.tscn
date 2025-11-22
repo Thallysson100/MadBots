@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dy7x18ud4428b" path="res://Assets/Textures/Armas_E_Personagens/1 Icons/k6554.png" id="3_hjn4q"]
 
 [node name="K6554" instance=ExtResource("1_hjn4q")]
+scale = Vector2(1.5, 1.5)
 init_fire_rate = 0.05
 init_fire_range = 300.0
 init_knockback_amount = 10.0

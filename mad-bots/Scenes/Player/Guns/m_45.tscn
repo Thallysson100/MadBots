@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://btfcd3ybmmr6l" path="res://Assets/Textures/Armas_E_Personagens/1 Icons/m45.png" id="3_g1cu4"]
 
 [node name="M45" instance=ExtResource("1_g1cu4")]
+scale = Vector2(1.5, 1.5)
 init_damage = 40
 init_fire_rate = 0.2
 init_fire_range = 200.0

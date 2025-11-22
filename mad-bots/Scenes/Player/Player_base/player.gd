@@ -48,6 +48,16 @@ var current_knockback: Vector2 = Vector2.ZERO  # Stores the current knockback fo
 var knockback_recovery: float  ## How quickly knockback force decays (higher = faster recovery)
 var knockback_cummulative_recovery: float = 0.0
 
+
+# "Futuristic Chicago": preload("res://Scenes/Player/Guns/futuristic_chicago.tscn"), # Corrected file path
+# 		"Rocket Launcher": preload("res://Scenes/Player/Guns/rocket_launcher.tscn"), # Corrected file path
+# 		"Desert Sniper": preload("res://Scenes/Player/Guns/desert_sniper.tscn"),
+# 		"M45": preload("res://Scenes/Player/Guns/m_45.tscn"),
+# 		"F547": preload("res://Scenes/Player/Guns/f_547.tscn"),
+# 		"K6554": preload("res://Scenes/Player/Guns/k_6554.tscn"),
+# 		"RRR7": preload("res://Scenes/Player/Guns/rrr_7.tscn"),
+# 		"T58": preload("res://Scenes/Player/Guns/t_58.tscn"),
+# 		"G65": preload("res://Scenes/Player/Guns/g_65.tscn")
 func _ready() -> void:
 	player_velocity = player_velocity_init
 	pickup_range = pickup_range_init
@@ -58,9 +68,17 @@ func _ready() -> void:
 	knockback_recovery = 1.0 / invincibility_time
 	hurtbox.invincibility_time = invincibility_time
 	gunsOrbiter.add_gun(initial_gun, atributtes_percentage)
-	
 
-	
+	#FIXME: Just for testing, remove later
+	gunsOrbiter.add_gun("Rocket Launcher", atributtes_percentage)  
+	gunsOrbiter.add_gun("Desert Sniper", atributtes_percentage)
+	gunsOrbiter.add_gun("M45", atributtes_percentage)
+	gunsOrbiter.add_gun("F547", atributtes_percentage)
+	gunsOrbiter.add_gun("K6554", atributtes_percentage)
+	gunsOrbiter.add_gun("RRR7", atributtes_percentage)
+	gunsOrbiter.add_gun("T58", atributtes_percentage)
+	gunsOrbiter.add_gun("G65", atributtes_percentage)
+
 func _physics_process(delta: float) -> void:
 	fps_label.text = "FPS: %d" % Engine.get_frames_per_second()
 	movement(delta)

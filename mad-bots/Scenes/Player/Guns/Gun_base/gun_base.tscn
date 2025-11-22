@@ -13,7 +13,6 @@ init_damage = 10
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="ProjectileSpawnPoint" type="Marker2D" parent="."]
-position = Vector2(13, -3)
 
 [node name="EnemyDetector" type="Area2D" parent="."]
 visible = false

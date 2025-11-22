@@ -27,17 +27,17 @@ const RARITY_CURVES = {
 	"common": {
 		"color": "00bfff", #blue
 		"base_weight": 100.0,
-		"level_modifier": -10  # Decreases as level increases
+		"level_modifier": -1.5  # Decreases as level increases
 	},
 	"rare": {
 		"color": "00ff00", #green
 		"base_weight": 0.0,
-		"level_modifier": 5  # Increases slightly with level
+		"level_modifier": 1  # Increases slightly with level
 	},
 	"epic": {
 		"color": "9400d3", #purple
 		"base_weight": 0.0,
-		"level_modifier": 5  # Increases with level
+		"level_modifier": 0.5  # Increases with level
 	}
 }
 

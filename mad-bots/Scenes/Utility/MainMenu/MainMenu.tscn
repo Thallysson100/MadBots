@@ -154,12 +154,6 @@ text = "MadBots"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MenuSong" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_0dd2c")
-autoplay = true
-bus = &"Music"
-parameters/looping = true
-
 [node name="Options" type="TextureRect" parent="."]
 visible = false
 offset_left = 404.0
@@ -494,6 +488,13 @@ offset_right = 438.0
 offset_bottom = 112.0
 rotation = 1.5707964
 texture = ExtResource("12_1i3eh")
+
+[node name="MenuSong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0dd2c")
+volume_db = -5.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true
 
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MainButtons/Options" to="." method="_on_options_pressed"]

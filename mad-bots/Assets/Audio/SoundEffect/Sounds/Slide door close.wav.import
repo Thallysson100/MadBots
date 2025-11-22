@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d305tspsrqdpm"
+path="res://.godot/imported/Slide door close.wav-460b2a30db9162f12bdc19c9d1d45d2f.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SoundEffect/Sounds/Slide door close.wav"
+dest_files=["res://.godot/imported/Slide door close.wav-460b2a30db9162f12bdc19c9d1d45d2f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

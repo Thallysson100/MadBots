@@ -12,5 +12,5 @@ func set_explosion_size(size: float) -> void:
 	hitbox.set_size(size)
 
 
-func _on_area_2d_enabled() -> void:
+func _on_area_2d_expired() -> void:
 	can_kill = true

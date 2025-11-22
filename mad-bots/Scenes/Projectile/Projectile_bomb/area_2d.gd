@@ -8,7 +8,7 @@ var direction = Vector2.ZERO
 var knockback_amount = 1
 var attacker_position = Vector2.ZERO
 
-signal enabled
+signal expired
 @onready var collision = $CollisionShape2D
 @onready var sprite = $Sprite2D
 
@@ -19,13 +19,21 @@ signal enabled
 var enabled_time: float = 0.0
 var sprite_enabled_time: float = 0.0
 
+func enable():
+	disabled = false
+	enabled_time = enable_time
+	sprite_enabled_time = sprite_enable_time
+	collision.set_deferred("disabled", false)
+	sprite.visible = true
+
+
 func _process(delta):
 	if not disabled:
 		enabled_time -= delta
 		if enabled_time <= 0:
 			disabled = true
-			collision.call_deferred("set","disabled",true)
-			emit_signal("enabled")
+			collision.set_deferred("disabled", true)
+			emit_signal("expired")
 	if sprite.visible:
 		sprite_enabled_time -= delta
 		if sprite_enabled_time <= 0:
@@ -45,9 +53,4 @@ func set_size(size: float) -> void:
 		collision.shape = shape
 	sprite.scale = Vector2.ONE * (size / sprite.texture.get_size().x)
 
-func enable():
-	disabled = false
-	enabled_time = enable_time
-	sprite_enabled_time = sprite_enable_time
-	collision.call_deferred("set","disabled",false)
-	sprite.visible = true
+

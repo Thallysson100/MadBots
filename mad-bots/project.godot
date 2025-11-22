@@ -71,10 +71,13 @@ esc={
 
 2d_physics/layer_1="World"
 2d_physics/layer_2="Player"
-2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Player_Attack"
 2d_physics/layer_5="Enemy_Attack"
 2d_physics/layer_6="loot"
+2d_physics/layer_7="Very_slow_enemy"
+2d_physics/layer_8="Slow_enemy"
+2d_physics/layer_9="Fast_enemy"
+2d_physics/layer_10="Very_fast_enemy"
 
 [rendering]
 

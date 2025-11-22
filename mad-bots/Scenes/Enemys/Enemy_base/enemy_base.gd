@@ -3,6 +3,8 @@ class_name Enemy
 
 # Node references
 @onready var experience_gem_scene : PackedScene = preload("res://Scenes/Objects/experience_gem.tscn")
+@onready var health_drop_scene : PackedScene = preload("res://Scenes/Objects/health_drop.tscn")
+
 @onready var hurtbox = $HurtBox  # Hurtbox area
 @onready var player = get_tree().get_first_node_in_group("player")  # Get player reference from group
 @onready var collision_shape = $CollisionShape2D
@@ -16,7 +18,7 @@ class_name Enemy
 # Enemy properties
 @export var speed: float   ## Movement speed
 @export var max_health: int  ## Maximum health points the enemy can have
-@export var experience_reward: int  ## Experience given to player upon defeat
+@export var drop_reward: int  ## Experience given to player upon defeat
 @export var invincibility_time: float  ## Time the enemy is invincible after being hit
 
 
@@ -65,17 +67,17 @@ func move_or_attack(delta : float):
 		move_and_slide()
 		return  # Skip further movement/attack processing while being knocked back
 
-	elif attack.can_attack and distance_to_player <= attack.attack_range:
+	elif attack.can_attack:
 		# Attack when in range
 		animation.custom_play("attack")
-		attack.start_attack(direction_to_player)
-		
-	elif (animation.can_play_new_animation):
+		attack.start_attack(player.global_position)
+
+	elif animation.can_play_new_animation:
 		# Move towards player	
 		velocity = speed * direction_to_player
 		animation.process_sprite()
 		animation.custom_play("walk")	
-	move(distance_to_player)
+		move(distance_to_player)
 
 func move(_distance_to_player: float) -> void:
 	move_and_slide()
@@ -102,11 +104,22 @@ func hurt(damage, direction, knockback_amount, attackerPosition) -> void:
 		collision_shape.call_deferred("set","disabled",true)
 		animation.custom_play("death")
 
+
 func _on_dead():
-	var gem_experience = experience_gem_scene.instantiate()
-	gem_experience.global_position = global_position
-	gem_experience.experience = experience_reward
-	get_tree().root.add_child(gem_experience)
+	var rand = randi() % 100
+	if rand < 97:
+		var gem = experience_gem_scene.instantiate()
+		gem.experience = drop_reward
+		gem.global_position = global_position
+		get_tree().root.add_child(gem)
+
+	else:
+		var health_drop = health_drop_scene.instantiate()
+		health_drop.experience = drop_reward
+		health_drop.global_position = global_position
+		get_tree().root.add_child(health_drop)
+
+		
 	queue_free()
 
 		

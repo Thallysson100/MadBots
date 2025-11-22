@@ -1,25 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4lhxp5ycv3qg"]
+[gd_scene load_steps=5 format=3 uid="uid://c4lhxp5ycv3qg"]
 
 [ext_resource type="Texture2D" uid="uid://dga2rrwus1s7f" path="res://Assets/Maps/earth.png" id="1_2swha"]
 [ext_resource type="PackedScene" uid="uid://bktn2d8pc84ta" path="res://Scenes/Player/player_test.tscn" id="2_2inwb"]
 [ext_resource type="PackedScene" uid="uid://bk54nw0n6l0nk" path="res://Scenes/Utility/EnemySpawner/enemy_spawner.tscn" id="3_yp7v2"]
-[ext_resource type="Script" uid="uid://bq30v575devcx" path="res://Scenes/Utility/EnemySpawner/spawn_info.gd" id="4_p53s1"]
-[ext_resource type="PackedScene" uid="uid://cw7fphffgyt4c" path="res://Scenes/Enemys/drone_1.tscn" id="5_vw4fy"]
-[ext_resource type="PackedScene" uid="uid://20imgnfiatm" path="res://Scenes/Enemys/enemy_test.tscn" id="6_che7i"]
-
-[sub_resource type="Resource" id="Resource_u30e8"]
-script = ExtResource("4_p53s1")
-time_end = 10
-enemy = ExtResource("5_vw4fy")
-enemy_num = 5
-metadata/_custom_type_script = "uid://bq30v575devcx"
-
-[sub_resource type="Resource" id="Resource_vyxds"]
-script = ExtResource("4_p53s1")
-time_end = 10
-enemy = ExtResource("6_che7i")
-enemy_num = 5
-metadata/_custom_type_script = "uid://bq30v575devcx"
+[ext_resource type="AudioStream" uid="uid://c1muc7w6ilhhr" path="res://Assets/Audio/Music/Track Industrial.mp3" id="7_g3r8l"]
 
 [node name="World2" type="Node2D"]
 
@@ -35,4 +19,11 @@ texture = ExtResource("1_2swha")
 [node name="Player_test" parent="." instance=ExtResource("2_2inwb")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3_yp7v2")]
-spawns = Array[ExtResource("4_p53s1")]([SubResource("Resource_u30e8"), SubResource("Resource_vyxds")])
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_g3r8l")
+volume_db = -10.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true

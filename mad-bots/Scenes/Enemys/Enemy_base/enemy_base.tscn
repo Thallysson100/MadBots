@@ -6,6 +6,7 @@
 
 [node name="Enemy_base" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_ucpyf")
 animation_path = NodePath("AnimationPlayer")

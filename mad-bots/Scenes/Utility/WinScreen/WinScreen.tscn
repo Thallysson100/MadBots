@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://drjhqdctoje6a"]
+[gd_scene load_steps=12 format=3 uid="uid://drjhqdctoje6a"]
 
 [ext_resource type="Script" uid="uid://dg002tn4x7k0t" path="res://Scenes/Utility/WinScreen/win_screen.gd" id="1_45hbk"]
 [ext_resource type="FontFile" uid="uid://jtemo7px1tum" path="res://Assets/Font/CyberpunkCraftpixPixel.otf" id="2_oxwtd"]
 [ext_resource type="Texture2D" uid="uid://c2k7o1w5orgbf" path="res://Assets/Textures/GUI/winScreen.png" id="3_mcdfn"]
+[ext_resource type="AudioStream" uid="uid://ba5yfxyekqj2e" path="res://Assets/Audio/Music/Game_menu_theme_loopable.mp3" id="4_oxwtd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_45hbk"]
 bg_color = Color(1, 1, 1, 1)
@@ -176,6 +177,12 @@ text = "Quit"
 libraries = {
 &"": SubResource("AnimationLibrary_jvd22")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_oxwtd")
+volume_db = -10.0
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -18,9 +18,11 @@ position = Vector2(13, -3)
 [node name="EnemyDetector" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
-collision_mask = 4
+collision_mask = 960
 monitorable = false
 script = ExtResource("3_eh1gl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector"]
 shape = SubResource("CircleShape2D_eh1gl")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

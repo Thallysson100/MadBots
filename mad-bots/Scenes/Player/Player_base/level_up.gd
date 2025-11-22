@@ -6,9 +6,17 @@ extends TextureRect
 @onready var expBar = get_node("%ExperienceBar")  # Reference to the experience bar GUI element
 @onready var stats_description = get_node("%StatsDescription")  # Reference to the stats description label
 @onready var player = get_tree().get_first_node_in_group("player")  # Reference to the player node
+@onready var countdown_label = get_node("%CountdownLabel")  # Label for countdown display
+@onready var countdown_timer = get_node("%CountdownTimer")  # Timer for countdown functionality
 
 var levelPanel_position = Vector2.ZERO  # Store the original position of the level-up panel
 var levelup_queue = []  # Queue to manage level-up panel requests
+var paused_menu_active = false  # Flag to indicate if the paused menu is active
+
+func paused_menu():
+	paused_menu_active = true
+func resumed_menu():
+	paused_menu_active = false
 
 func show_levelup_panel():
 
@@ -21,7 +29,25 @@ func process_levelup_queue():
 	if levelup_queue.size() > 0:
 		show_levelup_panel_instance()
 	else:
-		get_tree().paused = false
+		# Show a short countdown while the tree remains paused so the player has reaction time
+		var countdown_secs := 3
+
+		# Simple on-screen countdown label that still updates while the tree is paused
+		countdown_label.visible = true
+		countdown_label.text = str(countdown_timer.wait_time)
+		countdown_timer.start()
+
+		# Countdown loop
+		for i in range(countdown_secs, 0, -1):
+			countdown_label.text = str(i)
+			await countdown_timer.timeout
+
+		# Hide the countdown label
+		countdown_label.visible = false
+		countdown_timer.stop()
+
+		if not paused_menu_active:
+			get_tree().paused = false
 
 
 func show_levelup_panel_instance():

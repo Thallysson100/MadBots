@@ -45,6 +45,6 @@ func kill():
 	if can_kill:
 		if shake_camera_on_hit:
 			emit_signal("shake_camera",shake_intensity,shake_duration)
-		call_deferred("queue_free")
+		queue_free()
 	else:
 		have_to_kill = true

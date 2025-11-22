@@ -136,9 +136,14 @@ func _on_grab_area_area_entered(area: Area2D) -> void:
 
 func _on_collect_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("loot"):
-		var gem_exp = area.collect()
-		expBar.calculate_experience(gem_exp)
-		
+		var gem_value = area.collect()
+		# For not level up instantly when died
+		if (healthbar.health > 0):
+				if area.is_in_group("health_drop"):
+					heal_player(gem_value*10)
+				else:
+					expBar.calculate_experience(gem_value)
+
 
 ## UPGRADE FUNCTIONS ##
 

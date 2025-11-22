@@ -9,4 +9,7 @@ script = ExtResource("1_sps7h")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 
+[node name="DelayTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="Cooldown_timer" to="." method="_on_cooldown_timer_timeout"]

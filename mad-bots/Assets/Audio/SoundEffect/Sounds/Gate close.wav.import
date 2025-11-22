@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dh20cddbb2gl4"
+path="res://.godot/imported/Gate close.wav-9dbdbd0ad2cc14851d82008e0cc812c0.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SoundEffect/Sounds/Gate close.wav"
+dest_files=["res://.godot/imported/Gate close.wav-9dbdbd0ad2cc14851d82008e0cc812c0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

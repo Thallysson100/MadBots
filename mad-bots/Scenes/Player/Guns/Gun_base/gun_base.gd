@@ -3,6 +3,7 @@ extends Node2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var projectile_spawn_point: Marker2D = $ProjectileSpawnPoint
 @onready var enemyDetector = $EnemyDetector
+@onready var sound_player: AudioStreamPlayer = $AudioStreamPlayer
 
 @export var init_damage: int = 100 ## Damage dealt by the gun
 @export var init_fire_rate: float = 0.5 ## Time in seconds between shots
@@ -46,6 +47,7 @@ func _process(delta: float):
 		fire(enemyDetector.closest_enemy_position())
 
 func fire(target_pos: Vector2):	
+	sound_player.play()
 	var projectile_instance = projectile_scene.instantiate()
 	get_tree().root.add_child(projectile_instance)
 	var target_direction = (target_pos - projectile_spawn_point.global_position).normalized();

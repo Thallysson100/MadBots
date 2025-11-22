@@ -47,6 +47,7 @@ animationPlayer_path = NodePath("AnimationPlayer")
 hurtbox_path = NodePath("HurtBox")
 attack_path = NodePath("GunsOrbiter")
 grab_area = NodePath("GrabArea")
+initial_gun = "Rocket Launcher"
 
 [node name="SpriteIdle" type="Sprite2D" parent="."]
 z_index = 1
@@ -87,7 +88,7 @@ script = ExtResource("6_ocvar")
 
 [node name="HurtBox" parent="." instance=ExtResource("6_dd0ac")]
 collision_layer = 0
-collision_mask = 16
+collision_mask = 976
 monitorable = false
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
@@ -342,6 +343,31 @@ grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
 
+[node name="CountdownTimer" type="Timer" parent="GUILayer/GUI/LevelUp"]
+unique_name_in_owner = true
+
+[node name="CountdownLabel" type="Label" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -26.5
+offset_right = 20.0
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("10_2iroa")
+theme_override_font_sizes/font_size = 50
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DamagePopupLayer" type="ColorRect" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -370,7 +396,7 @@ text = "00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("24_fhn6u")
-time = 15.0
+time = 60.0
 
 [node name="FpsLabel" type="Label" parent="GUILayer/GUI"]
 unique_name_in_owner = true

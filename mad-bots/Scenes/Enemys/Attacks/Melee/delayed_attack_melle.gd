@@ -11,7 +11,8 @@ extends Node2D
 @export var attack_range : float = 50.0               # Range within which the attack can be initiated
 
 
-var can_attack = true						# Flag to control if attack can be initiated
+var can_attack = false						# Flag to control if attack can be initiated
+var cooldown_complete = true
 # Signal emitted when player enters detection range and attack can begin
 
 func _ready():
@@ -21,12 +22,16 @@ func _ready():
 
 
 # Initiates the attack sequence with specified angle
-func start_attack(angle):
+func start_attack(target_position: Vector2) -> void:
+	if (not cooldown_complete):
+		return  # Exit if still in cooldown
+
+	var direction = (target_position - global_position).normalized()
 	# Prevent further attacks until cooldown completes
-	can_attack = false
+	cooldown_complete = false
 	cooldown.start()
 	# Configure the attack area with damage and knockback properties
-	attack_area.set_knockback_property(damage, angle, knockback_force)
+	attack_area.set_knockback_property(damage, direction, knockback_force)
 	
 	# Start delay timer before attack area becomes active
 	delay.start()
@@ -38,5 +43,12 @@ func _on_delay_timeout():
 
 # Called when the cooldown timer finishes
 func _on_attack_cooldown_timeout():
-	# Allow new attacks to be initiated
-	can_attack = true
+	cooldown_complete = true
+
+
+func _on_attack_area_body_entered(_body: Node2D) -> void:
+	can_attack = true 
+
+
+func _on_attack_area_body_exited(_body: Node2D) -> void:
+	can_attack = false

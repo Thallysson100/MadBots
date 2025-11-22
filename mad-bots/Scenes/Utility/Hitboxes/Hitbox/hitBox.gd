@@ -16,18 +16,18 @@ func _ready():
 			disable = true	
 		1: #EnableForTime
 			disable = false
-	collision.call_deferred("set","disabled", not disable)
+	set_deferred("monitorable", disable)
 	disableTimer.timeout.connect(_on_disable_hit_box_timer_timeout)
 	attacker_position = global_position
 
 func tempToggle():
 	
-	collision.call_deferred("set","disabled",disable)
+	set_deferred("monitorable", not disable)
 	disableTimer.start()
 
 
 func _on_disable_hit_box_timer_timeout():
-	collision.call_deferred("set","disabled",not disable)
+	set_deferred("monitorable",disable)
 
 func set_knockback_property(damage_set: int, direction_set: Vector2, knockback_amount_set: int, attacker_position_set: Vector2 = Vector2.ZERO):
 	damage = damage_set

@@ -1,15 +1,23 @@
 extends Control
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var level_up: Node = get_tree().get_first_node_in_group("player").get_node("%LevelUp")
+
+signal paused()
+signal resumed()
 
 func _ready():
 	animation_player.play("RESET")
+	connect("paused",Callable(level_up,"paused_menu"))
+	connect("resumed",Callable(level_up,"resumed_menu"))
 
 func resume():
+	emit_signal("resumed")
 	get_tree().paused = false
 	animation_player.play_backwards("blur")
 
 func pause():
+	emit_signal("paused")
 	get_tree().paused = true
 	animation_player.play("blur")
 
@@ -26,11 +34,21 @@ func _on_resume_pressed() -> void:
 
 
 func _on_restart_pressed() -> void:
+	for child in get_tree().get_nodes_in_group("loot"):
+		child.queue_free()
+	for child in get_tree().get_nodes_in_group("attack"):
+		child.queue_free()
+		
 	resume()
 	get_tree().reload_current_scene()
 
 
 func _on_quit_pressed() -> void:
+	for child in get_tree().get_nodes_in_group("loot"):
+		child.queue_free()
+	for child in get_tree().get_nodes_in_group("attack"):
+		child.queue_free()
+		
 	resume()
 	get_tree().change_scene_to_file("res://Scenes/Utility/MainMenu/MainMenu.tscn")
 

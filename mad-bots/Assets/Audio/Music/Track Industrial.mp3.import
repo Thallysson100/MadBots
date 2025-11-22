@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c1muc7w6ilhhr"
+path="res://.godot/imported/Track Industrial.mp3-15fcc5783000e2ce18d470b1dc34150d.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Music/Track Industrial.mp3"
+dest_files=["res://.godot/imported/Track Industrial.mp3-15fcc5783000e2ce18d470b1dc34150d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

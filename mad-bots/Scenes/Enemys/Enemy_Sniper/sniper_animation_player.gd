@@ -1,21 +1,30 @@
 extends Enemy_AnimationPlayer
 
+func process_sprite() -> void:
+	var dir = set_direction()  # Get current direction
+	
+	# Mirror sprites based on movement direction
+	spriteWalk.flip_h = dir
+	spriteAttack.flip_h = dir
+	spriteHurt.flip_h = dir
+	spriteDeath.flip_h = dir
+	
+	# Calculate Z position based on Y coordinate for depth sorting (isometric/perspective)
+	# Higher Y position = higher Z index (appears in front)
+	# negative coordinates inversion need fixing
+	var pos : int = int(enemy.global_position.y)
+	z_pos = (pos)%RenderingServer.CANVAS_ITEM_Z_MAX if (pos>=0) else (pos)%RenderingServer.CANVAS_ITEM_Z_MIN
 
-func match_animation(anim_name: String) -> void:
-	match anim_name:
-		"death":
-			can_play_new_animation = false  # Lock animations during death
-			spriteDeath.visible = true  # Show death sprite
-		"taking_damage":
-			if not spriteDeath.visible:  # Only allow if death animation is not active
-				can_play_new_animation = false  # Lock animations during damage
-				spriteHurt.visible = true  # Show hurt sprite
-		"attack":
-			if not spriteDeath.visible and not spriteHurt.visible:  # Only allow if death or damage animation is not active
-				spriteAttack.visible = true  # Show attack sprite
-		"walk":
-			if not spriteDeath.visible and not spriteHurt.visible and not spriteAttack.visible:  # Only allow if no higher-priority animations are active
-				spriteWalk.visible = true  # Show walk sprite
-		_:
-			# Default case (should not be reached)
-			assert(false, "Unknown animation: " + anim_name)
+	# Apply Z index to both sprites
+	spriteWalk.z_index = z_pos
+	spriteAttack.z_index = z_pos
+	spriteHurt.z_index = z_pos
+	spriteDeath.z_index = z_pos
+
+	# Apply horizontal offset if flipped
+	if flipped:
+		spriteWalk.offset.x *= -1
+		spriteAttack.offset.x *= -1
+		spriteHurt.offset.x *= -1
+		spriteDeath.offset.x *= -1
+		enemy.attack.marker.position.x *= -1

@@ -32,6 +32,13 @@ func _ready() -> void:
 
 var last_direction: bool  # Store the last movement direction
 
+func flip_walk_sprite() -> void:
+	# Flip the walk sprite based on movement direction
+	var current_direction: bool = enemy.velocity.x < 0  # true for left, false for right/stopped
+	if current_direction != last_direction:
+		spriteWalk.flip_h = current_direction
+		last_direction = current_direction
+
 # Main function to process sprite animation and properties
 func process_sprite() -> void:
 	var dir = set_direction()  # Get current direction
@@ -76,6 +83,14 @@ func set_direction() -> bool:
 
 # Called when an animation starts playing
 func custom_play(anim_name: String) -> void:
+	if anim_name == "death":
+		can_play_new_animation = false
+		spriteWalk.visible = false  # Hide both sprites initially
+		spriteAttack.visible = false
+		spriteHurt.visible = false
+		spriteDeath.visible = true		
+		play("death")
+		return
 	if (not can_play_new_animation):
 		return  # Exit if new animations are locked
 	spriteWalk.visible = false  # Hide both sprites initially
@@ -91,12 +106,8 @@ func custom_play(anim_name: String) -> void:
 var last_animation = 0
 func match_animation(anim_name: String) -> void:
 	match anim_name:
-		"death":
-			can_play_new_animation = false  # Lock animations during death
-			spriteDeath.visible = true  # Show death sprite
 		"taking_damage":
 			if not spriteDeath.visible:  # Only allow if death animation is not active
-				can_play_new_animation = false  # Lock animations during damage
 				spriteHurt.visible = true  # Show hurt sprite
 		"attack":
 			if not spriteDeath.visible and not spriteHurt.visible:  # Only allow if death or damage animation is not active
@@ -105,9 +116,9 @@ func match_animation(anim_name: String) -> void:
 		"walk":
 			if not spriteDeath.visible and not spriteHurt.visible and not spriteAttack.visible:  # Only allow if no higher-priority animations are active
 				spriteWalk.visible = true  # Show walk sprite
-		_:
-			# Default case (should not be reached)
-			assert(false, "Unknown animation: " + anim_name)
+		"RESET":
+			if not spriteDeath.visible:  # Only allow if death animation is not active
+				spriteWalk.visible = true  # Show walk sprite
 
 # Called when an animation finishes playing
 func _on_animation_finished(anim_name: String) -> void:

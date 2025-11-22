@@ -69,16 +69,6 @@ func _ready() -> void:
 	hurtbox.invincibility_time = invincibility_time
 	gunsOrbiter.add_gun(initial_gun, atributtes_percentage)
 
-	#FIXME: Just for testing, remove later
-	gunsOrbiter.add_gun("Rocket Launcher", atributtes_percentage)  
-	gunsOrbiter.add_gun("Desert Sniper", atributtes_percentage)
-	gunsOrbiter.add_gun("M45", atributtes_percentage)
-	gunsOrbiter.add_gun("F547", atributtes_percentage)
-	gunsOrbiter.add_gun("K6554", atributtes_percentage)
-	gunsOrbiter.add_gun("RRR7", atributtes_percentage)
-	gunsOrbiter.add_gun("T58", atributtes_percentage)
-	gunsOrbiter.add_gun("G65", atributtes_percentage)
-
 func _physics_process(delta: float) -> void:
 	fps_label.text = "FPS: %d" % Engine.get_frames_per_second()
 	movement(delta)

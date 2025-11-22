@@ -391,11 +391,11 @@ offset_bottom = 54.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("10_2iroa")
 theme_override_font_sizes/font_size = 30
-text = "00:00"
+text = "5:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("24_fhn6u")
-time = 60.0
+time = 300.0
 
 [node name="FpsLabel" type="Label" parent="GUILayer/GUI"]
 unique_name_in_owner = true

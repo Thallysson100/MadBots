@@ -30,7 +30,7 @@ func process_levelup_queue():
 		show_levelup_panel_instance()
 	else:
 		# Show a short countdown while the tree remains paused so the player has reaction time
-		var countdown_secs := 3
+		var countdown_secs := 1
 
 		# Simple on-screen countdown label that still updates while the tree is paused
 		countdown_label.visible = true

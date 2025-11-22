@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dn55nwjvi8ywu" path="res://Scenes/Projectile/Projectile_base/projectile.tscn" id="1_nbq66"]
 [ext_resource type="Script" uid="uid://cs5fp8kgybdtm" path="res://Scenes/Projectile/Projectile_bomb/projectile_bomb.gd" id="2_vqx2i"]
-[ext_resource type="Texture2D" uid="uid://dqv0pv5nc7hdp" path="res://Assets/Textures/drone/1 Drones/2/Bomb.png" id="3_o5l2g"]
+[ext_resource type="Texture2D" uid="uid://dqv0pv5nc7hdp" path="res://Assets/Textures/Armas_E_Personagens/Tiros/Bomb.png" id="3_o5l2g"]
 [ext_resource type="Script" uid="uid://cgb6i0mwc43ch" path="res://Scenes/Projectile/Projectile_bomb/area_2d.gd" id="4_ph8ns"]
 [ext_resource type="Texture2D" uid="uid://cpgoy5235426g" path="res://Assets/Textures/whie-circle.png" id="5_ht2ml"]
 

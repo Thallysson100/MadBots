@@ -105,7 +105,9 @@ radius = 222.03603
 
 [node name="Player_test" instance=ExtResource("1_dg6dr")]
 player_velocity_init = 400
+pickup_range_init = 500.0
 max_health = 50
+initial_gun = "T58"
 invincibility_time = 0.3
 
 [node name="SpriteIdle" parent="." index="0"]

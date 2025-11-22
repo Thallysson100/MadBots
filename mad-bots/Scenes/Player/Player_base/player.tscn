@@ -47,7 +47,6 @@ animationPlayer_path = NodePath("AnimationPlayer")
 hurtbox_path = NodePath("HurtBox")
 attack_path = NodePath("GunsOrbiter")
 grab_area = NodePath("GrabArea")
-initial_gun = "Rocket Launcher"
 
 [node name="SpriteIdle" type="Sprite2D" parent="."]
 z_index = 1

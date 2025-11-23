@@ -1,60 +1,170 @@
-MADBOTS 
+# 🤖 MADBOTS
 
-Visão Geral
+<div align="center">
 
-MadBots é um jogo roguelike/roguelite de ficção científica focado em
-jogabilidade rápida, variedade de inimigos e múltiplas possibilidades de
-construção de personagens. Cada partida oferece novos desafios por meio
-de combinações únicas de classes, armas e acessórios.
+![MadBots Menu](https://raw.githubusercontent.com/Thallysson100/MadBots/main/screenshots/menu.png)
 
-Narrativa
+**Um roguelite de ficção científica sobre a batalha pela sobrevivência em um mundo dominado por IAs**
 
-Tema Principal
+[![Godot Engine](https://img.shields.io/badge/Godot-4.0+-478cbf?logo=godot-engine&logoColor=white)](https://godotengine.org/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white)](https://www.microsoft.com/windows)
 
-A história se passa em um futuro distópico no qual inteligências
-artificiais tomaram o controle do planeta, tornando a humanidade
-obsoleta. Nesse cenário, máquinas e humanos sobreviventes entram em
-conflito direto pela sobrevivência.
+[📂 Acessar Projeto Completo](https://drive.google.com/drive/folders/13mgPliwRuZ7gQ_4UGQbZvU5RhC_7t6sl?usp=sharing)
 
-Gênero
+</div>
 
-MadBots pertence ao gênero roguelike/roguelite, caracterizado por mapas
-gerados proceduralmente, morte permanente e alta rejogabilidade.
+---
 
-Gameplay
+## 📖 Visão Geral
 
-Controles
+**MadBots** é um jogo roguelite de ficção científica focado em jogabilidade rápida, variedade de inimigos e múltiplas possibilidades de construção de personagens. Cada partida oferece novos desafios por meio de combinações únicas de classes, armas e acessórios.
 
-A movimentação utiliza o padrão WASD: - W – mover para cima - A – mover
-para esquerda - S – mover para baixo - D – mover para direita
+### Características Principais
 
-Modos de Jogo
+- Mapas gerados proceduralmente para alta rejogabilidade
+- Sistema de progressão com múltiplas opções de build
+- Variedade de inimigos com comportamentos únicos
+- Morte permanente que torna cada decisão importante
+- Controles intuitivos e gameplay ágil
 
-MadBots é single-player offline.
+---
 
-Estrutura
+## 🌍 Narrativa
 
-O jogo é composto por aproximadamente 10 rounds. A cada round: - mais
-inimigos são gerados, - dificuldades aumentam, - o jogador melhora seus
-equipamentos.
+A história se passa em um **futuro distópico** no qual inteligências artificiais tomaram o controle do planeta, tornando a humanidade obsoleta. Nesse cenário caótico, máquinas e humanos sobreviventes entram em conflito direto pela sobrevivência.
 
-O jogo possui três fases: fácil, médio e difícil.
+> *"Em um mundo onde as máquinas reinam, a humanidade luta por sua última chance de existência."*
 
-Aspectos Técnicos
+---
 
-Plataforma
+## 🎮 Gameplay
 
-Desenvolvido inicialmente para desktops, com foco em Windows.
+### Controles
 
-Tecnologia Utilizada
+A movimentação utiliza o padrão **WASD**:
 
--   Godot Engine
--   GDScript
+| Tecla | Ação |
+|-------|------|
+| `W` | Mover para cima |
+| `A` | Mover para esquerda |
+| `S` | Mover para baixo |
+| `D` | Mover para direita |
 
-Links do Projeto
+### Estrutura de Jogo
 
-Todos os arquivos e materiais do MadBots estão disponíveis no link
-abaixo:
+O jogo é composto por aproximadamente **10 rounds progressivos** divididos em três fases:
 
-Acessar Projeto MadBots:
-https://drive.google.com/drive/folders/13mgPliwRuZ7gQ_4UGQbZvU5RhC_7t6sl?usp=sharing
+```
+Progressão de Dificuldade
+
+Fase 1: FÁCIL     
+Fase 2: MÉDIO     
+Fase 3: DIFÍCIL   
+```
+
+A cada round:
+- Mais inimigos são gerados
+- A dificuldade aumenta gradualmente
+- O jogador pode melhorar seus equipamentos
+
+### Modos de Jogo
+
+- **Single-player offline**
+- Sistema roguelite com alta rejogabilidade
+- Morte permanente
+
+---
+
+## 📸 Screenshots
+
+<div align="center">
+
+### Seleção de Níveis
+![Seleção de Níveis](https://raw.githubusercontent.com/Thallysson100/MadBots/main/screenshots/level-select.png)
+
+### Gameplay em Ação
+![Gameplay](https://raw.githubusercontent.com/Thallysson100/MadBots/main/screenshots/gameplay.png)
+
+### Sistema de Level Up
+![Level Up](https://raw.githubusercontent.com/Thallysson100/MadBots/main/screenshots/levelup.png)
+
+### Game Over
+![Game Over](https://raw.githubusercontent.com/Thallysson100/MadBots/main/screenshots/gameover.png)
+
+</div>
+
+---
+
+## 🛠️ Aspectos Técnicos
+
+### Tecnologias
+
+<div align="center">
+
+| Engine | Linguagem | Plataforma |
+|--------|-----------|------------|
+| ![Godot](https://img.shields.io/badge/Godot-478CBF?style=for-the-badge&logo=godot-engine&logoColor=white) | ![GDScript](https://img.shields.io/badge/GDScript-355570?style=for-the-badge&logo=godot-engine&logoColor=white) | ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white) |
+
+</div>
+
+- **Engine:** Godot Engine
+- **Linguagem:** GDScript
+- **Plataforma:** Windows (Desktop)
+
+---
+
+## 📂 Recursos do Projeto
+
+Todos os arquivos e materiais do MadBots estão disponíveis para acesso:
+
+<div align="center">
+
+### [Acessar Projeto Completo no Google Drive](https://drive.google.com/drive/folders/13mgPliwRuZ7gQ_4UGQbZvU5RhC_7t6sl?usp=sharing)
+
+</div>
+
+---
+
+## 🎯 Gênero
+
+**Roguelite / Roguelike** caracterizado por:
+
+- Mapas gerados proceduralmente
+- Morte permanente (permadeath)
+- Alta rejogabilidade
+- Progressão de poder a cada run
+- Combinações únicas de equipamentos
+
+---
+### Instalação
+
+1. Acesse o [link do projeto](https://drive.google.com/drive/folders/13mgPliwRuZ7gQ_4UGQbZvU5RhC_7t6sl?usp=sharing)
+2. Baixe os arquivos do jogo
+3. Extraia o arquivo .zip
+4. Execute o arquivo `MadBots.exe`
+5. Divirta-se!
+
+---
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+## 👥 Equipe de Desenvolvimento
+
+<div align="center">
+
+| Desenvolvedor | GitHub |
+|---------------|--------|
+| Thallysson Santos | [@Thallysson100](https://github.com/Thallysson100) |
+| Thiago Martins | [@TMartins11](https://github.com/TMartins11) |
+| Jeann Victor | [@JeannVictor](https://github.com/JeannVictor) |
+| Pedro Finochio | [@PedroFinochio](https://github.com/PedroFinochio) |
+| Nicolas RTO | [@NicolasRTO](https://github.com/NicolasRTO) |
+
+</div>
+
+---

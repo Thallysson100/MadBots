@@ -2,11 +2,13 @@ extends Control
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var level_up: Node = get_tree().get_first_node_in_group("player").get_node("%LevelUp")
+@onready var v_box_container: VBoxContainer = $Panel/VBoxContainer
 
 signal paused()
 signal resumed()
 
 func _ready():
+	v_box_container.position = Vector2(-916.75,-9)
 	animation_player.play("RESET")
 	connect("paused",Callable(level_up,"paused_menu"))
 	connect("resumed",Callable(level_up,"resumed_menu"))
@@ -25,9 +27,10 @@ func pause():
 func testEsc():
 	if Input.is_action_just_pressed("esc") and !get_tree().paused:
 		pause()
+		v_box_container.position = Vector2(20.25, -5) 
 	elif Input.is_action_just_pressed("esc") and get_tree().paused:
-		resume() 
-
+		resume()
+		v_box_container.position = Vector2(-916.75,-9)
 
 func _on_resume_pressed() -> void:
 	resume()

@@ -159,7 +159,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 | Desenvolvedor | GitHub |
 |---------------|--------|
-| Thallysson Santos | [@Thallysson100](https://github.com/Thallysson100) |
+| Thallysson Luis | [@Thallysson100](https://github.com/Thallysson100) |
 | Thiago Martins | [@TMartins11](https://github.com/TMartins11) |
 | Jeann Victor | [@JeannVictor](https://github.com/JeannVictor) |
 | Pedro Finochio | [@PedroFinochio](https://github.com/PedroFinochio) |

@@ -76,17 +76,10 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_b1agb")
 
 [node name="MainButtons" type="VBoxContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 485.5
-offset_top = 272.5
-offset_right = 794.5
-offset_bottom = 511.5
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 429.5
+offset_top = 263.0
+offset_right = 819.0
+offset_bottom = 551.5
 theme_override_constants/separation = 9
 
 [node name="Start" type="Button" parent="MainButtons"]
@@ -118,6 +111,21 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_b1agb")
 theme_override_styles/hover = SubResource("StyleBoxFlat_53a2v")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_b1agb")
 text = "Options"
+
+[node name="History" type="Button" parent="MainButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_b1agb")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_0dd2c")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_b1agb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_53a2v")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b1agb")
+text = "History"
 
 [node name="Quit" type="Button" parent="MainButtons"]
 layout_mode = 2
@@ -155,7 +163,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Options" type="TextureRect" parent="."]
-visible = false
 offset_left = 404.0
 offset_top = 223.0
 offset_right = 874.0
@@ -498,6 +505,7 @@ parameters/looping = true
 
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MainButtons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MainButtons/History" to="." method="_on_history_pressed"]
 [connection signal="pressed" from="MainButtons/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Options/Back" to="." method="_on_back_options_pressed"]
 [connection signal="value_changed" from="Options/VBoxContainer/TextureRect/HBoxContainer/AudioControl" to="Options/VBoxContainer/TextureRect/HBoxContainer/AudioControl" method="_on_value_changed"]

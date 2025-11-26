@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbphv2gl1in67"]
+[gd_scene load_steps=12 format=3 uid="uid://bbphv2gl1in67"]
 
 [ext_resource type="Script" uid="uid://bfhd6pkeyc061" path="res://Scenes/Utility/GameOver/game_over.gd" id="1_u2oof"]
 [ext_resource type="Texture2D" uid="uid://y8okqdcauwn0" path="res://Assets/Textures/GUI/deathScreen.png" id="2_mwnp7"]
 [ext_resource type="FontFile" uid="uid://jtemo7px1tum" path="res://Assets/Font/CyberpunkCraftpixPixel.otf" id="2_u2oof"]
+[ext_resource type="AudioStream" uid="uid://driivwlrvbnau" path="res://Assets/Audio/Music/a new beginning.ogg" id="4_mwnp7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u2oof"]
 bg_color = Color(1, 1, 1, 1)
@@ -243,6 +244,10 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mwnp7")
+autoplay = true
+bus = &"Music"
+parameters/looping = false
 
 [connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

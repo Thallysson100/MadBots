@@ -44,22 +44,6 @@ shadow_offset = Vector2(0, 3.41)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_noxdc"]
 
-[sub_resource type="Animation" id="Animation_iw4k0"]
-resource_name = "TitleFade"
-length = 2.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_e1lrm"]
 length = 0.001
 tracks/0/type = "value"
@@ -127,6 +111,22 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_iw4k0"]
+resource_name = "TitleFade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ngo86"]
 _data = {
 &"RESET": SubResource("Animation_e1lrm"),
@@ -168,16 +168,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -457.0
-offset_top = -374.5
-offset_right = 489.0
-offset_bottom = 294.5
+offset_left = -513.5
+offset_top = -358.5
+offset_right = 513.5
+offset_bottom = 310.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 10
 theme_override_fonts/font = ExtResource("1_annua")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 23
 text = "Humanity reached the peak of its own evolution,
  integrating intelligent machines into every part of life.
 
@@ -262,9 +262,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -201.15625
-offset_top = 213.875
+offset_top = 229.875
 offset_right = 201.15625
-offset_bottom = 298.125
+offset_bottom = 314.125
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 9
@@ -324,3 +324,5 @@ root_node = NodePath("../Panel/Title")
 libraries = {
 &"": SubResource("AnimationLibrary_ngo86")
 }
+
+[connection signal="pressed" from="Panel/MainButtons/Continue" to="." method="_on_continue_pressed"]

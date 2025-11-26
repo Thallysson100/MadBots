@@ -6,6 +6,7 @@
 
 [node name="K6554" instance=ExtResource("1_hjn4q")]
 scale = Vector2(1.5, 1.5)
+init_damage = 20
 init_fire_rate = 0.05
 init_fire_range = 300.0
 init_knockback_amount = 10.0
@@ -15,6 +16,3 @@ projectile_scene = ExtResource("2_o3uhr")
 [node name="Sprite2D" parent="." index="0"]
 rotation = 0.7853982
 texture = ExtResource("3_hjn4q")
-
-[node name="ProjectileSpawnPoint" parent="." index="1"]
-position = Vector2(0, 0)

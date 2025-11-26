@@ -109,7 +109,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_1pops"]
@@ -147,7 +147,7 @@ collision_layer = 132
 collision_mask = 135
 attack_path = NodePath("Delayed_Attack_Melee")
 speed = 200.0
-max_health = 100
+max_health = 300
 drop_reward = 1
 invincibility_time = 0.05
 
@@ -167,8 +167,8 @@ hframes = 6
 
 [node name="SpriteHurt" parent="." index="3"]
 texture = ExtResource("4_ynf3e")
-hframes = 2
-frame = 1
+offset = Vector2(15, -40)
+hframes = 1
 
 [node name="SpriteDeath" parent="." index="4"]
 texture = ExtResource("5_sjyhr")

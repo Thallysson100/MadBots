@@ -6,7 +6,7 @@
 
 [node name="G65" instance=ExtResource("1_o4u7d")]
 scale = Vector2(1.5, 1.5)
-init_damage = 30
+init_damage = 45
 init_fire_rate = 2.0
 init_fire_range = 1000.0
 pierce = 10

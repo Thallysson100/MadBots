@@ -50,3 +50,7 @@ func _on_level_3_pressed() -> void:
 	await TransitionScreen.on_transition_finished
 	ResourcesDb.world_selected = "res://World/world3.tscn"
 	get_tree().call_deferred("change_scene_to_file", "res://World/world3.tscn")
+
+
+func _on_history_pressed() -> void:
+	get_tree().call_deferred("change_scene_to_file", "res://Scenes/Utility/IntroScreen/IntroScreen.tscn")

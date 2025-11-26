@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dern1gkya8e4g" path="res://Assets/Textures/Armas_E_Personagens/1 Icons/rrr7.png" id="3_7rhsp"]
 
 [node name="RRR7" instance=ExtResource("1_7rhsp")]
+init_damage = 20
 init_fire_rate = 0.1
 init_fire_range = 300.0
 pierce = 2
